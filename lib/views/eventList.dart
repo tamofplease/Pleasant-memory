@@ -6,9 +6,6 @@ import 'package:meple/blocs/event/auth_event.dart';
 class EventList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
-    final authenticationBloc = BlocProvider.of<AuthenticationBloc>(context);
-
     return Center(
       child: Column(
         children: <Widget>[
@@ -16,12 +13,11 @@ class EventList extends StatelessWidget {
           RaisedButton(
             child: Text("LoggedOut"),
             onPressed: () {
-              authenticationBloc.add(LoggedOut());
-            }
-          )
+             BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
+            },
+          ),
         ],
-      )
-
+      ),
     );
   }
 }

@@ -25,3 +25,17 @@ class SignInWithEmailAndPassword extends SignInEvent{
 
   String toString() => "SignIn with email: $email password: $password";
 }
+
+class CreateUserWithEmailAndPassword extends SignInEvent {
+  final String email;
+  final String password;
+  CreateUserWithEmailAndPassword({
+    @required this.email,
+    @required this.password,
+  }): assert(email != null),
+      assert(password != null);
+
+  @override
+  List<Object> get props => [email, password];
+  String toString() => "createUser with email: $email password: $password";
+}

@@ -5,6 +5,7 @@ abstract class SignInRepository {
   Future<void> signInWithGoogle();
   Future<void> signInAnonymously();
   Future<void> signInWithEmailAndPassword(String email, String password);
+  Future<void> createUserWithEmailAndPassword(String email, String password);
 }
 
 class FirebaseSignInRepository extends SignInRepository {
@@ -35,6 +36,10 @@ class FirebaseSignInRepository extends SignInRepository {
 
   @override
   Future<void> signInWithEmailAndPassword(String email, String password) async {
+    await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+  }
+
+  Future<void> createUserWithEmailAndPassword(String email, String password) async {
     await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
   }
 }

@@ -5,21 +5,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:meple/blocs/bloc/auth_bloc.dart';
 import 'package:meple/blocs/bloc/signin_bloc.dart';
 import 'package:meple/blocs/event/auth_event.dart';
-import 'package:meple/blocs/event/login_event.dart';
+import 'package:meple/blocs/event/signin_event.dart';
 import 'package:meple/blocs/repository/signin_repository.dart';
-import 'package:meple/blocs/state/login_state.dart';
-import 'package:meple/helper/splash_screen.dart';
-import 'package:meple/views/auths/login_form.dart';
+import 'package:meple/blocs/state/signin_state.dart';
+import 'package:meple/helper/splash_screen_with_background.dart';
+import 'package:meple/views/auths/signin_form.dart';
 import 'package:meple/views/auths/signup_form.dart';
-import 'package:meple/views/eventList.dart';
-
-
-// main() => runApp(
-//   MaterialApp(
-//     home: AuthThreePage(),
-//   ),
-// );
-  
 
 
 class AuthPage extends StatefulWidget {
@@ -40,20 +31,22 @@ class _AuthPageState extends State<AuthPage> {
     _formsIndex = 1;
   }
 
+
+
   @override
   Widget build(BuildContext context) {
+    final authBloc = BlocProvider.of<AuthenticationBloc>(context);
     final signInBloc = SignInBloc(signInRepository: FirebaseSignInRepository());
-    final authenticationBloc = BlocProvider.of<AuthenticationBloc>(context);
     return Scaffold(
       body: BlocBuilder<SignInBloc, SignInState>(
         bloc: signInBloc,
         builder: (context, state){
           if(state is SignInLoading) {
-            return SplashScreen();
+            return SplashScreenWithBG();
           }
 
           if(state is SignInSuccess) {
-            authenticationBloc.add(LoggedIn());
+            authBloc.add(LoggedIn());
           }
 
           if(state is SignInFailure) {
@@ -73,7 +66,7 @@ class _AuthPageState extends State<AuthPage> {
                     color: Colors.black54,
                     child: Column(
                       children: <Widget>[
-                        const SizedBox(height: kToolbarHeight + 40),
+                        const SizedBox(height: kToolbarHeight + 30),
                         Expanded(
                           child: Column(
                             children: <Widget>[
@@ -85,7 +78,7 @@ class _AuthPageState extends State<AuthPage> {
                                   fontSize: 30.0,
                                 ),
                               ),
-                              const SizedBox(height: 10.0),
+                              const SizedBox(height: 5.0),
                               Text(
                                 "大切な思い出を共有しましょう!",
                                 style: TextStyle(
@@ -149,11 +142,9 @@ class _AuthPageState extends State<AuthPage> {
                           ),
                           icon: Icon(Icons.account_circle),
                           label: Text("Continue with Annon"),
-                          onPressed: () {
-                            signInBloc.add(SignInAnonymouslyOnPressed());
-                          },
+                          onPressed: () => signInBloc.add(SignInAnonymouslyOnPressed()),
                         ),
-                        const SizedBox(height: 40.0),
+                        const SizedBox(height: 30.0),
                         OutlineButton.icon(
                           borderSide: BorderSide(color: Colors.red),
                           color: Colors.red,
@@ -163,9 +154,8 @@ class _AuthPageState extends State<AuthPage> {
                           ),
                           icon: Icon(FontAwesomeIcons.google),
                           label: Text("Continue with Google"),
-                          onPressed: () {
-                            signInBloc.add(SignInWithGoogleOnPressed());
-                          },
+                          onPressed: () => signInBloc.add(SignInWithGoogleOnPressed()),
+                          
                         ),
                         const SizedBox(height: 20.0),
                       ],

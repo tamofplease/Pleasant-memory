@@ -2,7 +2,6 @@ import 'package:meple/blocs/bloc/auth_bloc.dart';
 import 'package:meple/blocs/state/auth_state.dart';
 import 'package:meple/blocs/event/auth_event.dart';
 import 'package:meple/helper/splash_screen.dart';
-import 'package:meple/views/signinscreen.dart';
 import 'blocs/repository/auth_repository.dart';
 import 'package:meple/views/eventList.dart';
 import 'package:flutter/material.dart';
@@ -40,14 +39,12 @@ class MyApp extends StatelessWidget {
             return EventList();
           }
           if(state is AuthenticationFailure) {
-            // return SignInScreen();
             return AuthPage();
           }
           else {
             print(state);
             return Container();
           }
-          
         },
       ),
     );

@@ -1,6 +1,6 @@
-import 'package:meple/blocs/event/login_event.dart';
+import 'package:meple/blocs/event/signin_event.dart';
 import 'package:meple/blocs/repository/signin_repository.dart';
-import 'package:meple/blocs/state/login_state.dart';
+import 'package:meple/blocs/state/signin_state.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
@@ -25,6 +25,12 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     }
     if(event is SignInWithEmailAndPassword){
       yield* _mapSignInWithEmailAndPassword(
+        event.email,
+        event.password,
+      );
+    }
+    if(event is CreateUserWithEmailAndPassword) {
+      yield* _mapCreateUserWithEmailAndPassword(
         event.email,
         event.password,
       );
@@ -57,6 +63,18 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       await _signInRepository.signInWithEmailAndPassword(email, password);
       yield SignInSuccess();
     } catch(_) {
+      print("error");
+      yield SignInFailure();
+    }
+  }
+
+  Stream<SignInState> _mapCreateUserWithEmailAndPassword(String email, String password) async* {
+    yield SignInLoading();
+    try {
+      await _signInRepository.createUserWithEmailAndPassword(email, password);
+      yield SignInSuccess();
+    } catch(_) {
+      print("error");
       yield SignInFailure();
     }
   }

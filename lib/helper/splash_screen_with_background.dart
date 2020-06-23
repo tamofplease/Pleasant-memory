@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreenWithBG extends StatelessWidget {
 
   final heart = SpinKitPumpingHeart(
     color: Colors.red,
@@ -15,7 +15,7 @@ class SplashScreen extends StatelessWidget {
         child:heart,
       ),
       decoration: BoxDecoration(
-        // color: Colors.lightBlue,
+        color: Colors.lightBlue,
       ),
     );
   }
