@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "851375196879",
+    "firebase_url": "https://meple-6ca20.firebaseio.com",
+    "project_id": "meple-6ca20",
+    "storage_bucket": "meple-6ca20.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:851375196879:android:5b25d00f563b8c96d105ba",
+        "android_client_info": {
+          "package_name": "com.example.meple"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "851375196879-8m3vtq2afv1d6u953tbvt2jm25odopuj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlxwMMBvEeBNU6fthyET3zMQzCuf4ZMZs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "851375196879-8m3vtq2afv1d6u953tbvt2jm25odopuj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "851375196879-skrkjicdlh1te0tel4jkb82flt60inf7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.meple"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
