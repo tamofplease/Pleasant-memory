@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meple/blocs/bloc/auth_bloc.dart';
-import 'package:meple/blocs/bloc/signin_bloc.dart';
-import 'package:meple/blocs/event/auth_event.dart';
-import 'package:meple/blocs/event/signin_event.dart';
-import 'package:meple/blocs/repository/signin_repository.dart';
-import 'package:meple/blocs/state/signin_state.dart';
+import 'package:meple/blocs/auth/auth_bloc.dart';
+import 'package:meple/blocs/signin/signin_bloc.dart';
+import 'package:meple/blocs/auth/auth_event.dart';
+import 'package:meple/blocs/signin/signin_event.dart';
+import 'package:meple/blocs/signin/signin_repository.dart';
+import 'package:meple/blocs/signin/signin_state.dart';
 // import 'package:meple/helper/splash_screen.dart';
 
 
@@ -99,7 +99,6 @@ class _SignupFormState extends State<SignupForm> {
                   child: Text("Signup"),
                   onPressed: () {
                     if(_formKey.currentState.validate()){
-                      print(password);
                       signInBloc.add(CreateUserWithEmailAndPassword(email: email, password: password));
                     }
                   },

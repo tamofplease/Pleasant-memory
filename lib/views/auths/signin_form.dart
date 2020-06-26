@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meple/blocs/bloc/auth_bloc.dart';
-import 'package:meple/blocs/bloc/signin_bloc.dart';
-import 'package:meple/blocs/event/auth_event.dart';
-import 'package:meple/blocs/event/signin_event.dart';
-import 'package:meple/blocs/repository/signin_repository.dart';
-import 'package:meple/blocs/state/signin_state.dart';
+import 'package:meple/blocs/auth/auth_bloc.dart';
+import 'package:meple/blocs/signin/signin_bloc.dart';
+import 'package:meple/blocs/auth/auth_event.dart';
+import 'package:meple/blocs/signin/signin_event.dart';
+import 'package:meple/blocs/signin/signin_repository.dart';
+import 'package:meple/blocs/signin/signin_state.dart';
 import 'package:meple/helper/splash_screen.dart';
 // import 'package:meple/helper/splash_screen.dart';
 
@@ -81,8 +81,7 @@ class _LoginFormState extends State<LoginForm> {
                         hintText: "Enter password",
                         border: OutlineInputBorder(),
                       ),
-                      validator: (val) {
-                        print(error);
+                      validator: (val) {                        
                         if(val.isEmpty)return "パスワードを入力してください";
                         // else if(error.isNotEmpty) return "正しい値を入力してください";
                         return null;

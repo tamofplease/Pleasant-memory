@@ -1,9 +1,9 @@
-import 'package:meple/blocs/bloc/auth_bloc.dart';
-import 'package:meple/blocs/state/auth_state.dart';
-import 'package:meple/blocs/event/auth_event.dart';
+import 'package:meple/blocs/auth/auth_bloc.dart';
+import 'package:meple/blocs/auth/auth_state.dart';
+import 'package:meple/blocs/auth/auth_event.dart';
 import 'package:meple/helper/splash_screen.dart';
-import 'blocs/repository/auth_repository.dart';
-import 'package:meple/views/eventList.dart';
+import 'package:meple/views/homes/home_screen.dart';
+import 'blocs/auth/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meple/views/auths/auth.dart';
@@ -14,9 +14,8 @@ void main() {
     create: (context) => 
       AuthenticationBloc(authRepository: authenticationRepository)
         ..add(AppStarted()),
-        child: MyApp(),
-    ) 
-  );
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -36,13 +35,12 @@ class MyApp extends StatelessWidget {
             return SplashScreen();
           }
           if(state is AuthenticationSuccess) {
-            return EventList();
+            return HomeScreen();
           }
           if(state is AuthenticationFailure) {
             return AuthPage();
           }
           else {
-            print(state);
             return Container();
           }
         },

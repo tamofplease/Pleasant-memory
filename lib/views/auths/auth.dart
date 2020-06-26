@@ -2,12 +2,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:meple/blocs/bloc/auth_bloc.dart';
-import 'package:meple/blocs/bloc/signin_bloc.dart';
-import 'package:meple/blocs/event/auth_event.dart';
-import 'package:meple/blocs/event/signin_event.dart';
-import 'package:meple/blocs/repository/signin_repository.dart';
-import 'package:meple/blocs/state/signin_state.dart';
+import 'package:meple/blocs/auth/auth_bloc.dart';
+import 'package:meple/blocs/signin/signin_bloc.dart';
+import 'package:meple/blocs/auth/auth_event.dart';
+import 'package:meple/blocs/signin/signin_event.dart';
+import 'package:meple/blocs/signin/signin_repository.dart';
+import 'package:meple/blocs/signin/signin_state.dart';
 import 'package:meple/helper/splash_screen_with_background.dart';
 import 'package:meple/views/auths/signin_form.dart';
 import 'package:meple/views/auths/signup_form.dart';
@@ -20,7 +20,7 @@ class AuthPage extends StatefulWidget {
 }
 
 class _AuthPageState extends State<AuthPage> {
-  final String backImg = "assets/beach.jpeg";
+  final String backImg = "assets/auth/beach.jpeg";
   bool formVisible;
   int _formsIndex;
 
