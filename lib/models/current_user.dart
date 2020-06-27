@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 class CurrentUser {
   final String uid;
   final String name;
-  // final String email;
-  // final String password;
+  final String email; 
   final String photoUrl;
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -12,15 +11,13 @@ class CurrentUser {
   CurrentUser({
     @required this.uid,
     @required this.name,
-    // @required this.email,
-    // @required this.password,
+    @required this.email,
     @required this.photoUrl,
     @required this.createdAt,
     @required this.updatedAt,
   }) :assert(uid != null),
       assert(name != null),
-      // assert(email != null),
-      // assert(password != null),
+      assert(email != null), 
       assert(photoUrl != null),
       assert(createdAt != null),
       assert(updatedAt != null);

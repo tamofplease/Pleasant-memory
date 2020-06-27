@@ -6,7 +6,7 @@ import 'package:meple/blocs/category/category_state.dart';
 class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   
   @override
-  CategoryState get initialState => SelectedChat();
+  CategoryState get initialState => SelectedMemory();
 
   @override
   Stream<CategoryState> mapEventToState(

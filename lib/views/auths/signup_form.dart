@@ -6,7 +6,7 @@ import 'package:meple/blocs/auth/auth_event.dart';
 import 'package:meple/blocs/signin/signin_event.dart';
 import 'package:meple/blocs/signin/signin_repository.dart';
 import 'package:meple/blocs/signin/signin_state.dart';
-// import 'package:meple/helper/splash_screen.dart';
+import 'package:meple/helper/splash_screen.dart';
 
 
 class SignupForm extends StatefulWidget {
@@ -31,7 +31,7 @@ class _SignupFormState extends State<SignupForm> {
       builder: (context, state) {
 
         if(state is SignInLoading) {
-          
+          SplashScreen();
         }
 
         if(state is SignInSuccess) {
@@ -43,7 +43,7 @@ class _SignupFormState extends State<SignupForm> {
         }
 
         return  Container(
-          margin: const EdgeInsets.all(16.0),
+          margin: const EdgeInsets.all(8.0),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(16.0),

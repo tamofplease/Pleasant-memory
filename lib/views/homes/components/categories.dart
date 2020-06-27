@@ -13,7 +13,7 @@ class Categorylist extends StatefulWidget {
 
 class _CategorylistState extends State<Categorylist> {
   int selectedCategory = 0;
-  List<String> categories = ["会話", "思い出", "探す"];
+  List<String> categories = ["思い出", "会話", "探す"];
   @override
   Widget build(BuildContext context) {
     final categoryBloc = BlocProvider.of<CategoryBloc>(context);
@@ -34,7 +34,7 @@ class _CategorylistState extends State<Categorylist> {
   }
 
   Widget buildCategory(int index, BuildContext context, CategoryBloc bloc) {  
-    CategoryEvent _selectedEvent = index == 0 ? ChatEvent() : (index == 1) ? MemoryEvent() : FindEvent();
+    CategoryEvent _selectedEvent = index == 0 ? MemoryEvent() : (index == 1) ? ChatEvent() : FindEvent();
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: GestureDetector(

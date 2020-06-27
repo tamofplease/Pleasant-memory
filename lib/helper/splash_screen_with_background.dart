@@ -12,7 +12,7 @@ class SplashScreenWithBG extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Center(
-        child:heart,
+        child: heart,
       ),
       decoration: BoxDecoration(
         color: Colors.lightBlue,

@@ -27,17 +27,26 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
+  
+  #visible
   cupertino_icons: ^0.1.3
   font_awesome_flutter: ^8.8.1
-  equatable: ^1.2.0
+  flutter_spinkit: ^4.1.2+1
+
+  #bloc
   bloc: ^4.0.0
   flutter_bloc: ^4.0.1
+  equatable: ^1.2.0
+
+  #firebase
   firebase: ^7.3.0
   firebase_auth: ^0.16.1
   firebase_storage: ^3.1.6
+  cloud_firestore: ^0.13.7
   google_sign_in: ^4.5.1
   firebase_core: ^0.4.5
-  flutter_spinkit: ^4.1.2+1
+
+  #other
   flutter_svg: ^0.17.4
   animations: ^1.1.0
   
@@ -62,6 +71,7 @@ flutter:
     - assets/auth/beach.jpeg
     - assets/images/
     - assets/icons/
+    - assets/home/choice/
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

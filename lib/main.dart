@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meple/views/auths/auth.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized(); 
   final authenticationRepository = FireBaseAuthenticationRepository();
   runApp(BlocProvider<AuthenticationBloc> (
     create: (context) => 
