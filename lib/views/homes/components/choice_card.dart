@@ -1,7 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:meple/helper/coming_soon.dart';
+import 'package:meple/helper/coming_soon_with_btn.dart';
 import 'package:meple/models/choice.dart';
 // import 'package:meple/screens/details/details_screen.dart';
 
@@ -17,7 +16,7 @@ class ChoiceCard extends StatelessWidget {
         closedElevation: 0,
         openElevation: 0,
         closedBuilder: (context, action) => buildChoiceCard(context),
-        openBuilder: (context, action) => ComingSoon(1.0, choice.image),
+        openBuilder: (context, action) => ComingSoonWithBtn(1.0, choice.image),
       ),
     );
   }

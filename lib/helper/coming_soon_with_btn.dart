@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class ComingSoon extends StatelessWidget {
+class ComingSoonWithBtn extends StatelessWidget {
   final double heightRate;
   String backImg;
-  ComingSoon(this.heightRate,[this.backImg]);
+  ComingSoonWithBtn(this.heightRate,[this.backImg]);
 
   
   @override
@@ -35,6 +35,10 @@ class ComingSoon extends StatelessWidget {
                       ),
                     ),
                   ),
+                  RaisedButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: Text("Back To Home"),
+                  )
                 ],
               ),
             ),

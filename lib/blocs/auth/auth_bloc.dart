@@ -37,7 +37,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
       final isSignedIn = await _authRepository.isSignedIn();
       if(isSignedIn) {
         final currentUser = await _authRepository.getCurrentUser();
-        // await _authRepository.createUser(currentUser);
+        await _authRepository.createUser(currentUser);
         yield AuthenticationSuccess(currentUser);
       }else {
         yield AuthenticationFailure();

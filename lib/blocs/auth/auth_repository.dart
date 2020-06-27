@@ -7,7 +7,7 @@ abstract class AuthenticationRepository {
   Future<void> signOut();
   Future<bool>  isSignedIn();
   Future<CurrentUser> getCurrentUser();
-  // Future<void> createUser(CurrentUser currentUser);
+  Future<void> createUser(CurrentUser currentUser);
 }
 
 class FireBaseAuthenticationRepository extends AuthenticationRepository {
@@ -46,16 +46,16 @@ class FireBaseAuthenticationRepository extends AuthenticationRepository {
     return Future.wait([ _firebaseAuth.signOut(), _googleSignIn.signOut()]);
   }
 
-  // @override
-  // Future<void> createUser(currentUser) async {
-  //   await usersCollection.document(currentUser.uid).setData({
-  //     'uid': currentUser.uid,
-  //     'name': currentUser.name ?? "",
-  //     'email': currentUser.email ?? "",
-  //     'photoUrl': currentUser.photoUrl ?? "",
-  //     'createdAt': currentUser.createdAt ?? "",
-  //     'updatedAt': currentUser.updatedAt ?? "",
-  //   });
-  // }
+  @override
+  Future<void> createUser(currentUser) async {
+    await usersCollection.document(currentUser.uid).setData({
+      'uid': currentUser.uid,
+      'name': currentUser.name ?? "",
+      'email': currentUser.email ?? "",
+      'photoUrl': currentUser.photoUrl ?? "",
+      'createdAt': currentUser.createdAt ?? "",
+      'updatedAt': currentUser.updatedAt ?? "",
+    });
+  }
 
 }
