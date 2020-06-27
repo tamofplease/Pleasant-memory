@@ -11,26 +11,21 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authBloc = BlocProvider.of<AuthenticationBloc>(context);
+
     return BlocProvider<CategoryBloc>(
       create: (context) => CategoryBloc(),
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: buildAppBar(authBloc),
         body: Body(),
+        // drawer: _buildDrawer(authBloc),
       ),
     );
   }
 
   AppBar buildAppBar(AuthenticationBloc authBloc) {
     return AppBar(
-      backgroundColor: Colors.white,
-      elevation: 0,
-      leading: IconButton(
-        padding: EdgeInsets.only(left: 20.0),
-        icon: SvgPicture.asset("assets/icons/menu.svg"),
-        onPressed: () {
-        },
-      ),
+      backgroundColor: Colors.blueGrey[600],
       actions: <Widget>[
         IconButton(
           padding: EdgeInsets.symmetric(horizontal: 20.0),
@@ -42,4 +37,10 @@ class HomeScreen extends StatelessWidget {
       ],
     );
   }
+
+  // Drawer _buildDrawer(AuthenticationBloc authBloc) {
+  //   // final String image = 
+  //   return ;
+  // }
 }
+

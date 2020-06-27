@@ -1,5 +1,6 @@
 import 'package:meple/models/current_user.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
 abstract class AuthenticationState extends Equatable {
   AuthenticationState([List props = const[]]);
@@ -24,6 +25,7 @@ class AuthenticationFailure extends AuthenticationState {
   @override
   String toString() => 'AuthenticationFailure';
 }
+
 
 
 

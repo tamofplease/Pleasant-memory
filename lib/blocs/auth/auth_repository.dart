@@ -35,6 +35,8 @@ class FireBaseAuthenticationRepository extends AuthenticationRepository {
     );
   }
 
+
+
   @override
   Future<bool> isSignedIn() async {
     final currentUser = await _firebaseAuth.currentUser();
@@ -57,5 +59,4 @@ class FireBaseAuthenticationRepository extends AuthenticationRepository {
       'updatedAt': currentUser.updatedAt ?? "",
     });
   }
-
 }

@@ -25,6 +25,7 @@ class Body extends StatelessWidget {
                 // ArgumentText(text),
                 // SizedBox(height: 20.0),
                 MemoryChoice(),
+                
               ],
             ),
           );
