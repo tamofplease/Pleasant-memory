@@ -17,7 +17,7 @@ class Body extends StatelessWidget {
       bloc: categoryBloc,
       builder: (context, state) {
         if(state is SelectedMemory) {
-          text= ChatEvent().toString();
+          text= MemoryEvent().toString();
           return SingleChildScrollView(
             child: Column(
               children: <Widget>[
@@ -30,7 +30,7 @@ class Body extends StatelessWidget {
           );
         }
         if(state is SelectedChat) {
-          text = MemoryEvent().toString();
+          text = ChatEvent().toString();
           return SingleChildScrollView(
             child: Column(
               children: <Widget>[
