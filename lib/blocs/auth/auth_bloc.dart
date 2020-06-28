@@ -3,6 +3,7 @@ import 'package:meple/blocs/auth/auth_event.dart';
 import 'package:meple/blocs/auth/auth_state.dart';
 import 'package:meple/blocs/auth/auth_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:meple/models/current_user.dart';
 
 
 
@@ -29,6 +30,8 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
       yield* _mapLoggedInToState();
     }else if (event is LoggedOut) {
       yield* _mapLoggedOutToState();
+    }else if( event is GetCurrentUser) {
+      yield* _mapGetCurrentUser();
     }
   }
 
@@ -54,5 +57,12 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   Stream<AuthenticationState> _mapLoggedOutToState() async* {
     yield AuthenticationFailure();
     _authRepository.signOut();
+  }
+
+  Stream<AuthenticationState> _mapGetCurrentUser() async* {
+    CurrentUser currentUser = await _authRepository.getCurrentUser();
+    yield GetCurrentUserState(
+      currentUser: currentUser,
+    );
   }
 }

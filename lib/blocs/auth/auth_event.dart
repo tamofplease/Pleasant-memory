@@ -20,5 +20,7 @@ class LoggedOut extends AuthenticationEvent {
   String toString() => 'LoggedOut';
 }
 
-
+class GetCurrentUser extends AuthenticationEvent {
+  
+}
 

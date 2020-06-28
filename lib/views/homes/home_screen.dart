@@ -5,6 +5,7 @@ import 'package:meple/blocs/auth/auth_event.dart';
 import 'package:meple/blocs/category/category_bloc.dart';
 import 'package:meple/views/homes/components/body.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:meple/views/homes/components/home_drawer.dart';
 
 
 class HomeScreen extends StatelessWidget {
@@ -18,7 +19,7 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         appBar: buildAppBar(authBloc),
         body: Body(),
-        // drawer: _buildDrawer(authBloc),
+        drawer: HomeDrawer(),
       ),
     );
   }

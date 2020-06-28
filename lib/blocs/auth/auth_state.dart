@@ -16,7 +16,6 @@ class AuthenticationSuccess extends AuthenticationState {
   final CurrentUser currentUser;
 
   AuthenticationSuccess(this.currentUser) : super([currentUser]);
-
   @override
   String toString() => "AuthenticatonSuccess";
 }
@@ -25,6 +24,14 @@ class AuthenticationFailure extends AuthenticationState {
   @override
   String toString() => 'AuthenticationFailure';
 }
+
+class GetCurrentUserState extends AuthenticationState {
+  final CurrentUser currentUser;
+  GetCurrentUserState({ @required this.currentUser}) 
+  : assert(currentUser != null),
+    super([currentUser]);
+}
+
 
 
 
