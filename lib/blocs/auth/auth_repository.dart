@@ -27,9 +27,9 @@ class FireBaseAuthenticationRepository extends AuthenticationRepository {
     final currentUser = await _firebaseAuth.currentUser();
     return CurrentUser(
       uid: currentUser.uid,
-      name: currentUser.displayName ?? "",
-      email: currentUser.email ?? "",
-      photoUrl: currentUser.photoUrl ?? "",
+      name: currentUser.displayName ?? "Noname",
+      email: currentUser.email ?? "xxx@yyy.zzz",
+      photoUrl: currentUser.photoUrl ?? "assets/images/default.png",
       createdAt: currentUser.metadata.creationTime,
       updatedAt: currentUser.metadata.lastSignInTime,
     );
@@ -52,9 +52,9 @@ class FireBaseAuthenticationRepository extends AuthenticationRepository {
   Future<void> createUser(currentUser) async {
     await usersCollection.document(currentUser.uid).setData({
       'uid': currentUser.uid,
-      'name': currentUser.name ?? "",
-      'email': currentUser.email ?? "",
-      'photoUrl': currentUser.photoUrl ?? "",
+      'name': currentUser.name ?? "Noname",
+      'email': currentUser.email ?? "xxx@yyy.zzz",
+      'photoUrl': currentUser.photoUrl ?? "assets/images/default.png",
       'createdAt': currentUser.createdAt ?? "",
       'updatedAt': currentUser.updatedAt ?? "",
     });
