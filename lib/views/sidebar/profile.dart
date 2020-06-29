@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Setting extends StatelessWidget {
+class Profile extends StatelessWidget {
   var count = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
 
       appBar: AppBar(
-        title: Text("setting"),
+        title: Text("profile"),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.popUntil(context, (route) {

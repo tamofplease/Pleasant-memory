@@ -1,6 +1,7 @@
 import 'package:meple/blocs/auth/auth_bloc.dart';
 import 'package:meple/blocs/auth/auth_state.dart';
 import 'package:meple/blocs/auth/auth_event.dart';
+import 'package:meple/blocs/drawer/drawer_bloc.dart';
 import 'package:meple/helper/splash_screen.dart';
 import 'package:meple/views/homes/home_screen.dart';
 import 'blocs/auth/auth_repository.dart';
@@ -11,12 +12,19 @@ import 'package:meple/views/auths/auth.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); 
   final authenticationRepository = FireBaseAuthenticationRepository();
-  runApp(BlocProvider<AuthenticationBloc> (
-    create: (context) => 
-      AuthenticationBloc(authRepository: authenticationRepository)
-        ..add(AppStarted()),
-    child: MyApp(),
-  ));
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthenticationBloc>(
+          create: (context) => AuthenticationBloc(authRepository: authenticationRepository)..add(AppStarted()),
+        ),
+        BlocProvider<DrawerBloc> (
+          create: (context) => DrawerBloc(),
+        ),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
