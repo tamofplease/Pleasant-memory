@@ -15,7 +15,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authBloc = BlocProvider.of<AuthenticationBloc>(context);
-
     return BlocProvider<CategoryBloc>(
       create: (context) => CategoryBloc(),
       child: BlocBuilder(
@@ -28,11 +27,9 @@ class HomeScreen extends StatelessWidget {
             backgroundColor: Colors.white,
             appBar: buildAppBar(authBloc),
             body: Body(),
-            // drawer: Drawer(),
-            drawer: buildDrawer(_currentUser),
+            drawer: BuildDrawer(currentUser: _currentUser),
           );
-        }
-        
+        },
       ),
     );
   }
