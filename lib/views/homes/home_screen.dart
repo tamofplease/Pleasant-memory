@@ -4,16 +4,19 @@ import 'package:meple/blocs/auth/auth_bloc.dart';
 import 'package:meple/blocs/auth/auth_event.dart';
 import 'package:meple/blocs/auth/auth_state.dart';
 import 'package:meple/blocs/category/category_bloc.dart';
+import 'package:meple/helper/form.dart';
 import 'package:meple/models/current_user.dart';
 import 'package:meple/views/homes/components/body.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meple/views/homes/drawer/build_drawer.dart';
+import 'package:provider/provider.dart';
 
 
 class HomeScreen extends StatelessWidget {
-  CurrentUser _currentUser;
+  
   @override
   Widget build(BuildContext context) {
+    CurrentUser _currentUser;
     final authBloc = BlocProvider.of<AuthenticationBloc>(context);
     return BlocProvider<CategoryBloc>(
       create: (context) => CategoryBloc(),
@@ -23,11 +26,14 @@ class HomeScreen extends StatelessWidget {
           if(status is AuthenticationSuccess) {
             _currentUser = status.currentUser;
           }
-          return Scaffold(
-            backgroundColor: Colors.white,
-            appBar: buildAppBar(authBloc),
-            body: Body(),
-            drawer: BuildDrawer(currentUser: _currentUser),
+          return Provider<CurrentUser>.value(
+            value: _currentUser,
+            child: Scaffold(
+              backgroundColor: Colors.white,
+              appBar: buildAppBar(authBloc),
+              body: Body(),
+              drawer: BuildDrawer(currentUser: _currentUser),
+            ),
           );
         },
       ),
@@ -36,7 +42,7 @@ class HomeScreen extends StatelessWidget {
 
   AppBar buildAppBar(AuthenticationBloc authBloc) {
     return AppBar(
-      backgroundColor: Colors.blueGrey[600],
+      backgroundColor: appBarColor,
       actions: <Widget>[
         IconButton(
           padding: EdgeInsets.symmetric(horizontal: 20.0),

@@ -55,8 +55,8 @@ class FireBaseAuthenticationRepository extends AuthenticationRepository {
       'name': currentUser.name ?? "Noname",
       'email': currentUser.email ?? "xxx@yyy.zzz",
       'photoUrl': currentUser.photoUrl ?? "assets/images/default.png",
-      'createdAt': currentUser.createdAt ?? "",
-      'updatedAt': currentUser.updatedAt ?? "",
+      'createdAt': DateTime.now(),
+      'updatedAt': DateTime.now(),
     });
   }
 }

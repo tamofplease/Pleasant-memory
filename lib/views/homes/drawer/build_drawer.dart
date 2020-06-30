@@ -41,7 +41,7 @@ class BuildDrawer extends StatelessWidget {
         if(state is SettingDrawerState) {
           Navigator.pop(context);
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return Setting();
+            // return Setting();
           }));
         }
 
@@ -59,85 +59,111 @@ class BuildDrawer extends StatelessWidget {
           }));
         }
 
-        if(state is NothingDrawerState) {}
+        if(state is NothingDrawerState) {
 
-        return ClipPath(
-          clipper: DrawerClipper(),
-          child: Drawer(
-            child: Container(
-              padding: const EdgeInsets.only(left: 16.0, right: 40),
-              decoration: BoxDecoration(
-                color: Colors.grey[300], boxShadow: [BoxShadow(color: Colors.black45)],
-              ),
-              width: 300,
-              child: SafeArea(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(height: 30),
-                      Container(
-                        height: 90,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          gradient: LinearGradient(
-                            colors: [Colors.black, Colors.white],
+       
+          return ClipPath(
+            clipper: DrawerClipper(),
+            child: Drawer(
+              child: Container(
+                padding: const EdgeInsets.only(left: 16.0, right: 40),
+                decoration: BoxDecoration(
+                  color: Colors.grey[300], boxShadow: [BoxShadow(color: Colors.black45)],
+                ),
+                width: 300,
+                child: SafeArea(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(height: 30),
+                        Container(
+                          height: 90,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            gradient: LinearGradient(
+                              colors: [Colors.blue, Colors.red],
+                            ),
+                          ),
+                          child: CircleAvatar(
+                            radius: 40,
+                            backgroundImage: AssetImage(currentUser.photoUrl),
                           ),
                         ),
-                        child: CircleAvatar(
-                          radius: 40,
-                          backgroundImage: AssetImage(currentUser.photoUrl),
+                        SizedBox(
+                          height: 10.0,
                         ),
-                      ),
-                      GestureDetector(
-                        child: Text("tap"),
-                        onTap: () {
-                          Navigator.push(
-                            context, 
-                            MaterialPageRoute(builder: (context) {
-                              return Setting();
-                            }),
-                          );
-                        },
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      Text(
-                        currentUser.name,
-                        style: TextStyle(color: Colors.black, fontSize: 22.0),
-                      ),
-                      Text(
-                        currentUser.email,
-                        style: TextStyle(color: Colors.black, fontSize: 22.0),
-                      ),
-                      SizedBox(height: 30.0),
-                      _buildDivider(),
-                      _buildRow(Icons.home, "ホーム",context,HomeDrawerEvent()),
-                      _buildDivider(),
-                      _buildRow(Icons.person_pin, "プロフィール", context,ProfileDrawerEvent()),
-                      _buildDivider(),
-                      _buildRow(Icons.settings, "設定",context,SettingDrawerEvent()),
-                      _buildDivider(),
-                      _buildRow(Icons.email, "コンタクト",context,ContactDrawerEvent()),
-                      _buildDivider(),
-                      _buildRow(Icons.info_outline, "ヘルプ",context,HelpDrawerEvent()),
-                      _buildDivider(),
-                    ],
+                        Text(
+                          currentUser.name,
+                          style: TextStyle(color: Colors.black, fontSize: 22.0),
+                        ),
+                        Text(
+                          currentUser.email,
+                          style: TextStyle(color: Colors.black, fontSize: 22.0),
+                        ),
+                        SizedBox(height: 30.0),
+                        
+                        _buildDivider(),
+                        GestureDetector(
+                          child: _buildRow(Icons.home, "ホーム"),
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                return HomeScreen();
+                              }));
+                          },
+                        ),
+                        _buildDivider(),
+                        GestureDetector(
+                          child: _buildRow(Icons.person_pin, "プロフィール"),
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                return Profile();
+                              }));
+                          },
+                        ),
+                        _buildDivider(),
+                        GestureDetector(
+                          child: _buildRow(Icons.settings, "設定"),
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                return Setting(currentUser);
+                              }));
+                          },
+                        ),
+                        _buildDivider(),
+                        GestureDetector(
+                          child: _buildRow(Icons.email, "コンタクト"),
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                return Contact();
+                              }));
+                          },
+                        ),
+                        _buildDivider(),
+                        GestureDetector(
+                          child: _buildRow(Icons.info_outline, "ヘルプ"),
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                return Help();
+                              }));
+                          },
+                        ),
+                        _buildDivider(),
+                      ],
+                    )
                   )
-                )
+                ),
               ),
             ),
-          ),
-        );
+          );
+        }
       }
     );
         
   }
    
 
-  Widget _buildRow(IconData iconData, String title, BuildContext context, DrawerEvent event) {
-    DrawerBloc drawerBloc = BlocProvider.of<DrawerBloc>(context);
+  Widget _buildRow(IconData iconData, String title) {
     return Container(
       child: ListTile(
         leading: Icon(
@@ -148,12 +174,6 @@ class BuildDrawer extends StatelessWidget {
           title,
           style: TextStyle(fontSize: 17.0),
         ),
-        onTap: () {
-          drawerBloc.add(event);
-        },
-        onLongPress: () {
-          drawerBloc.add(event);
-        },
       ),
     );
   }

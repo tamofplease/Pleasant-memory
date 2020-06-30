@@ -2,6 +2,8 @@ import 'package:meple/blocs/auth/auth_bloc.dart';
 import 'package:meple/blocs/auth/auth_state.dart';
 import 'package:meple/blocs/auth/auth_event.dart';
 import 'package:meple/blocs/drawer/drawer_bloc.dart';
+import 'package:meple/blocs/setting/setting_bloc.dart';
+import 'package:meple/blocs/setting/setting_repository.dart';
 import 'package:meple/helper/splash_screen.dart';
 import 'package:meple/views/homes/home_screen.dart';
 import 'blocs/auth/auth_repository.dart';
@@ -12,6 +14,7 @@ import 'package:meple/views/auths/auth.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); 
   final authenticationRepository = FireBaseAuthenticationRepository();
+  final settingRepo = SettingRepo();
   runApp(
     MultiBlocProvider(
       providers: [
@@ -21,6 +24,9 @@ void main() {
         BlocProvider<DrawerBloc> (
           create: (context) => DrawerBloc(),
         ),
+        BlocProvider<SettingBloc> (
+          create: (context) => SettingBloc(settingRepo),
+        )
       ],
       child: MyApp(),
     ),
