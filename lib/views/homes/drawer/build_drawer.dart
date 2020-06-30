@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:meple/blocs/auth/auth_bloc.dart';
+import 'package:meple/blocs/auth/auth_event.dart';
+import 'package:meple/blocs/auth/auth_state.dart';
 import 'package:meple/blocs/drawer/drawer_bloc.dart';
 import 'package:meple/blocs/drawer/drawer_event.dart';
 import 'package:meple/blocs/drawer/drawer_state.dart';
@@ -8,8 +11,8 @@ import 'package:meple/views/homes/drawer/drawer_clipper.dart';
 import 'package:meple/views/homes/home_screen.dart';
 import 'package:meple/views/sidebar/contact.dart';
 import 'package:meple/views/sidebar/help.dart';
-import 'package:meple/views/sidebar/profile.dart';
-import 'package:meple/views/sidebar/setting.dart';
+import 'package:meple/views/sidebar/profile/profile.dart';
+import 'package:meple/views/sidebar/setting/setting.dart';
 
 
 class BuildDrawer extends StatelessWidget {
@@ -19,49 +22,11 @@ class BuildDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DrawerBloc drawerBloc = BlocProvider.of<DrawerBloc>(context);
+    AuthenticationBloc authBloc = BlocProvider.of<AuthenticationBloc>(context);
     return BlocBuilder(
-      bloc: drawerBloc,
+      bloc: authBloc,
       builder: (context, state) {
-
-        if(state is HomeDrawerState) {
-          Navigator.pop(context);
-          
-          // Navigator.push(context, MaterialPageRoute(builder: (context) {
-          //   return HomeScreen();
-          // }));
-        }
-
-        if(state is ProfileDrawerState) {
-          Navigator.pop(context);
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return Profile();
-          }));
-        }
-
-        if(state is SettingDrawerState) {
-          Navigator.pop(context);
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            // return Setting();
-          }));
-        }
-
-        if(state is ContactDrawerState) {
-          Navigator.pop(context);
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return Contact();
-          }));
-        }
-
-        if(state is HelpDrawerState) {
-          Navigator.pop(context);
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return Help();
-          }));
-        }
-
-        if(state is NothingDrawerState) {
-
-       
+        if(state is AuthenticationSuccess) {
           return ClipPath(
             clipper: DrawerClipper(),
             child: Drawer(
@@ -139,16 +104,16 @@ class BuildDrawer extends StatelessWidget {
                               }));
                           },
                         ),
+                        
                         _buildDivider(),
+                       
                         GestureDetector(
-                          child: _buildRow(Icons.info_outline, "ヘルプ"),
+                          child: _buildRow(Icons.info_outline, "ログアウト"),
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                return Help();
-                              }));
+                            authBloc.add(LoggedOut());
                           },
                         ),
-                        _buildDivider(),
+                         _buildDivider(),
                       ],
                     )
                   )
@@ -157,6 +122,7 @@ class BuildDrawer extends StatelessWidget {
             ),
           );
         }
+        return Container();
       }
     );
         

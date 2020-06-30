@@ -25,6 +25,7 @@ class FireBaseAuthenticationRepository extends AuthenticationRepository {
   @override
   Future<CurrentUser> getCurrentUser() async {
     final currentUser = await _firebaseAuth.currentUser();
+    print("get");
     return CurrentUser(
       uid: currentUser.uid,
       name: currentUser.displayName ?? "Noname",
@@ -52,7 +53,7 @@ class FireBaseAuthenticationRepository extends AuthenticationRepository {
   Future<void> createUser(currentUser) async {
     await usersCollection.document(currentUser.uid).setData({
       'uid': currentUser.uid,
-      'name': currentUser.name ?? "Noname",
+      'name': currentUser.displayName ?? "Noname",
       'email': currentUser.email ?? "xxx@yyy.zzz",
       'photoUrl': currentUser.photoUrl ?? "assets/images/default.png",
       'createdAt': DateTime.now(),

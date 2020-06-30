@@ -102,11 +102,6 @@ class _SettingFormState extends State<SettingForm> {
           ),
         ),
       ),  
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.popUntil(context, (route) {
-          return widget.count++ == 2;
-        })
-      ),
     );
   }
 }

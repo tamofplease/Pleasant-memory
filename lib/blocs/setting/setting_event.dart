@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:meple/views/sidebar/setting.dart';
+import 'package:meple/views/sidebar/setting/setting.dart';
 import 'package:flutter/material.dart';
 import 'package:meple/models/current_user.dart';
 

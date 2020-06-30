@@ -8,7 +8,7 @@ import 'package:meple/blocs/setting/setting_state.dart';
 import 'package:meple/helper/form.dart';
 import 'package:meple/helper/splash_screen_with_background.dart';
 import 'package:meple/models/current_user.dart';
-import 'package:meple/views/sidebar/setting_form.dart';
+import 'package:meple/views/sidebar/setting/setting_form.dart';
 import 'package:provider/provider.dart';
 import 'package:meple/blocs/setting/setting_bloc.dart';
 
@@ -33,8 +33,8 @@ class Setting extends StatelessWidget {
         }
 
         if(status is SettingFailuer) {
-
         }
+        
         if(status is SettingEmpty) {
         }
         return SettingForm(currentUser);
