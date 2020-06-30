@@ -26,7 +26,6 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
 
   Stream<SettingState> _mapUpdateUser(CurrentUser currentUser) async* {
     yield SettingProgress();
-    print(currentUser.name);
     try {
       await settingRepo.updateUser(currentUser);
       yield SettingSuccess(currentUser);

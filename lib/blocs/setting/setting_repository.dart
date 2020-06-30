@@ -11,9 +11,12 @@ class SettingRepo extends SettingRepository {
 
   Future<CurrentUser> updateUser(currentUser) async {
     await userCollection.document(currentUser.uid).setData({
-      'name': currentUser.name ?? "Noname",
+      'uid': currentUser.uid,
+      'name': currentUser.name,
       'email': currentUser.email,
+      'photoUrl': currentUser.photoUrl,
       'updatedAt': DateTime.now(),
+      'createdAt': currentUser.createdAt,
     });
     return currentUser;
   }

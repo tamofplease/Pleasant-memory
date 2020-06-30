@@ -24,7 +24,6 @@ class Setting extends StatelessWidget {
     return BlocBuilder(
       bloc: settingBloc,
       builder: (context,status) {
-        print("set");
         if(status is SettingProgress) {
           // return SplashScreenWithBG();
         }
