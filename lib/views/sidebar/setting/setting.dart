@@ -19,8 +19,7 @@ class Setting extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-
-    final SettingBloc settingBloc = Provider.of<SettingBloc>(context);
+    final SettingBloc settingBloc = BlocProvider.of<SettingBloc>(context);
     return BlocBuilder(
       bloc: settingBloc,
       builder: (context,status) {

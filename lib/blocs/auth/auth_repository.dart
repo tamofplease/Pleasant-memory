@@ -8,6 +8,7 @@ abstract class AuthenticationRepository {
   Future<bool>  isSignedIn();
   Future<CurrentUser> getCurrentUser();
   Future<void> createUser(CurrentUser currentUser);
+  
 }
 
 class FireBaseAuthenticationRepository extends AuthenticationRepository {
@@ -59,4 +60,7 @@ class FireBaseAuthenticationRepository extends AuthenticationRepository {
       'updatedAt': DateTime.now(),
     });
   }
+
+
+
 }

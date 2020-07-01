@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:meple/models/current_user.dart';
 
 abstract class AuthenticationEvent extends Equatable {
   AuthenticationEvent([List props = const[]]);
@@ -18,9 +19,5 @@ class LoggedIn extends AuthenticationEvent {
 class LoggedOut extends AuthenticationEvent {
   @override
   String toString() => 'LoggedOut';
-}
-
-class GetCurrentUser extends AuthenticationEvent {
-  
 }
 

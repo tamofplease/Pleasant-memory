@@ -4,6 +4,9 @@ import 'package:meple/blocs/auth/auth_bloc.dart';
 import 'package:meple/blocs/auth/auth_event.dart';
 import 'package:meple/blocs/auth/auth_state.dart';
 import 'package:meple/blocs/category/category_bloc.dart';
+import 'package:meple/blocs/user/user_bloc.dart';
+import 'package:meple/blocs/user/user_event.dart';
+import 'package:meple/blocs/user/user_state.dart';
 import 'package:meple/helper/form.dart';
 import 'package:meple/models/current_user.dart';
 import 'package:meple/views/homes/components/body.dart';
@@ -18,13 +21,18 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     CurrentUser _currentUser;
     final authBloc = BlocProvider.of<AuthenticationBloc>(context);
+    final userBloc = BlocProvider.of<UserBloc>(context);
+    final String uid = Provider.of<String>(context);
     return BlocProvider<CategoryBloc>(
       create: (context) => CategoryBloc(),
       child: BlocBuilder(
-        bloc: authBloc,
+        bloc: userBloc,
         builder: (context, status){
-          if(status is AuthenticationSuccess) {
-            _currentUser = status.currentUser;
+          if(status is UserProgress) {
+            userBloc.add(GetUserData(uid));
+          }
+          if(status is UserLoaded ){ 
+            _currentUser ??= status.currentUser;
           }
           return Provider<CurrentUser>.value(
             value: _currentUser,
@@ -32,13 +40,14 @@ class HomeScreen extends StatelessWidget {
               backgroundColor: Colors.white,
               appBar: buildAppBar(authBloc),
               body: Body(),
-              drawer: BuildDrawer(currentUser: _currentUser),
+              drawer: BuildDrawer(),
             ),
           );
         },
       ),
     );
   }
+
 
   AppBar buildAppBar(AuthenticationBloc authBloc) {
     return AppBar(

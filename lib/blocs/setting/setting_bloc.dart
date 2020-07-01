@@ -11,7 +11,7 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
 
   final SettingRepo settingRepo;
 
-  SettingBloc(@required this.settingRepo);
+  SettingBloc(this.settingRepo);
 
   SettingState get initialState => SettingEmpty();
 
@@ -25,9 +25,9 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
   }
 
   Stream<SettingState> _mapUpdateUser(CurrentUser currentUser) async* {
-    yield SettingProgress();
     try {
-      await settingRepo.updateUser(currentUser);
+      yield SettingProgress();
+      // currentUser = await settingRepo.updateUser(currentUser);
       yield SettingSuccess(currentUser);
     }catch (e) {
       yield SettingFailuer();

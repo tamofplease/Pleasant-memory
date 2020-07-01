@@ -4,17 +4,23 @@ import 'package:meple/blocs/auth/auth_event.dart';
 import 'package:meple/blocs/drawer/drawer_bloc.dart';
 import 'package:meple/blocs/setting/setting_bloc.dart';
 import 'package:meple/blocs/setting/setting_repository.dart';
+import 'package:meple/blocs/user/user_bloc.dart';
+import 'package:meple/blocs/user/user_repository.dart';
 import 'package:meple/helper/splash_screen.dart';
+import 'package:meple/models/current_user.dart';
 import 'package:meple/views/homes/home_screen.dart';
+import 'package:provider/provider.dart';
 import 'blocs/auth/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meple/views/auths/auth.dart';
 
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); 
   final authenticationRepository = FireBaseAuthenticationRepository();
   final settingRepo = SettingRepo();
+  final userRepo = CurrentUserRepository();
   runApp(
     MultiBlocProvider(
       providers: [
@@ -26,6 +32,9 @@ void main() {
         ),
         BlocProvider<SettingBloc> (
           create: (context) => SettingBloc(settingRepo),
+        ),
+        BlocProvider<UserBloc> (
+          create: (context) => UserBloc(userRepo),
         )
       ],
       child: MyApp(),
@@ -50,7 +59,11 @@ class MyApp extends StatelessWidget {
             return SplashScreen();
           }
           if(state is AuthenticationSuccess) {
-            return HomeScreen();
+            String uid = state.currentUser.uid;
+            return Provider<String>.value (
+              value: uid,
+              child: HomeScreen(),
+            );
           }
           if(state is AuthenticationFailure) {
             return AuthPage();

@@ -31,8 +31,3 @@ class GetCurrentUserState extends AuthenticationState {
   : assert(currentUser != null),
     super([currentUser]);
 }
-
-
-
-
-

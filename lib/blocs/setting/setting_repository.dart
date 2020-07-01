@@ -10,14 +10,18 @@ class SettingRepo extends SettingRepository {
   final CollectionReference userCollection = Firestore.instance.collection("users");
 
   Future<CurrentUser> updateUser(currentUser) async {
-    await userCollection.document(currentUser.uid).setData({
-      'uid': currentUser.uid,
-      'name': currentUser.name,
-      'email': currentUser.email,
-      'photoUrl': currentUser.photoUrl,
-      'updatedAt': DateTime.now(),
-      'createdAt': currentUser.createdAt,
-    });
+    try {
+      await userCollection.document(currentUser.uid).setData({
+        'uid': currentUser.uid,
+        'name': currentUser.name,
+        'email': currentUser.email,
+        'photoUrl': currentUser.photoUrl,
+        'updatedAt': DateTime.now(),
+        'createdAt': currentUser.createdAt,
+      });
+    }catch(e) {
+    }
+    
     return currentUser;
   }
 }
