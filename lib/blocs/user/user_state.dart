@@ -18,3 +18,13 @@ class UserLoaded extends UserState{
   final CurrentUser currentUser;
   UserLoaded(this.currentUser) :super([currentUser]);
 }
+
+class UpdateProgress extends UserState {
+}
+
+class UpdateDone extends UserState {
+}
+
+class UpdateFail extends UserState {
+
+}

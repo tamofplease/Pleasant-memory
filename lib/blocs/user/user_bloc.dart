@@ -1,10 +1,13 @@
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:meple/blocs/setting/setting_event.dart';
 import 'package:meple/blocs/user/user_event.dart';
 import 'package:meple/blocs/user/user_state.dart';
 import 'package:meple/blocs/user/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
+
+import 'package:meple/models/current_user.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   final UserRepository _userRepository;
@@ -21,6 +24,10 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       yield * _mapGetUserData(event.uid);
     }else if(event is GetUser) {
       yield* _mapGetUser(event);
+    }else if(event is UpdateUser) {
+      yield* _mapUpdateUser(
+        event,
+      );
     }
   }
 
@@ -43,6 +50,16 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   Stream<UserState> _mapGetUser(GetUser event) async* {
     yield UserLoaded(event.currentUser);
   } 
+
+  Stream<UserState> _mapUpdateUser(UpdateUser event) async* {
+    try {
+       yield UpdateProgress();
+      await _userRepository.updateUser(event.currentUser);
+      yield UpdateDone();
+    }catch(e) {
+      yield UpdateFail();
+    }
+  }
 
 }
 

@@ -11,8 +11,6 @@ class SettingProgress extends SettingState {
 }
 
 class SettingSuccess extends SettingState {
-  final CurrentUser currentUser;
-  SettingSuccess(this.currentUser) : super([currentUser]);
   @override
   String toString() => "SettingSuccess";
 }

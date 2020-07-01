@@ -27,7 +27,7 @@ class Setting extends StatelessWidget {
           // return SplashScreenWithBG();
         }
         if(status is SettingSuccess) {
-          currentUser = status.currentUser;
+          currentUser = Provider.of<CurrentUser>(context);
         }
 
         if(status is SettingFailuer) {

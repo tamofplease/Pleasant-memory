@@ -4,6 +4,7 @@ import 'package:meple/models/current_user.dart';
 
 abstract class UserRepository {
   Stream<CurrentUser> getUserData(String uid);
+  Future<void> updateUser(CurrentUser currentUser);
 }
 
 class CurrentUserRepository extends UserRepository {
@@ -25,6 +26,20 @@ class CurrentUserRepository extends UserRepository {
       createdAt: snapshot["createdAt"].toDate(),
       updatedAt: snapshot["updatedAt"].toDate(),
     );
+  }
+
+  Future<void>  updateUser(currentUser) async {
+    try {
+      return await usersCollection.document(currentUser.uid).setData({
+        'uid': currentUser.uid,
+        'name': currentUser.name,
+        'email': currentUser.email,
+        'photoUrl': currentUser.photoUrl,
+        'updatedAt': DateTime.now(),
+        'createdAt': currentUser.createdAt,
+      });
+    }catch(e) {
+    }
   }
 }
 

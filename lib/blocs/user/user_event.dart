@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:meple/models/current_user.dart';
+import 'package:flutter/material.dart';
 
 abstract class UserEvent extends Equatable {
   UserEvent([List props = const[]]);
@@ -18,3 +19,13 @@ class GetUser extends UserEvent {
   final CurrentUser currentUser;
   GetUser(this.currentUser);
 }
+
+class UpdateUser extends UserEvent{
+  final CurrentUser currentUser;
+  UpdateUser({
+    @required this.currentUser,
+  })
+  :assert(currentUser != null);
+}
+
+
