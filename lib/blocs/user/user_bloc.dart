@@ -1,6 +1,5 @@
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meple/blocs/setting/setting_event.dart';
 import 'package:meple/blocs/user/user_event.dart';
 import 'package:meple/blocs/user/user_state.dart';
 import 'package:meple/blocs/user/user_repository.dart';
@@ -38,8 +37,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         (user) {
           add(
             GetUser(user),
-          );
-          
+          ); 
         }
       );
     } catch(e) {
@@ -53,9 +51,11 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
   Stream<UserState> _mapUpdateUser(UpdateUser event) async* {
     try {
-       yield UpdateProgress();
+      yield UpdateProgress();
       await _userRepository.updateUser(event.currentUser);
-      yield UpdateDone();
+      print("r");
+      yield UserProgress();
+      print("s");
     }catch(e) {
       yield UpdateFail();
     }

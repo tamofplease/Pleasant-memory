@@ -29,8 +29,9 @@ class CurrentUserRepository extends UserRepository {
   }
 
   Future<void>  updateUser(currentUser) async {
+    print("e");
     try {
-      return await usersCollection.document(currentUser.uid).setData({
+      await usersCollection.document(currentUser.uid).setData({
         'uid': currentUser.uid,
         'name': currentUser.name,
         'email': currentUser.email,
@@ -38,7 +39,9 @@ class CurrentUserRepository extends UserRepository {
         'updatedAt': DateTime.now(),
         'createdAt': currentUser.createdAt,
       });
+      print("f");
     }catch(e) {
+      
     }
   }
 }

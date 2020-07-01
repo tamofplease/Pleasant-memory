@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meple/blocs/auth/auth_bloc.dart';
 import 'package:meple/blocs/auth/auth_state.dart';
-import 'package:meple/blocs/setting/setting_event.dart';
-import 'package:meple/blocs/setting/setting_repository.dart';
-import 'package:meple/blocs/setting/setting_state.dart';
+import 'package:meple/blocs/user/user_bloc.dart';
+import 'package:meple/blocs/user/user_event.dart';
 import 'package:meple/helper/form.dart';
 import 'package:meple/models/current_user.dart';
 import 'package:provider/provider.dart';
-import 'package:meple/blocs/setting/setting_bloc.dart';
 
 class SettingForm extends StatefulWidget {
 
@@ -29,7 +27,7 @@ class _SettingFormState extends State<SettingForm> {
     CurrentUser _currentUser = widget.currentUser;
     _email ??= _currentUser.email;
     _name ??= _currentUser.name;
-    SettingBloc settingBloc = Provider.of<SettingBloc>(context);
+    UserBloc userBloc = BlocProvider.of<UserBloc>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: appBarColor,
@@ -83,7 +81,7 @@ class _SettingFormState extends State<SettingForm> {
                 SizedBox(height: 20),
                 RaisedButton(
                   onPressed: () {
-                    settingBloc.add(UpdateSetting(
+                    userBloc.add(UpdateUser(
                       currentUser: CurrentUser(
                         email: _email,
                         uid: _currentUser.uid,

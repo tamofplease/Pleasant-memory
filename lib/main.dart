@@ -2,8 +2,6 @@ import 'package:meple/blocs/auth/auth_bloc.dart';
 import 'package:meple/blocs/auth/auth_state.dart';
 import 'package:meple/blocs/auth/auth_event.dart';
 import 'package:meple/blocs/drawer/drawer_bloc.dart';
-import 'package:meple/blocs/setting/setting_bloc.dart';
-import 'package:meple/blocs/setting/setting_repository.dart';
 import 'package:meple/blocs/user/user_bloc.dart';
 import 'package:meple/blocs/user/user_repository.dart';
 import 'package:meple/helper/splash_screen.dart';
@@ -19,7 +17,6 @@ import 'package:meple/views/auths/auth.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); 
   final authenticationRepository = FireBaseAuthenticationRepository();
-  final settingRepo = SettingRepo();
   final userRepo = CurrentUserRepository();
   runApp(
     MultiBlocProvider(
@@ -29,9 +26,6 @@ void main() {
         ),
         BlocProvider<DrawerBloc> (
           create: (context) => DrawerBloc(),
-        ),
-        BlocProvider<SettingBloc> (
-          create: (context) => SettingBloc(settingRepo),
         ),
         BlocProvider<UserBloc> (
           create: (context) => UserBloc(userRepo),
@@ -46,7 +40,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) { 
     return MaterialApp(
-      title: "Awase",
+      title: "Meple",
       theme: ThemeData(
         primaryColor: Colors.indigo[900],
         accentColor: Colors.pink[800],
@@ -56,7 +50,7 @@ class MyApp extends StatelessWidget {
         bloc: BlocProvider.of<AuthenticationBloc>(context),
         builder: (context, state) { 
           if(state is AuthenticationInProgress) {
-            return SplashScreen();
+            
           }
           if(state is AuthenticationSuccess) {
             String uid = state.currentUser.uid;

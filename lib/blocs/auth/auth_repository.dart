@@ -7,7 +7,6 @@ abstract class AuthenticationRepository {
   Future<void> signOut();
   Future<bool>  isSignedIn();
   Future<CurrentUser> getCurrentUser();
-  Future<void> createUser(CurrentUser currentUser);
   
 }
 
@@ -37,7 +36,6 @@ class FireBaseAuthenticationRepository extends AuthenticationRepository {
   }
 
 
-
   @override
   Future<bool> isSignedIn() async {
     final currentUser = await _firebaseAuth.currentUser();
@@ -48,19 +46,5 @@ class FireBaseAuthenticationRepository extends AuthenticationRepository {
   Future<void> signOut() {
     return Future.wait([ _firebaseAuth.signOut(), _googleSignIn.signOut()]);
   }
-
-  @override
-  Future<void> createUser(currentUser) async {
-    await usersCollection.document(currentUser.uid).setData({
-      'uid': currentUser.uid ?? "",
-      'name': currentUser.name ?? "Noname",
-      'email': currentUser.email ?? "xxx@yyy.zzz",
-      'photoUrl': currentUser.photoUrl ?? "assets/images/default.png",
-      'createdAt': DateTime.now(),
-      'updatedAt': DateTime.now(),
-    });
-  }
-
-
 
 }

@@ -29,7 +29,6 @@ class _SignupFormState extends State<SignupForm> {
     return BlocBuilder<SignInBloc, SignInState>(
       bloc: signInBloc,
       builder: (context, state) {
-
         if(state is SignInLoading) {
           SplashScreen();
         }

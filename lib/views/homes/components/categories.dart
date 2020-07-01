@@ -17,19 +17,14 @@ class _CategorylistState extends State<Categorylist> {
   @override
   Widget build(BuildContext context) {
     final categoryBloc = BlocProvider.of<CategoryBloc>(context);
-    return BlocBuilder<CategoryBloc,CategoryState>(
-      bloc: categoryBloc,
-      builder: (context, state) {
-        return Container(
-          margin: EdgeInsets.symmetric(vertical: 20.0 / 2),
-          height: 70,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: categories.length,
-            itemBuilder: (context, index) => buildCategory(index, context, categoryBloc),
-          ),
-        );
-      }
+    return  Container(
+      margin: EdgeInsets.symmetric(vertical: 20.0 / 2),
+      height: 70,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: categories.length,
+        itemBuilder: (context, index) => buildCategory(index, context, categoryBloc),
+      ),
     );
   }
 

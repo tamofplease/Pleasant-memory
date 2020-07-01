@@ -1,16 +1,20 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:meple/models/current_user.dart';
 
 abstract class SignInRepository {
   Future<void> signInWithGoogle();
   Future<void> signInAnonymously();
   Future<void> signInWithEmailAndPassword(String email, String password);
   Future<void> createUserWithEmailAndPassword(String email, String password);
+  Future<void> createUser(String email, String uid);
 }
 
 class FirebaseSignInRepository extends SignInRepository {
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
+  final CollectionReference usersCollection = Firestore.instance.collection("users");
 
   FirebaseSignInRepository(
     {FirebaseAuth firebaseAuth, GoogleSignIn googleSignIn})
@@ -39,9 +43,25 @@ class FirebaseSignInRepository extends SignInRepository {
     await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
   }
 
+  @override
   Future<void> createUserWithEmailAndPassword(String email, String password) async {
-    await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
+    AuthResult result = await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
+    await createUser(email, result.user.uid);
   }
+
+
+  @override
+  Future<void> createUser(String email, String uid) async {
+    await usersCollection.document(uid).setData({
+      'uid': uid ?? "",
+      'name': "NoName",
+      'email': email ?? "xxx@yyy.zzz",
+      'photoUrl': "assets/images/default.png",
+      'createdAt': DateTime.now(),
+      'updatedAt': DateTime.now(),
+    });
+  }
+
 }
 
 

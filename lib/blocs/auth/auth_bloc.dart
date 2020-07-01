@@ -5,10 +5,14 @@ import 'package:meple/blocs/auth/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:meple/blocs/user/user_repository.dart';
+import 'package:meple/models/current_user.dart';
+
 
 
 class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
   final AuthenticationRepository _authRepository;
+  CurrentUserRepository _userRepository = CurrentUserRepository();
   
 
   AuthenticationBloc({
@@ -38,8 +42,8 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     try {
       final isSignedIn = await _authRepository.isSignedIn();
       if(isSignedIn) {
-        final currentUser = await _authRepository.getCurrentUser();
-        await _authRepository.createUser(currentUser);
+        CurrentUser currentUser = await _authRepository.getCurrentUser();
+        
         yield AuthenticationSuccess(currentUser);
       }else {
         yield AuthenticationFailure();

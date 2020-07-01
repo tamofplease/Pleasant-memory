@@ -22,10 +22,7 @@ class Body extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Categorylist(),
-                // ArgumentText(text),
-                // SizedBox(height: 20.0),
                 MemoryChoice(),
-                
               ],
             ),
           );
