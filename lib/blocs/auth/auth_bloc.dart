@@ -12,8 +12,7 @@ import 'package:meple/models/current_user.dart';
 
 class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
   final AuthenticationRepository _authRepository;
-  CurrentUserRepository _userRepository = CurrentUserRepository();
-  
+  UserRepository _userRepository = UserRepository();
 
   AuthenticationBloc({
     @required AuthenticationRepository authRepository
@@ -43,7 +42,6 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
       final isSignedIn = await _authRepository.isSignedIn();
       if(isSignedIn) {
         CurrentUser currentUser = await _authRepository.getCurrentUser();
-        
         yield AuthenticationSuccess(currentUser);
       }else {
         yield AuthenticationFailure();

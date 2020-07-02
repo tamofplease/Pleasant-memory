@@ -1,45 +1,44 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meple/models/current_user.dart';
+import 'package:meple/models/user.dart';
 
-abstract class UserRepository {
-  Stream<CurrentUser> getUserData(String uid);
-  Future<void> updateUser(CurrentUser currentUser);
+abstract class UserDataRepository {
+  Stream<User> getUserData(String uid);
+  Future<void> updateUser(User user);
 }
 
-class CurrentUserRepository extends UserRepository {
+class UserRepository extends UserDataRepository {
 
   final CollectionReference usersCollection = Firestore.instance.collection("users");
 
 
   @override
-  Stream<CurrentUser> getUserData(String uid) {
+  Stream<User> getUserData(String uid) {
     return usersCollection.document(uid).snapshots().map(_userDataFromSnapshot);
   }
 
-  CurrentUser _userDataFromSnapshot(DocumentSnapshot snapshot) {
-    return CurrentUser(
+  User _userDataFromSnapshot(DocumentSnapshot snapshot) {
+    return User(
       uid: snapshot["uid"],
       name: snapshot["name"],
       email: snapshot["email"],
       photoUrl: snapshot["photoUrl"],
-      createdAt: snapshot["createdAt"].toDate(),
-      updatedAt: snapshot["updatedAt"].toDate(),
+      createdAt: snapshot["createdAt"] != null ? snapshot["createdAt"].toDate() : DateTime.now(),
+      updatedAt: snapshot["updatedAt"] != null ? snapshot["updatedAt"].toDate() : DateTime.now(),
     );
   }
 
-  Future<void>  updateUser(currentUser) async {
-    print("e");
+  Future<void> updateUser(user) async {
     try {
-      await usersCollection.document(currentUser.uid).setData({
-        'uid': currentUser.uid,
-        'name': currentUser.name,
-        'email': currentUser.email,
-        'photoUrl': currentUser.photoUrl,
+      return await usersCollection.document(user.uid).setData({
+        'uid': user.uid,
+        'name': user.name,
+        'email': user.email,
+        'photoUrl': user.photoUrl,
         'updatedAt': DateTime.now(),
-        'createdAt': currentUser.createdAt,
+        'createdAt': user.createdAt,
       });
-      print("f");
     }catch(e) {
       
     }

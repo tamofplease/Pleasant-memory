@@ -5,7 +5,8 @@ import 'package:meple/blocs/drawer/drawer_bloc.dart';
 import 'package:meple/blocs/user/user_bloc.dart';
 import 'package:meple/blocs/user/user_repository.dart';
 import 'package:meple/helper/splash_screen.dart';
-import 'package:meple/models/current_user.dart';
+import 'models/current_user.dart';
+import 'models/user.dart';
 import 'package:meple/views/homes/home_screen.dart';
 import 'package:provider/provider.dart';
 import 'blocs/auth/auth_repository.dart';
@@ -17,7 +18,7 @@ import 'package:meple/views/auths/auth.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); 
   final authenticationRepository = FireBaseAuthenticationRepository();
-  final userRepo = CurrentUserRepository();
+  final userRepo = UserRepository();
   runApp(
     MultiBlocProvider(
       providers: [

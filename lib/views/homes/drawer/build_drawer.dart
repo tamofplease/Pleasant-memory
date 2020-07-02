@@ -7,6 +7,7 @@ import 'package:meple/blocs/drawer/drawer_bloc.dart';
 import 'package:meple/blocs/drawer/drawer_event.dart';
 import 'package:meple/blocs/drawer/drawer_state.dart';
 import 'package:meple/models/current_user.dart';
+import 'package:meple/models/user.dart';
 import 'package:meple/views/homes/drawer/drawer_clipper.dart';
 import 'package:meple/views/homes/home_screen.dart';
 import 'package:meple/views/sidebar/contact.dart';
@@ -17,10 +18,12 @@ import 'package:provider/provider.dart';
 
 
 class BuildDrawer extends StatelessWidget {
+
+  final User user;
+  BuildDrawer(this.user);
   
   @override
   Widget build(BuildContext context) {
-    final CurrentUser currentUser = Provider.of<CurrentUser>(context);
     DrawerBloc drawerBloc = BlocProvider.of<DrawerBloc>(context);
     AuthenticationBloc authBloc = BlocProvider.of<AuthenticationBloc>(context);
     return ClipPath(
@@ -48,18 +51,18 @@ class BuildDrawer extends StatelessWidget {
                     ),
                     child: CircleAvatar(
                       radius: 40,
-                      backgroundImage: AssetImage(currentUser.photoUrl),
+                      backgroundImage: AssetImage(user.photoUrl),
                     ),
                   ),
                   SizedBox(
                     height: 10.0,
                   ),
                   Text(
-                    currentUser.name,
+                    user.name,
                     style: TextStyle(color: Colors.black, fontSize: 22.0),
                   ),
                   Text(
-                    currentUser.email,
+                    user.email,
                     style: TextStyle(color: Colors.black, fontSize: 22.0),
                   ),
                   SizedBox(height: 30.0),
@@ -87,7 +90,7 @@ class BuildDrawer extends StatelessWidget {
                     child: _buildRow(Icons.settings, "設定"),
                     onTap: () {
                       Navigator.push(context, MaterialPageRoute(builder: (context) {
-                          return Setting(currentUser);
+                          return Setting(user);
                         }));
                     },
                   ),

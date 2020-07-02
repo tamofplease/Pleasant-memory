@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:meple/models/current_user.dart';
+import 'package:meple/models/user.dart';
+import 'package:provider/provider.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   final UserRepository _userRepository;
@@ -22,16 +24,13 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     if(event is GetUserData) {
       yield * _mapGetUserData(event.uid);
     }else if(event is GetUser) {
-      yield* _mapGetUser(event);
+      yield* _mapGetUser(event.user);
     }else if(event is UpdateUser) {
-      yield* _mapUpdateUser(
-        event,
-      );
+      yield* _mapUpdateUser(event.user);
     }
   }
 
   Stream<UserState> _mapGetUserData(String uid) async* {
-    _todosSubscription?.cancel();
     try {
       _todosSubscription = _userRepository.getUserData(uid).listen(
         (user) {
@@ -42,24 +41,24 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       );
     } catch(e) {
     }
-    
   }
 
-  Stream<UserState> _mapGetUser(GetUser event) async* {
-    yield UserLoaded(event.currentUser);
+  Stream<UserState> _mapGetUser(User user) async* {
+    yield UserLoaded(user: user);
   } 
 
-  Stream<UserState> _mapUpdateUser(UpdateUser event) async* {
+  Stream<UserState> _mapUpdateUser(User user) async* {
+    yield UpdateProgress();
     try {
-      yield UpdateProgress();
-      await _userRepository.updateUser(event.currentUser);
-      print("r");
+      await _userRepository.updateUser(user);
       yield UserProgress();
-      print("s");
     }catch(e) {
       yield UpdateFail();
     }
   }
 
+  void dispose() {
+    _todosSubscription.cancel();
+  }
 }
 

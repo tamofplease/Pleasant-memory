@@ -6,13 +6,14 @@ import 'package:meple/blocs/user/user_bloc.dart';
 import 'package:meple/blocs/user/user_event.dart';
 import 'package:meple/helper/form.dart';
 import 'package:meple/models/current_user.dart';
+import 'package:meple/models/user.dart';
 import 'package:provider/provider.dart';
 
 class SettingForm extends StatefulWidget {
 
   var count = 0;
-  CurrentUser currentUser;
-  SettingForm(this.currentUser);
+  User user;
+  SettingForm(this.user);
   @override
   _SettingFormState createState() => _SettingFormState();
 }
@@ -24,9 +25,9 @@ class _SettingFormState extends State<SettingForm> {
   String _name;
   @override
   Widget build(BuildContext context) {
-    CurrentUser _currentUser = widget.currentUser;
-    _email ??= _currentUser.email;
-    _name ??= _currentUser.name;
+    User _user = widget.user;
+    _email ??= _user.email;
+    _name ??= _user.name;
     UserBloc userBloc = BlocProvider.of<UserBloc>(context);
     return Scaffold(
       appBar: AppBar(
@@ -43,7 +44,7 @@ class _SettingFormState extends State<SettingForm> {
               children: [
                 CircleAvatar(
                   radius: 50,
-                  backgroundImage: AssetImage(_currentUser.photoUrl),
+                  backgroundImage: AssetImage(_user.photoUrl),
                 ),
                 SizedBox(
                   height: 30,
@@ -59,7 +60,7 @@ class _SettingFormState extends State<SettingForm> {
                 TextFormField(
                   cursorRadius: Radius.circular(100),
                   readOnly: true,
-                  initialValue: _currentUser.email,
+                  initialValue: _user.email,
                   onChanged: (val) => setState(() => _email = val),
                 ),
                 SizedBox(
@@ -75,23 +76,23 @@ class _SettingFormState extends State<SettingForm> {
                 ),
                 TextFormField(
                   validator: (val) => val.isEmpty? "値を入力してください" : null,
-                  initialValue: _currentUser.name,
+                  initialValue: _user.name,
                   onChanged: (val) => setState(() => _name = val),
                 ),
                 SizedBox(height: 20),
                 RaisedButton(
                   onPressed: () {
                     userBloc.add(UpdateUser(
-                      currentUser: CurrentUser(
+                      user: User(
                         email: _email,
-                        uid: _currentUser.uid,
+                        uid: _user.uid,
                         name: _name,
-                        photoUrl: _currentUser.photoUrl,
-                        createdAt: _currentUser.createdAt,
+                        photoUrl: _user.photoUrl,
+                        createdAt: _user.createdAt,
                         updatedAt: DateTime.now(),
                       ),
                     ));
-                    Navigator.pop(context);
+                    // Navigator.pop(context);
                   },
                   child: Text("保存"),
                 ),
