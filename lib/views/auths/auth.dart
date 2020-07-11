@@ -1,13 +1,9 @@
 
 import 'package:flutter/material.dart';
+import 'package:meple/blocs/auth/auth.dart';
+import 'package:meple/blocs/signin/signin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:meple/blocs/auth/auth_bloc.dart';
-import 'package:meple/blocs/signin/signin_bloc.dart';
-import 'package:meple/blocs/auth/auth_event.dart';
-import 'package:meple/blocs/signin/signin_event.dart';
-import 'package:meple/blocs/signin/signin_repository.dart';
-import 'package:meple/blocs/signin/signin_state.dart';
 import 'package:meple/helper/splash_screen_with_background.dart';
 import 'package:meple/views/auths/signin_form.dart';
 import 'package:meple/views/auths/signup_form.dart';

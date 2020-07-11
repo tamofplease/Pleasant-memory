@@ -1,5 +1,5 @@
-import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:animations/animations.dart';
 import 'package:meple/helper/coming_soon_with_btn.dart';
 import 'package:meple/models/choice.dart';
 // import 'package:meple/screens/details/details_screen.dart';

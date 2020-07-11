@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-
 abstract class SignInState extends Equatable {
   SignInState([List props = const[]]);
   List<Object> get props => [props];

@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:meple/models/current_user.dart';
 
 abstract class AuthenticationEvent extends Equatable {
   AuthenticationEvent([List props = const[]]);

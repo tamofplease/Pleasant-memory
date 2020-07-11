@@ -1,8 +1,6 @@
-import 'package:meple/blocs/signin/signin_event.dart';
-import 'package:meple/blocs/signin/signin_repository.dart';
-import 'package:meple/blocs/signin/signin_state.dart';
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:meple/blocs/signin/signin.dart';
+import 'package:bloc/bloc.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
   final SignInRepository _signInRepository;

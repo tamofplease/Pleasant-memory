@@ -92,7 +92,7 @@ class _SettingFormState extends State<SettingForm> {
                         updatedAt: DateTime.now(),
                       ),
                     ));
-                    // Navigator.pop(context);
+                    Navigator.pop(context);
                   },
                   child: Text("保存"),
                 ),

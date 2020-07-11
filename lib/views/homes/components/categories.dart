@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meple/blocs/category/category_bloc.dart';
-import 'package:meple/blocs/category/category_state.dart';
-import 'package:meple/blocs/category/category_event.dart';
+import 'package:meple/blocs/category/category.dart';
 
 
 // We need stateful widget because we need to change some sate on our category

@@ -1,20 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meple/blocs/auth/auth_bloc.dart';
-import 'package:meple/blocs/auth/auth_event.dart';
-import 'package:meple/blocs/auth/auth_state.dart';
-import 'package:meple/blocs/drawer/drawer_bloc.dart';
-import 'package:meple/blocs/drawer/drawer_event.dart';
-import 'package:meple/blocs/drawer/drawer_state.dart';
-import 'package:meple/models/current_user.dart';
+import 'package:meple/blocs/auth/auth.dart';
+import 'package:meple/blocs/drawer/drawer.dart';
 import 'package:meple/models/user.dart';
-import 'package:meple/views/homes/drawer/drawer_clipper.dart';
+import 'package:meple/views/homes/drawer/drawer.dart';
 import 'package:meple/views/homes/home_screen.dart';
-import 'package:meple/views/sidebar/contact.dart';
-import 'package:meple/views/sidebar/help.dart';
-import 'package:meple/views/sidebar/profile/profile.dart';
-import 'package:meple/views/sidebar/setting/setting.dart';
-import 'package:provider/provider.dart';
+import 'package:meple/views/sidebar/sidebar.dart';
 
 
 class BuildDrawer extends StatelessWidget {
@@ -63,7 +54,7 @@ class BuildDrawer extends StatelessWidget {
                   ),
                   Text(
                     user.email,
-                    style: TextStyle(color: Colors.black, fontSize: 22.0),
+                    style: TextStyle(color: Colors.black, fontSize: 16.0),
                   ),
                   SizedBox(height: 30.0),
                   
@@ -71,9 +62,7 @@ class BuildDrawer extends StatelessWidget {
                   GestureDetector(
                     child: _buildRow(Icons.home, "ホーム"),
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) {
-                          return HomeScreen();
-                        }));
+                      Navigator.pop(context);
                     },
                   ),
                   _buildDivider(),

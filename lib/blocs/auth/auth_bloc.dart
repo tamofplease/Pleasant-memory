@@ -1,18 +1,13 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meple/blocs/auth/auth_event.dart';
-import 'package:meple/blocs/auth/auth_state.dart';
-import 'package:meple/blocs/auth/auth_repository.dart';
-import 'package:flutter/material.dart';
 import 'dart:async';
-
-import 'package:meple/blocs/user/user_repository.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:meple/blocs/auth/auth.dart';
+import 'package:flutter/material.dart';
 import 'package:meple/models/current_user.dart';
 
 
 
 class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
   final AuthenticationRepository _authRepository;
-  UserRepository _userRepository = UserRepository();
 
   AuthenticationBloc({
     @required AuthenticationRepository authRepository

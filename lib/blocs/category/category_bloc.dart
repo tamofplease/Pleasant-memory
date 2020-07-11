@@ -1,7 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:meple/blocs/category/category_event.dart';
-import 'package:meple/blocs/category/category_state.dart';
+import 'package:meple/blocs/category/category.dart';
 
 class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   

@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:meple/models/current_user.dart';
 import 'package:flutter/material.dart';
 import 'package:meple/models/user.dart';
 

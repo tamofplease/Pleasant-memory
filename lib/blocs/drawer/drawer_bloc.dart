@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:meple/blocs/drawer/drawer_event.dart';
-import 'package:meple/blocs/drawer/drawer_state.dart';
+import 'package:meple/blocs/drawer/drawer.dart';
 
 class DrawerBloc extends Bloc<DrawerEvent,DrawerState> {
 

@@ -1,6 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:meple/models/current_user.dart';
 import 'package:meple/models/user.dart';
 
 abstract class UserDataRepository {

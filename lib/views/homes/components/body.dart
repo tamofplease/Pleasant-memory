@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meple/blocs/category/category_bloc.dart';
-import 'package:meple/blocs/category/category_state.dart';
-import 'package:meple/blocs/category/category_event.dart';
+import 'package:meple/blocs/category/category.dart';
 import 'package:meple/helper/coming_soon.dart';
 import 'categories.dart';
 import 'memory_choice.dart';

@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meple/blocs/auth/auth_bloc.dart';
-import 'package:meple/blocs/signin/signin_bloc.dart';
-import 'package:meple/blocs/auth/auth_event.dart';
-import 'package:meple/blocs/signin/signin_event.dart';
-import 'package:meple/blocs/signin/signin_repository.dart';
-import 'package:meple/blocs/signin/signin_state.dart';
+import 'package:meple/blocs/auth/auth.dart';
+import 'package:meple/blocs/signin/signin.dart';
 import 'package:meple/helper/splash_screen.dart';
 
 
