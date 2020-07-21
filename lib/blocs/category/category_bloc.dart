@@ -1,21 +1,22 @@
 import 'package:bloc/bloc.dart';
 import 'package:meple/blocs/category/category.dart';
+import 'package:meple/models/enums/category.dart';
 
-class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
+class CategoryBloc extends Bloc<CategoryEvent, Category> {
   
   @override
-  CategoryState get initialState => SelectedMemory();
+  Category get initialState => Category.Memory;
 
   @override
-  Stream<CategoryState> mapEventToState(
+  Stream<Category> mapEventToState(
     CategoryEvent event,
   ) async* {
-    if(event is ChatEvent) {
-      yield SelectedChat();
-    }else if(event is MemoryEvent) { 
-      yield SelectedMemory();
+    if(event is MemoryEvent) {
+      yield Category.Memory;
+    }else if(event is ChatEvent) { 
+      yield Category.Chat;
     }else if(event is FindEvent) { 
-      yield SelectedFind();
+      yield Category.Find;
     }
   }
 

@@ -10,8 +10,11 @@ abstract class UserEvent extends Equatable {
 class GetUserData extends UserEvent {
   final String uid;
   GetUserData(this.uid) 
-  : assert(uid != null),
-    super([uid]);
+  : assert(uid != null);
+
+  @override
+  List<Object> get props => [uid];
+  
   @override
   String toString() => 'GetUserData';
 }
@@ -19,8 +22,13 @@ class GetUserData extends UserEvent {
 class GetUser extends UserEvent {
   final User user;
   GetUser(this.user)
-  : assert(user != null),
-    super([user]);
+  : assert(user != null);
+
+  @override
+  List<Object> get props => [user];
+
+  @override
+  String toString() => "GetUser";
 }
 
 class UpdateUser extends UserEvent{
@@ -28,8 +36,13 @@ class UpdateUser extends UserEvent{
   UpdateUser({
     @required this.user,
   })
-  : assert(user != null),
-    super([user]);
+  : assert(user != null);
+
+  @override
+  List<Object> get porps => [user];
+
+  @override
+  String toString() => "UpdateUser";
 }
 
 

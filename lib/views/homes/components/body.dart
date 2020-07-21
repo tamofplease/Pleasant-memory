@@ -4,6 +4,7 @@ import 'package:meple/helper/coming_soon.dart';
 import 'categories.dart';
 import 'memory_choice.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:meple/models/enums/category.dart';
 
 
 class Body extends StatelessWidget {
@@ -11,10 +12,9 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     String text = "";
     final categoryBloc = BlocProvider.of<CategoryBloc>(context);
-    return BlocBuilder<CategoryBloc, CategoryState>(
-      bloc: categoryBloc,
+    return BlocBuilder<CategoryBloc, Category>(
       builder: (context, state) {
-        if(state is SelectedMemory) {
+        if(state == Category.Memory) {
           text= MemoryEvent().toString();
           return SingleChildScrollView(
             child: Column(
@@ -25,7 +25,7 @@ class Body extends StatelessWidget {
             ),
           );
         }
-        if(state is SelectedChat) {
+        if(state ==Category.Chat ) {
           text = ChatEvent().toString();
           return SingleChildScrollView(
             child: Column(
@@ -38,7 +38,7 @@ class Body extends StatelessWidget {
             ),
           );
         }
-        if(state is SelectedFind) {
+        if(state == Category.Find) {
           text = FindEvent().toString();
           return SingleChildScrollView(
             child: Column(

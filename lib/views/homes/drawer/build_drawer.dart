@@ -4,7 +4,6 @@ import 'package:meple/blocs/auth/auth.dart';
 import 'package:meple/blocs/drawer/drawer.dart';
 import 'package:meple/models/user.dart';
 import 'package:meple/views/homes/drawer/drawer.dart';
-import 'package:meple/views/homes/home_screen.dart';
 import 'package:meple/views/sidebar/sidebar.dart';
 
 
@@ -40,9 +39,12 @@ class BuildDrawer extends StatelessWidget {
                         colors: [Colors.blue, Colors.red],
                       ),
                     ),
-                    child: CircleAvatar(
-                      radius: 40,
-                      backgroundImage: AssetImage(user.photoUrl),
+                    child: Hero(
+                      tag: "${user.uid}__image",
+                      child: CircleAvatar(
+                        radius: 40,
+                        backgroundImage: AssetImage(user.photoUrl),
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -57,7 +59,6 @@ class BuildDrawer extends StatelessWidget {
                     style: TextStyle(color: Colors.black, fontSize: 16.0),
                   ),
                   SizedBox(height: 30.0),
-                  
                   _buildDivider(),
                   GestureDetector(
                     child: _buildRow(Icons.home, "ホーム"),

@@ -16,15 +16,15 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     UserEvent event,
   ) async* {
     if(event is GetUserData) {
-      yield * _mapGetUserData(event.uid);
+      yield * _mapGetUserDataToState(event.uid);
     }else if(event is GetUser) {
-      yield* _mapGetUser(event.user);
+      yield* _mapGetUserToState(event.user);
     }else if(event is UpdateUser) {
       yield* _mapUpdateUser(event.user);
     }
   }
 
-  Stream<UserState> _mapGetUserData(String uid) async* {
+  Stream<UserState> _mapGetUserDataToState(String uid) async* {
     try {
       _todosSubscription = _userRepository.getUserData(uid).listen(
         (user) {
@@ -37,15 +37,15 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     }
   }
 
-  Stream<UserState> _mapGetUser(User user) async* {
+  Stream<UserState> _mapGetUserToState(User user) async* {
     yield UserLoaded(user: user);
   } 
 
   Stream<UserState> _mapUpdateUser(User user) async* {
-    yield UserProgress();
+    
     try {
       await _userRepository.updateUser(user);
-
+      yield UserProgress();
     }catch(e) {
       yield UpdateFail();
     }

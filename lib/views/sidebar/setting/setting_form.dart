@@ -42,9 +42,12 @@ class _SettingFormState extends State<SettingForm> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CircleAvatar(
-                  radius: 50,
-                  backgroundImage: AssetImage(_user.photoUrl),
+                Hero(
+                  tag: "${_user.uid}__image",
+                  child: CircleAvatar(
+                    radius: 50,
+                    backgroundImage: AssetImage(_user.photoUrl),
+                  ),
                 ),
                 SizedBox(
                   height: 30,
