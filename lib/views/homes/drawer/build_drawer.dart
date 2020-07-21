@@ -71,7 +71,7 @@ class BuildDrawer extends StatelessWidget {
                     child: _buildRow(Icons.person_pin, "プロフィール"),
                     onTap: () {
                       Navigator.push(context, MaterialPageRoute(builder: (context) {
-                          return Profile();
+                          return Profile(user);
                         }));
                     },
                   ),

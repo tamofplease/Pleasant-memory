@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meple/blocs/auth/auth_bloc.dart';
-import 'package:meple/blocs/auth/auth_state.dart';
-import 'package:meple/blocs/user/user_bloc.dart';
-import 'package:meple/blocs/user/user_event.dart';
+import 'package:meple/blocs/user/user.dart';
 import 'package:meple/helper/form.dart';
-import 'package:meple/models/current_user.dart';
 import 'package:meple/models/user.dart';
-import 'package:provider/provider.dart';
 
 class SettingForm extends StatefulWidget {
 
@@ -42,11 +37,14 @@ class _SettingFormState extends State<SettingForm> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Hero(
-                  tag: "${_user.uid}__image",
-                  child: CircleAvatar(
-                    radius: 50,
-                    backgroundImage: AssetImage(_user.photoUrl),
+                GestureDetector(
+                  
+                  child: Hero(
+                    tag: "${_user.uid}__image",
+                    child: CircleAvatar(
+                      radius: 50,
+                      backgroundImage: AssetImage(_user.photoUrl),
+                    ),
                   ),
                 ),
                 SizedBox(
