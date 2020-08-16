@@ -21,6 +21,7 @@ class UserLoaded extends UserState{
 
   @override
   List<Object>  get props => [user];
+  
   @override 
   String toString() => "UserLoaded";
 }

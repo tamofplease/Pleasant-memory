@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meple/blocs/user/user.dart';
 import 'package:meple/helper/form.dart';
 import 'package:meple/models/user.dart';
+import 'package:meple/blocs/image/image.dart';
 
 class SettingForm extends StatefulWidget {
 
@@ -23,7 +24,7 @@ class _SettingFormState extends State<SettingForm> {
     User _user = widget.user;
     _email ??= _user.email;
     _name ??= _user.name;
-    UserBloc userBloc = BlocProvider.of<UserBloc>(context);
+    UserBloc userBloc = BlocProvider.of<UserBloc>(context);    
     return Scaffold(
       appBar: AppBar(
         backgroundColor: appBarColor,
@@ -38,7 +39,11 @@ class _SettingFormState extends State<SettingForm> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 GestureDetector(
-                  
+                  onTap: (){
+                    BlocProvider.of<ImageBloc>(context).add(
+                      ImagePickEvent(),
+                    );
+                  },
                   child: Hero(
                     tag: "${_user.uid}__image",
                     child: CircleAvatar(

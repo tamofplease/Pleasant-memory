@@ -37,7 +37,6 @@ class HomeScreen extends StatelessWidget {
           );
         } 
         return SplashScreenWithBG();
-        
       },
     );
   }
@@ -51,7 +50,7 @@ class HomeScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 20.0),
           icon: SvgPicture.asset("assets/icons/search.svg"),
           onPressed: () {
-            authBloc.add(LoggedOut());
+            print("pressed_ Search Button");
           },
         ),
       ],

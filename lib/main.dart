@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:meple/blocs/auth/auth.dart';
 import 'package:meple/blocs/category/category_bloc.dart';
 import 'package:meple/blocs/drawer/drawer.dart';
+import 'package:meple/blocs/image/image.dart';
 import 'package:meple/blocs/user/user.dart';
 import 'package:meple/helper/splash_screen.dart';
 import 'package:meple/views/homes/home_screen.dart';
-import 'package:meple/views/sidebar/setting/setting.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meple/views/auths/auth.dart';
@@ -32,6 +32,9 @@ void main() {
         ),
         BlocProvider<CategoryBloc> (
           create: (context) => CategoryBloc(),
+        ),
+        BlocProvider<ImageBloc> (
+          create: (context) => ImageBloc(),
         )
       ],
       child: MyApp(),
