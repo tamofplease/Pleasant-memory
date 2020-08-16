@@ -21,24 +21,40 @@ class _PlaceFromState extends State<PlaceFrom> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("URL"),
-                  SizedBox(width: 10),
-                  Icon(Icons.ac_unit),
-                ],
-              ),
-              TextFormField(
-                cursorRadius: Radius.circular(100),
-                // readOnly: true,
-                initialValue: _url,
-                onChanged: (val) => setState(() => _url = val),
-              ),
+              placeTitle("名前", Icons.account_box),
+              inputForm(_name),
+              SizedBox(height: 20),
+              placeTitle("詳細", Icons.add_box),
+              inputForm(_detail),
+              SizedBox(height: 20),
+              placeTitle("住所", Icons.ac_unit),
+              inputForm(_postalCode),
+              SizedBox(height: 20),
+              placeTitle("URL", Icons.ac_unit),
+              inputForm(_url),
             ],
           )
         )
       ), 
+    );
+  }
+  Widget placeTitle(String name, IconData icon) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(name),
+                  SizedBox(width: 10),
+                  Icon(icon),
+                ],
+    );
+  }
+
+  Widget inputForm(dynamic target) {
+    return TextFormField(
+      cursorRadius: Radius.circular(100),
+      // readOnly: true,
+      initialValue: target,
+      onChanged: (val) => setState(() => target = val),
     );
   }
 }

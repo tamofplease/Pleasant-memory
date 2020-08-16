@@ -39,7 +39,7 @@ class UpdateUser extends UserEvent{
   : assert(user != null);
 
   @override
-  List<Object> get porps => [user];
+  List<Object> get props => [user];
 
   @override
   String toString() => "UpdateUser";
