@@ -32,6 +32,15 @@ class _PlaceFromState extends State<PlaceFrom> {
               SizedBox(height: 20),
               placeTitle("URL", Icons.ac_unit),
               inputForm(_url),
+              SizedBox(height: 20),
+              RaisedButton(
+                child: Text("保存"),
+                splashColor: Colors.yellow,
+                onPressed: (){
+                  print("press");
+                },
+                color: Colors.lightGreen,
+              ),
             ],
           )
         )
@@ -42,19 +51,38 @@ class _PlaceFromState extends State<PlaceFrom> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(name),
+                  Text(
+                    name,
+                    style: TextStyle(
+                      fontSize: 17,
+                      color: Colors.lightBlueAccent,
+                    )
+                  ),
                   SizedBox(width: 10),
-                  Icon(icon),
+                  Icon(
+                    icon,
+                    color: Colors.lightBlueAccent,
+                    ),
                 ],
     );
   }
 
   Widget inputForm(dynamic target) {
     return TextFormField(
+      style: TextStyle(
+        color: Colors.white,
+      ),
       cursorRadius: Radius.circular(100),
       // readOnly: true,
       initialValue: target,
       onChanged: (val) => setState(() => target = val),
+      decoration: new InputDecoration(
+        fillColor: Colors.lightBlueAccent,
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.lightBlueAccent),
+        ),
+        
+      ),
     );
   }
 }
