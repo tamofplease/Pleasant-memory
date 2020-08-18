@@ -22,13 +22,14 @@ class PlaceRepository extends PlaceDataRepository{
       return await placesCollection.document(uid).setData({
         'name': place.name,
         'detail': place.detail,
-        'address': place.postalCode.toInt(),
+        'address': place.postalCode,
         'url': place.url,
         'creatorId': uid,
         'been': false,
       });
     }catch(e){
-      print(e);
+      print("\n error is occur in place_repo l:31");
+      // print(e);
     }
   }
 }

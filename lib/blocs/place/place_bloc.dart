@@ -9,7 +9,7 @@ class PlaceBloc extends Bloc<PlaceEvent, PlaceState> {
 
   PlaceBloc(this._placeRepository);
 
-  @override get initialState => NewPlace();
+  @override get initialState => PlaceNew();
 
   Stream<PlaceState> mapEventToState(
     PlaceEvent event,
@@ -20,11 +20,10 @@ class PlaceBloc extends Bloc<PlaceEvent, PlaceState> {
   }
 
   Stream<PlaceState> _mapCraetePlaceToState(Place place, String uid)async* {
-    try{
-      print(place);
-      print(uid);
+    try{      
       await _placeRepository.createPlace(place, uid);
-      yield PlaceProgress();
+      // yield PlaceCreated(place: place);
+      yield PlaceNew();
     } catch(e) {
       print("\nerror is occur in place_dart_bloc l:24\n");
     }

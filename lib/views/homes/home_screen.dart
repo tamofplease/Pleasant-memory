@@ -17,15 +17,13 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     User _user;
     final authBloc = BlocProvider.of<AuthenticationBloc>(context);
-    final userBloc = BlocProvider.of<UserBloc>(context);
     final String uid = Provider.of<String>(context);
     return  BlocBuilder<UserBloc, UserState>(
       builder: (context, status){
         if(status is UpdateFail) {
-          
         }
         if(status is UserProgress) {
-          userBloc.add(GetUserData(uid));
+          BlocProvider.of<UserBloc>(context).add(GetUserData(uid));
         }
         if(status is UserLoaded ){ 
           _user = status.user;

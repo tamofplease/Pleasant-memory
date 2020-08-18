@@ -12,7 +12,6 @@ class MemoryChoice extends StatefulWidget {
 class _MemoryChoiceState extends State<MemoryChoice> {
   PageController _pageController;
   int initialPage = 0;
-
   @override
   void initState() {
     super.initState();
@@ -45,13 +44,13 @@ class _MemoryChoiceState extends State<MemoryChoice> {
           controller: _pageController,
           physics: ClampingScrollPhysics(),
           itemCount: memoryChoices.length, // we have 3 demo movies
-          itemBuilder: (context, index) => buildMovieSlider(index),
+          itemBuilder: (context, index) => buildSlider(index),
         ),
       ),
     );
   }
 
-  Widget buildMovieSlider(int index) => AnimatedBuilder(
+  Widget buildSlider(int index) => AnimatedBuilder(
         animation: _pageController,
         builder: (context, child) {
           double value = 0;

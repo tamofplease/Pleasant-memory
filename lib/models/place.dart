@@ -4,7 +4,7 @@ class Place {
   final int id;
   final String postalCode;
   final String name,url;
-  final Text detail;
+  final String detail;
   bool been; //0がまだ、1が行った
   List<String> images;
   final String creatorId;

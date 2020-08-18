@@ -25,13 +25,12 @@ class Body extends StatelessWidget {
             ),
           );
         }
-        if(state ==Category.Chat ) {
+        if(state == Category.Chat ) {
           text = ChatEvent().toString();
           return SingleChildScrollView(
             child: Column(
               children: <Widget>[
                 Categorylist(),
-                ArgumentText(text),
                 SizedBox(height: 20.0),
                 ComingSoon(0.8),
               ],
@@ -44,7 +43,6 @@ class Body extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Categorylist(),
-                ArgumentText(text),
                 SizedBox(height: 20.0),
                 ComingSoon(0.8),
               ],
@@ -53,12 +51,6 @@ class Body extends StatelessWidget {
         }
 
       }
-    );
-  }
-
-  Text ArgumentText(String text) {
-    return Text(
-      text,
     );
   }
 }

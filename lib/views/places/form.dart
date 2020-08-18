@@ -11,14 +11,12 @@ class PlaceFrom extends StatefulWidget {
 
 class _PlaceFromState extends State<PlaceFrom> {
   final _formKey = GlobalKey<FormState>();
+  String _name,_postalCode,_url;
+  String _detail;
+  String _images;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {   
     String _uid = Provider.of<String>(context);
-    print(_uid);
-    String _name,_postalCode,_url;
-    Text _detail;
-    String _images;
-
     return SingleChildScrollView(
       child: Form(
         key: _formKey,
@@ -28,16 +26,57 @@ class _PlaceFromState extends State<PlaceFrom> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               placeTitle("名前", Icons.account_box),
-              inputForm(_name),
+              TextFormField(
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+                cursorRadius: Radius.circular(100),
+                initialValue: _name,
+                onChanged: (val) => setState(() {
+                  _name = val;
+                }),
+                validator: (val) => val.isEmpty? "error" : null,
+                decoration: placeDeco,
+              ),
               SizedBox(height: 20),
               placeTitle("詳細", Icons.add_box),
-              inputForm(_detail),
+              TextFormField(
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+                cursorRadius: Radius.circular(100),
+                initialValue: _detail,
+                onChanged: (val) => setState(() {
+                  _detail = val;
+                }),
+                decoration: placeDeco,
+              ),
               SizedBox(height: 20),
               placeTitle("住所", Icons.ac_unit),
-              inputForm(_postalCode),
+              TextFormField(
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+                cursorRadius: Radius.circular(100),
+                initialValue: _postalCode,
+                onChanged: (val) => setState(() {
+                  _postalCode = val;
+                }),
+                decoration: placeDeco,
+              ),
               SizedBox(height: 20),
               placeTitle("URL", Icons.ac_unit),
-              inputForm(_url),
+              TextFormField(
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+                cursorRadius: Radius.circular(100),
+                initialValue: _url,
+                onChanged: (val) => setState(() {
+                  _url = val;
+                }),
+                decoration: placeDeco,
+              ),
               SizedBox(height: 20),
               RaisedButton(
                 child: Text("保存"),
@@ -59,6 +98,7 @@ class _PlaceFromState extends State<PlaceFrom> {
                       uid: _uid
                     ),
                   );
+                  Navigator.pop(context);
                 },
                 color: Colors.lightGreen,
               ),
@@ -87,27 +127,11 @@ class _PlaceFromState extends State<PlaceFrom> {
       ],
     );
   }
-
-  Widget inputForm(dynamic target) {
-    return TextFormField(
-      style: TextStyle(
-        color: Colors.white,
-      ),
-      cursorRadius: Radius.circular(100),
-      // readOnly: true,
-      initialValue: target,
-      onChanged: (val) => setState(() {
-        target = val.toString();
-        print(target);
-      }),
-        
-      decoration: new InputDecoration(
-        fillColor: Colors.lightBlueAccent,
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.lightBlueAccent),
-        ),
-        
-      ),
-    );
-  }
 }
+
+const InputDecoration placeDeco = InputDecoration(
+  fillColor: Colors.lightBlueAccent,
+  enabledBorder: UnderlineInputBorder(
+    borderSide: BorderSide(color: Colors.lightBlueAccent),
+  ),
+);
