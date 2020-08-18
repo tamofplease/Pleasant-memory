@@ -15,13 +15,15 @@ class PlaceBloc extends Bloc<PlaceEvent, PlaceState> {
     PlaceEvent event,
   ) async* {
     if(event is CreatePlace){
-      yield* _mapCraetePlaceToState(event.place, event.user);
+      yield* _mapCraetePlaceToState(event.place, event.uid);
     }
   }
 
-  Stream<PlaceState> _mapCraetePlaceToState(Place place, User user)async* {
+  Stream<PlaceState> _mapCraetePlaceToState(Place place, String uid)async* {
     try{
-      await _placeRepository.createPlace(place, user.uid);
+      print(place);
+      print(uid);
+      await _placeRepository.createPlace(place, uid);
       yield PlaceProgress();
     } catch(e) {
       print("\nerror is occur in place_dart_bloc l:24\n");

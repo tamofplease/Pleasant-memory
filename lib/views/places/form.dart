@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:meple/blocs/place/place.dart';
+import 'package:meple/models/place.dart';
+import 'package:provider/provider.dart';
 
 class PlaceFrom extends StatefulWidget {
   @override
@@ -6,12 +10,14 @@ class PlaceFrom extends StatefulWidget {
 }
 
 class _PlaceFromState extends State<PlaceFrom> {
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
-    String _postalCode, _name, _url;
+    String _uid = Provider.of<String>(context);
+    print(_uid);
+    String _name,_postalCode,_url;
     Text _detail;
-    String images;
+    String _images;
 
     return SingleChildScrollView(
       child: Form(
@@ -37,7 +43,22 @@ class _PlaceFromState extends State<PlaceFrom> {
                 child: Text("保存"),
                 splashColor: Colors.yellow,
                 onPressed: (){
-                  print("press");
+                  BlocProvider.of<PlaceBloc>(context).add(
+                    CreatePlace(
+                      place: Place(
+                        postalCode: _postalCode,
+                        id: 1,
+                        name: _name,
+                        url: _url,
+                        detail: _detail,
+                        been: false,
+                        creatorId: _uid,
+                        createdAt: DateTime.now(),
+                        updatedAt: DateTime.now(),
+                      ), 
+                      uid: _uid
+                    ),
+                  );
                 },
                 color: Colors.lightGreen,
               ),
@@ -50,20 +71,20 @@ class _PlaceFromState extends State<PlaceFrom> {
   Widget placeTitle(String name, IconData icon) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    name,
-                    style: TextStyle(
-                      fontSize: 17,
-                      color: Colors.lightBlueAccent,
-                    )
-                  ),
-                  SizedBox(width: 10),
-                  Icon(
-                    icon,
-                    color: Colors.lightBlueAccent,
-                    ),
-                ],
+      children: [
+        Text(
+          name,
+          style: TextStyle(
+            fontSize: 17,
+            color: Colors.lightBlueAccent,
+          )
+        ),
+        SizedBox(width: 10),
+        Icon(
+          icon,
+          color: Colors.lightBlueAccent,
+          ),
+      ],
     );
   }
 
@@ -75,7 +96,11 @@ class _PlaceFromState extends State<PlaceFrom> {
       cursorRadius: Radius.circular(100),
       // readOnly: true,
       initialValue: target,
-      onChanged: (val) => setState(() => target = val),
+      onChanged: (val) => setState(() {
+        target = val.toString();
+        print(target);
+      }),
+        
       decoration: new InputDecoration(
         fillColor: Colors.lightBlueAccent,
         enabledBorder: UnderlineInputBorder(

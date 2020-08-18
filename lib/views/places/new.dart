@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:meple/views/places/form.dart';
+import 'package:provider/provider.dart';
 
 
 class NewPlace extends StatelessWidget {
+  const NewPlace({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,20 +55,3 @@ class NewPlace extends StatelessWidget {
 
   }
 }
-
-class NewPlaceForm extends StatefulWidget {
-  @override
-  _NewPlaceFormState createState() => _NewPlaceFormState();
-}
-
-class _NewPlaceFormState extends State<NewPlaceForm> {
-
-  
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      
-    );
-  }
-}
-

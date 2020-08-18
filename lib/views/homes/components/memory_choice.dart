@@ -11,7 +11,7 @@ class MemoryChoice extends StatefulWidget {
 
 class _MemoryChoiceState extends State<MemoryChoice> {
   PageController _pageController;
-  int initialPage = 1;
+  int initialPage = 0;
 
   @override
   void initState() {

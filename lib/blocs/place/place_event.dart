@@ -11,15 +11,14 @@ abstract class PlaceEvent extends Equatable{
 
 class CreatePlace extends PlaceEvent{
   final Place place;
-  final User user;
-  CreatePlace(this.place, this.user)
+  final String uid;
+  CreatePlace({@required this.place, @required this.uid})
   : assert(
     place != null,
-    user != null,
+    uid != null,
     );
-
   @override
-  List<Object> get props => [place, user];
+  List<Object> get props => [place, uid];
 
   @override
   String toString() => "CreateEvent";

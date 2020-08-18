@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 class Place {
-  final int id,postalCode;
+  final int id;
+  final String postalCode;
   final String name,url;
   final Text detail;
   bool been; //0がまだ、1が行った
   List<String> images;
-  final int creatorId;
+  final String creatorId;
   final DateTime createdAt;
   final DateTime updatedAt;
   
