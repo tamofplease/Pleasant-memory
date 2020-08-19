@@ -16,6 +16,8 @@ class PlaceBloc extends Bloc<PlaceEvent, PlaceState> {
   ) async* {
     if(event is CreatePlace){
       yield* _mapCraetePlaceToState(event.place, event.uid);
+    }else if(event is ShowNewPlace) {
+      yield PlaceNew();
     }
   }
 
@@ -23,9 +25,11 @@ class PlaceBloc extends Bloc<PlaceEvent, PlaceState> {
     try{      
       await _placeRepository.createPlace(place, uid);
       // yield PlaceCreated(place: place);
-      yield PlaceNew();
+      yield PlaceCreated(place: place);
     } catch(e) {
       print("\nerror is occur in place_dart_bloc l:24\n");
     }
   }
+
+
 }

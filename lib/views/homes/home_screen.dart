@@ -9,6 +9,7 @@ import 'package:meple/views/homes/components/body.dart';
 import 'package:meple/views/homes/drawer/build_drawer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:meple/blocs/place/place.dart';
 
 
 class HomeScreen extends StatelessWidget {
@@ -30,7 +31,23 @@ class HomeScreen extends StatelessWidget {
           return Scaffold(
             backgroundColor: Colors.white,
             appBar: buildAppBar(authBloc),
-            body: Body(),
+            body: BlocBuilder<PlaceBloc, PlaceState>(
+              builder: (context, state) {
+                if(state is PlaceCreated){
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    Scaffold.of(context)
+                      ..showSnackBar(
+                        SnackBar(content: Text(
+                          "${state.place.name}を作成しました。"
+                          ),
+                        ),
+                      );
+                  });
+                  Provider.of<PlaceBloc>(context).add(ShowNewPlace());
+                  return Body();
+                }else return Body();
+              }
+            ),
             drawer: BuildDrawer(_user),
           );
         } 

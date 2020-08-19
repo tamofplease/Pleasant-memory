@@ -19,7 +19,7 @@ class ChoiceCard extends StatelessWidget {
         closedBuilder: (context, action) => buildChoiceCard(context),
         openBuilder: (context, action){
           if(choice.id==1)return NewPlace();
-          else return ComingSoonWithBtn(1.0);
+          return ComingSoonWithBtn(1.0);
         }
       ),
     );

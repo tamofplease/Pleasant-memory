@@ -8,10 +8,8 @@ abstract class PlaceState extends Equatable{
 }
 
 class PlaceNew extends PlaceState {
-
   @override
   List<Object> get props => [];
-  
   @override
   String toString() => "NewPlace";
 }

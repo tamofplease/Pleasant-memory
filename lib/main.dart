@@ -69,7 +69,11 @@ class MyApp extends StatelessWidget {
               ),
               routes: {
                 '/': (context) {
-                  return HomeScreen();
+                  return new Builder(
+                    builder: (BuildContext context) {
+                      return HomeScreen();
+                    }
+                  );
                 },
               },
             ),

@@ -24,3 +24,11 @@ class CreatePlace extends PlaceEvent{
   String toString() => "CreateEvent";
 }
 
+class ShowNewPlace extends PlaceEvent {
+  @override
+  List<Object> get props => [];
+
+  @override
+  String toString() => "ShowNewPlace";
+}
+

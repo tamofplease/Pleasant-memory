@@ -56,10 +56,6 @@ class NewPlace extends StatelessWidget {
                 ),
               );
             }
-            if(state is PlaceCreated) {
-              return Text(state.place.name);
-              //ここでsnapbarでも出す。
-            }
             return SplashScreen();
           }
         )
