@@ -9,42 +9,135 @@ class ComingSoonWithBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    return Column(
-      children: <Widget>[
-        Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(backImg ?? "assets/images/coming_soon.jpg"),
-              fit: BoxFit.fill,
-            )
-          ),
-          child: Container(
-            color: Colors.black54,
-            height: size.height * heightRate,
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    child: Text(
-                      "Coming Soon",
-                      style: TextStyle(
-                        color: Colors.white,
-                        // backgroundColor: Colors.white,
-                        fontSize: 40.0,
+    return Scaffold(
+      appBar: AppBar(
+        
+      ),
+       body: SafeArea(
+        child: Column(
+          children: <Widget>[
+            Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(backImg ?? "assets/images/coming_soon.jpg"),
+                  fit: BoxFit.cover,
+                )
+              ),
+              child: Container(
+                color: Colors.black54,
+                height: (size.height * heightRate) - 76,
+                child: Center(
+                  child: ListWheelScrollView(
+                    children: [
+                      Text(
+                        "Coming Soon",
+                        style: TextStyle(
+                          color: Colors.white,
+                          // backgroundColor: Colors.white,
+                          fontSize: 40.0,
+                        ),
                       ),
-                    ),
+                      
+                      Text(
+                        "Coming Soon",
+                        style: TextStyle(
+                          color: Colors.white,
+                          // backgroundColor: Colors.white,
+                          fontSize: 40.0,
+                        ),
+                      ),
+                      
+                      Text(
+                        "Coming Soon",
+                        style: TextStyle(
+                          color: Colors.white,
+                          // backgroundColor: Colors.white,
+                          fontSize: 40.0,
+                        ),
+                      ),
+                      
+                      Text(
+                        "Coming Soon",
+                        style: TextStyle(
+                          color: Colors.white,
+                          // backgroundColor: Colors.white,
+                          fontSize: 40.0,
+                        ),
+                      ),
+                      
+                      Text(
+                        "Coming Soon",
+                        style: TextStyle(
+                          color: Colors.white,
+                          // backgroundColor: Colors.white,
+                          fontSize: 40.0,
+                        ),
+                      ),
+                      
+                      Text(
+                        "Coming Soon",
+                        style: TextStyle(
+                          color: Colors.white,
+                          // backgroundColor: Colors.white,
+                          fontSize: 40.0,
+                        ),
+                      ),
+                      
+                      Text(
+                        "Coming Soon",
+                        style: TextStyle(
+                          color: Colors.white,
+                          // backgroundColor: Colors.white,
+                          fontSize: 40.0,
+                        ),
+                      ),
+                      
+                      Text(
+                        "Coming Soon",
+                        style: TextStyle(
+                          color: Colors.white,
+                          // backgroundColor: Colors.white,
+                          fontSize: 40.0,
+                        ),
+                      ),
+                      
+                      Text(
+                        "Coming Soon",
+                        style: TextStyle(
+                          color: Colors.white,
+                          // backgroundColor: Colors.white,
+                          fontSize: 40.0,
+                        ),
+                      ),
+                      
+                      Text(
+                        "Coming Soon",
+                        style: TextStyle(
+                          color: Colors.white,
+                          // backgroundColor: Colors.white,
+                          fontSize: 40.0,
+                        ),
+                      ),
+                      
+                      Text(
+                        "Coming Soon",
+                        style: TextStyle(
+                          color: Colors.white,
+                          // backgroundColor: Colors.white,
+                          fontSize: 40.0,
+                        ),
+                      ),
+                      
+                    ],
+                    itemExtent: 100,
+                    diameterRatio: 1.5,
                   ),
-                  RaisedButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    child: Text("Back To Home"),
-                  )
-                ],
+                ),
               ),
             ),
-          ),
-        ),
-      ],
+          ],
+      ),
+       ),
     );
   }
 }
