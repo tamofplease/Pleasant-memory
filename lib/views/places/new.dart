@@ -10,6 +10,7 @@ class NewPlace extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<PlaceBloc>(context).add(GetNewPlace());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueGrey,

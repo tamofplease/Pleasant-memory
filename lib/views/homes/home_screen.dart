@@ -43,7 +43,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                       );
                   });
-                  Provider.of<PlaceBloc>(context).add(ShowNewPlace());
+                  Provider.of<PlaceBloc>(context).add(GetInitialPlace());
                   return Body();
                 }else return Body();
               }

@@ -83,7 +83,7 @@ class _PlaceFromState extends State<PlaceFrom> {
                 splashColor: Colors.yellow,
                 onPressed: (){
                   BlocProvider.of<PlaceBloc>(context).add(
-                    CreatePlace(
+                    GetCreatePlace(
                       place: Place(
                         postalCode: _postalCode,
                         id: 1,

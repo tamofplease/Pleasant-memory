@@ -3,18 +3,38 @@ import 'package:meple/models/place.dart';
 import 'package:meple/models/user.dart';
 
 abstract class PlaceDataRepository{
-  Stream<Place> getPlaceData(String uid);
+  Stream<List<Place> > getPlaceList(String uid);
   Future<void> createPlace(Place place, String uid);
   Future<void> createPlaceinPlace(Place place, String uid);
-  Future<void> createPlaceinUser(Place place, String uid);
+  Future<void> createPlaceinUser(Place place, String uid);  
 }
 
 class PlaceRepository extends PlaceDataRepository{
   final CollectionReference placesCollection = Firestore.instance.collection("places");
   final CollectionReference usersCollection = Firestore.instance.collection("users");
+  
   @override
-  Stream<Place> getPlaceData(String uid) {
-    // return placesCollection.document(uid)
+  Stream<List<Place> > getPlaceList(String uid) {
+    return usersCollection.document(uid).collection("places").snapshots().map(_placeListFromSnapshot);
+  }
+
+  Place _placeDataFromSnapshot(DocumentSnapshot doc) {
+    return  Place(
+      id: 1,
+      name: doc["name"],
+      creatorId: doc["creatorId"],
+      createdAt: doc["createdAt"],
+      updatedAt: doc["updatedAt"],
+      postalCode: doc["address"]?? "",
+      url: doc["url"]?? "",
+      been: doc["been"]?? false,
+    );
+  }
+
+  List<Place> _placeListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc) {
+      return _placeDataFromSnapshot(doc);
+    }).toList();
   }
 
   @override
