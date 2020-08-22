@@ -17,7 +17,6 @@ class PlaceListState extends State<PlaceList> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.selectedPlace);
     return GestureDetector(
       child: ListWheelScrollView(
         onSelectedItemChanged: (index) {

@@ -26,7 +26,6 @@ class ChoiceCard extends StatelessWidget {
             return NewPlace();
           }
           else if(choice.id==6){
-            
             return IndexPlace();
           }
           return ComingSoonWithBtn(1.0);

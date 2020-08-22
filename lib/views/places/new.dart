@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:meple/blocs/place/place.dart';
 import 'package:meple/helper/helpers.dart';
-import 'package:meple/views/places/form.dart';
+import 'package:meple/views/places/places.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 
 
 class NewPlace extends StatelessWidget {
@@ -51,6 +52,8 @@ class NewPlace extends StatelessWidget {
                           ),
                         ),
                       ),
+                      SizedBox(height:30),
+                      PlaceImagePick(),
                       PlaceFrom(),
                     ],
                   ),

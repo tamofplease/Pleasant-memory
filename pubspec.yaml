@@ -46,12 +46,14 @@ dependencies:
   google_sign_in: ^4.5.1
   firebase_core: ^0.4.5
   
+  #image
+  image_picker: ^0.6.7+4
+  multi_image_picker: ^4.7.12
 
   #other
   flutter_svg: ^0.18.0
   animations: ^1.1.0
   provider: ^4.1.3
-  image_picker: ^0.6.7+4
   
 
 dev_dependencies:

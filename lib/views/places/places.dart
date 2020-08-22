@@ -4,3 +4,4 @@ export 'new.dart';
 export 'form.dart';
 export 'tile.dart';
 export 'list.dart';
+export 'image.dart';

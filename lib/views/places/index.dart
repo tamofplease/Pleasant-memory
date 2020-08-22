@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:meple/blocs/place/place.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meple/helper/helpers.dart';
-import 'package:meple/models/place.dart';
 import 'package:provider/provider.dart';
 import './places.dart';
 

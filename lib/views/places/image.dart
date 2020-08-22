@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:multi_image_picker/multi_image_picker.dart';
 import 'dart:async';
 
-import 'package:multi_image_picker/multi_image_picker.dart';
-
-void main() => runApp(new MyApp());
-
-class MyApp extends StatefulWidget {
+class PlaceImagePick extends StatefulWidget {
   @override
-  _MyAppState createState() => new _MyAppState();
+
+  _PlaceImagePickState createState() => _PlaceImagePickState();
 }
 
-class _MyAppState extends State<MyApp> {
+
+class _PlaceImagePickState extends State<PlaceImagePick> {
   List<Asset> images = List<Asset>();
   String _error;
 
@@ -20,7 +19,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   Widget buildGridView() {
-    if (images != null)
+    if (images != null){
       return GridView.count(
         crossAxisCount: 3,
         children: List.generate(images.length, (index) {
@@ -32,8 +31,10 @@ class _MyAppState extends State<MyApp> {
           );
         }),
       );
+    }
     else
-      return Container(color: Colors.white);
+      return Container(
+      );
   }
 
   Future<void> loadAssets() async {
@@ -47,14 +48,12 @@ class _MyAppState extends State<MyApp> {
     try {
       resultList = await MultiImagePicker.pickImages(
         maxImages: 300,
+        enableCamera: true,
       );
     } on Exception catch (e) {
       error = e.toString();
     }
 
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
     if (!mounted) return;
 
     setState(() {
@@ -65,23 +64,23 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      home: new Scaffold(
-        appBar: new AppBar(
-          title: const Text('Plugin example app'),
-        ),
-        body: Column(
-          children: <Widget>[
-            Center(child: Text('Error: $_error')),
-            RaisedButton(
-              child: Text("Pick images"),
-              onPressed: loadAssets,
+    return Container(
+      height:100,
+      child: Column(
+        children: <Widget>[
+          RaisedButton(
+            child: Text(
+              "画像を選択",
+              style: TextStyle(
+                color: Colors.lightBlueAccent,
+              ), 
             ),
-            Expanded(
-              child: buildGridView(),
-            )
-          ],
-        ),
+            onPressed: loadAssets,
+          ),
+          Expanded(
+            child: buildGridView(),
+          ),
+        ],
       ),
     );
   }
