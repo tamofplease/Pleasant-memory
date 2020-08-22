@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:meple/blocs/place/place.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meple/helper/helpers.dart';
+import 'package:meple/models/place.dart';
 import 'package:provider/provider.dart';
 import './places.dart';
 
+
 class IndexPlace extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     String uid = Provider.of<String>(context);
@@ -30,15 +33,7 @@ class IndexPlace extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-                child: ListWheelScrollView(
-                  children: <Widget>[
-                    ...state.places.map((place) {
-                      return PlaceTile(place);
-                    })
-                  ],
-                  itemExtent: 100,
-                  diameterRatio: 3.0,
-                )
+                child: PlaceList(state.places,state.places[0]),
               );
             }
             return SplashScreen();
