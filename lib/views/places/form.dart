@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meple/blocs/place/place.dart';
 import 'package:meple/models/place.dart';
 import 'package:provider/provider.dart';
+import 'package:meple/views/places/places.dart';
 
 class PlaceFrom extends StatefulWidget {
   @override
@@ -77,6 +78,8 @@ class _PlaceFromState extends State<PlaceFrom> {
                 }),
                 decoration: placeDeco,
               ),
+              SizedBox(height: 20),
+              PlaceImagePick(),
               SizedBox(height: 20),
               RaisedButton(
                 child: Text("保存"),

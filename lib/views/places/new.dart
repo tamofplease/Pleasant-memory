@@ -4,8 +4,6 @@ import 'package:meple/helper/helpers.dart';
 import 'package:meple/views/places/places.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
-
 class NewPlace extends StatelessWidget {
   // const NewPlace({Key key}) : super(key: key);
 
@@ -53,7 +51,6 @@ class NewPlace extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height:30),
-                      PlaceImagePick(),
                       PlaceFrom(),
                     ],
                   ),
