@@ -1,24 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:meple/blocs/image/image.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'dart:async';
-
-class PlaceImagePick extends StatefulWidget {
-  @override
-
-  _PlaceImagePickState createState() => _PlaceImagePickState();
-}
+import 'package:meple/blocs/image/image.dart';
 
 
-class _PlaceImagePickState extends State<PlaceImagePick> {
-  List<Asset> images = List<Asset>();
-  String _error;
 
-  @override
-  void initState() {
-    super.initState();
-  }
+class PlaceImagePick extends StatelessWidget {
 
-  Widget buildGridView() {
+  Widget buildGridView(List<Asset> images) {
     if (images != null){
       return GridView.count(
         crossAxisCount: 3,
@@ -26,8 +17,8 @@ class _PlaceImagePickState extends State<PlaceImagePick> {
           Asset asset = images[index];
           return AssetThumb(
             asset: asset,
-            width: 300,
-            height: 300,
+            width: 100,
+            height: 100,
           );
         }),
       );
@@ -37,51 +28,66 @@ class _PlaceImagePickState extends State<PlaceImagePick> {
       );
   }
 
-  Future<void> loadAssets() async {
-    setState(() {
-      images = List<Asset>();
-    });
-
-    List<Asset> resultList;
-    String error;
-
-    try {
-      resultList = await MultiImagePicker.pickImages(
-        maxImages: 300,
-        enableCamera: true,
-      );
-    } on Exception catch (e) {
-      error = e.toString();
-    }
-
-    if (!mounted) return;
-
-    setState(() {
-      images = resultList;
-      if (error == null) _error = 'No Error Dectected';
-    });
+  Widget buildListView(List<Asset> images) {
+    return ListView.builder(
+      scrollDirection: Axis.horizontal,
+      itemCount: images.length,
+      itemBuilder: (context, index){
+        return AssetThumb(
+          asset: images[index],
+          width: 100,
+          height: 100,
+        );
+      }
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height:100,
-      child: Column(
-        children: <Widget>[
-          RaisedButton(
-            child: Text(
-              "画像を選択",
-              style: TextStyle(
-                color: Colors.lightBlueAccent,
-              ), 
+    return BlocBuilder<ImageBloc, ImageState>(
+      builder: (context, state) {
+        if(state is PickedPlaceImages && state.images != null){
+          return Container(
+            child: Column(
+              children: <Widget>[
+                SizedBox(height: 20),
+                Container(
+                  child: buildListView(state.images),
+                  height: 100,
+                ),
+                SizedBox(height: 20),
+                RaisedButton(
+                  child: Text(
+                    "画像を追加",
+                    style: TextStyle(
+                      color: Colors.lightBlueAccent,
+                    ), 
+                  ),
+                  onPressed: () => BlocProvider.of<ImageBloc>(context).add(PickPlaceImages()),
+                ),
+              ],
             ),
-            onPressed: loadAssets,
-          ),
-          Expanded(
-            child: buildGridView(),
-          ),
-        ],
-      ),
+          );
+        }
+        return Container(
+            height:100,
+            child: Column(
+              children: <Widget>[
+                SizedBox(height:20),
+                RaisedButton(
+                  child: Text(
+                    "画像を選ぶ",
+                    style: TextStyle(
+                      color: Colors.lightBlueAccent,
+                    ), 
+                  ),
+                  onPressed: () => BlocProvider.of<ImageBloc>(context).add(PickPlaceImages()),
+                ),
+              ],
+            ),
+          );
+        
+      }
     );
   }
 }

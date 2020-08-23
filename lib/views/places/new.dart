@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:meple/blocs/place/place.dart';
+import 'package:meple/blocs/image/image.dart';
 import 'package:meple/helper/helpers.dart';
 import 'package:meple/views/places/places.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 
 class NewPlace extends StatelessWidget {
   // const NewPlace({Key key}) : super(key: key);
@@ -22,6 +24,7 @@ class NewPlace extends StatelessWidget {
         child: BlocBuilder<PlaceBloc, PlaceState>(
           builder: (context, state) {
             if(state is PlaceNew) {
+              // BlocProvider.of<ImageBloc>(context).add(ImageInitial());
               return Container(
                 decoration: BoxDecoration(
                   color: Colors.black54,

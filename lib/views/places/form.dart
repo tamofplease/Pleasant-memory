@@ -39,6 +39,8 @@ class _PlaceFromState extends State<PlaceFrom> {
                 validator: (val) => val.isEmpty? "error" : null,
                 decoration: placeDeco,
               ),
+              // SizedBox(height: 20),
+              PlaceImagePick(),
               SizedBox(height: 20),
               placeTitle("詳細", Icons.add_box),
               TextFormField(
@@ -78,8 +80,6 @@ class _PlaceFromState extends State<PlaceFrom> {
                 }),
                 decoration: placeDeco,
               ),
-              SizedBox(height: 20),
-              PlaceImagePick(),
               SizedBox(height: 20),
               RaisedButton(
                 child: Text("保存"),

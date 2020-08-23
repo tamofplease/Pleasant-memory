@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:multi_image_picker/multi_image_picker.dart';
 import './image.dart';
+
 import 'dart:io';
 
 
@@ -16,6 +18,10 @@ class ImageBloc extends Bloc<ImageEvent,ImageState> {
   ) async* {
     if(event is ImagePickEvent) {
       yield* _mapImagePickToState();
+    }else if(event is PickPlaceImages){
+      yield* _mapPickPlaceImagesToState();
+    }else if(event is ImageInitial) {
+      yield PickImageInitial();
     }
   }
 
@@ -27,5 +33,23 @@ class ImageBloc extends Bloc<ImageEvent,ImageState> {
     }catch(_) {
       yield PickImageFailure();
     }
+  }
+
+  Stream<ImageState> _mapPickPlaceImagesToState() async* {
+    List<Asset> resultList;
+    String error;
+    try{
+      resultList = await MultiImagePicker.pickImages(
+        maxImages: 20,
+        enableCamera: true,
+      );
+    } on Exception catch(e) {
+      error = e.toString();
+      yield PickPlaceImagesFail(error);
+    }
+
+    yield PickedPlaceImages(resultList);
+    
+
   }
 }
