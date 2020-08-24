@@ -13,6 +13,7 @@ void main() {
   final authenticationRepository = FireBaseAuthenticationRepository();
   final userRepo = UserRepository();
   final placeRepo = PlaceRepository();
+  final imageRepo = ImageRepository();
   runApp(
     MultiBlocProvider(
       providers: [
@@ -32,7 +33,7 @@ void main() {
           create: (context) => ImageBloc(),
         ),
         BlocProvider<PlaceBloc> (
-          create: (context) => PlaceBloc(placeRepo),
+          create: (context) => PlaceBloc(placeRepo, imageRepo),
         )
       ],
       child: MyApp(),

@@ -3,12 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meple/blocs/place/place.dart';
 import 'package:meple/models/place.dart';
 import 'package:meple/models/user.dart';
+import 'package:meple/blocs/image/image_repo.dart';
+import 'package:multi_image_picker/multi_image_picker.dart';
 
 class PlaceBloc extends Bloc<PlaceEvent, PlaceState> {
   final PlaceRepository _placeRepository;
+  final ImageRepository _imageRepository;
   StreamSubscription _placesSubscription;
+  
 
-  PlaceBloc(this._placeRepository);
+  PlaceBloc(this._placeRepository, this._imageRepository);
 
   @override get initialState => PlaceInitial();
 
@@ -16,7 +20,7 @@ class PlaceBloc extends Bloc<PlaceEvent, PlaceState> {
     PlaceEvent event,
   ) async* {
     if(event is GetCreatePlace){
-      yield* _mapCraetePlaceToState(event.place, event.uid);
+      yield* _mapCraetePlaceToState(event.place, event.uid, event.images);
     }else if(event is GetNewPlace) {
       yield PlaceNew();
     }else if(event is GetIndexPlace){
@@ -28,12 +32,23 @@ class PlaceBloc extends Bloc<PlaceEvent, PlaceState> {
     }
   }
 
-  Stream<PlaceState> _mapCraetePlaceToState(Place place, String uid)async* {
-    try{      
-      await _placeRepository.createPlace(place, uid);
-      // yield PlaceCreated(place: place);
-      yield PlaceCreated(place: place);
+  Stream<PlaceState> _mapCraetePlaceToState(Place place, String uid, List<Asset> images)async* {
+    try{
+      List<dynamic> urls =  _imageRepository.saveImages(images, place, uid);
+      print(urls);
+      await _placeRepository.createPlace(place, uid, urls);
+      yield PlaceCreated(place: new Place(
 
+        name: place.name,
+        detail: place.detail,
+        postalCode: place.postalCode,
+        url: place.url,
+        creatorId: uid,
+        been: false,
+        images: urls,
+        createdAt: place.createdAt,
+        updatedAt: place.updatedAt,
+      ));
     } catch(e) {
       print("\nerror is occur in place_dart_bloc l:24\n");
     }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:meple/blocs/image/image.dart';
 import 'package:meple/blocs/place/place.dart';
 import 'package:meple/models/place.dart';
 import 'package:provider/provider.dart';
@@ -22,88 +23,127 @@ class _PlaceFromState extends State<PlaceFrom> {
       child: Form(
         key: _formKey,
         child: Container(
-          padding: EdgeInsets.all(60),
+          // padding: EdgeInsets.all(15),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              placeTitle("名前", Icons.account_box),
-              TextFormField(
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-                cursorRadius: Radius.circular(100),
-                initialValue: _name,
-                onChanged: (val) => setState(() {
-                  _name = val;
-                }),
-                validator: (val) => val.isEmpty? "error" : null,
-                decoration: placeDeco,
-              ),
-              // SizedBox(height: 20),
-              PlaceImagePick(),
               SizedBox(height: 20),
-              placeTitle("詳細", Icons.add_box),
-              TextFormField(
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-                cursorRadius: Radius.circular(100),
-                initialValue: _detail,
-                onChanged: (val) => setState(() {
-                  _detail = val;
-                }),
-                decoration: placeDeco,
-              ),
-              SizedBox(height: 20),
-              placeTitle("住所", Icons.ac_unit),
-              TextFormField(
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-                cursorRadius: Radius.circular(100),
-                initialValue: _postalCode,
-                onChanged: (val) => setState(() {
-                  _postalCode = val;
-                }),
-                decoration: placeDeco,
-              ),
-              SizedBox(height: 20),
-              placeTitle("URL", Icons.ac_unit),
-              TextFormField(
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-                cursorRadius: Radius.circular(100),
-                initialValue: _url,
-                onChanged: (val) => setState(() {
-                  _url = val;
-                }),
-                decoration: placeDeco,
-              ),
-              SizedBox(height: 20),
-              RaisedButton(
-                child: Text("保存"),
-                splashColor: Colors.yellow,
-                onPressed: (){
-                  BlocProvider.of<PlaceBloc>(context).add(
-                    GetCreatePlace(
-                      place: Place(
-                        postalCode: _postalCode,
-                        id: 1,
-                        name: _name,
-                        url: _url,
-                        detail: _detail,
-                        been: false,
-                        creatorId: _uid,
-                        createdAt: DateTime.now(),
-                        updatedAt: DateTime.now(),
-                      ), 
-                      uid: _uid
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 60),
+                child: Column(
+                  children: [
+                    placeTitle("名前", Icons.account_box),
+                    TextFormField(
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                      cursorRadius: Radius.circular(100),
+                      initialValue: _name,
+                      onChanged: (val) => setState(() {
+                        _name = val;
+                      }),
+                      validator: (val) => val.isEmpty? "error" : null,
+                      decoration: placeDeco,
                     ),
+                    
+                    SizedBox(height: 20),
+                    placeTitle("詳細", Icons.add_box),
+                    TextFormField(
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                      cursorRadius: Radius.circular(100),
+                      initialValue: _detail,
+                      onChanged: (val) => setState(() {
+                        _detail = val;
+                      }),
+                      decoration: placeDeco,
+                    ),
+                    SizedBox(height: 20),
+                    placeTitle("住所", Icons.ac_unit),
+                    TextFormField(
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                      cursorRadius: Radius.circular(100),
+                      initialValue: _postalCode,
+                      onChanged: (val) => setState(() {
+                        _postalCode = val;
+                      }),
+                      decoration: placeDeco,
+                    ),
+                    SizedBox(height: 20),
+                    placeTitle("URL", Icons.ac_unit),
+                    TextFormField(
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                      cursorRadius: Radius.circular(100),
+                      initialValue: _url,
+                      onChanged: (val) => setState(() {
+                        _url = val;
+                      }),
+                      decoration: placeDeco,
+                    ),
+                    SizedBox(height: 20),
+                  ],
+                ),
+              ), 
+              PlaceImagePick(),
+              BlocBuilder<ImageBloc, ImageState>(
+                builder: (context, state) {
+                  if(state is PickedPlaceImages){
+                    return RaisedButton(
+                    child: Text("保存 with 画像"),
+                    splashColor: Colors.yellow,
+                    onPressed: (){
+                      BlocProvider.of<PlaceBloc>(context).add(
+                        GetCreatePlace(
+                          place: Place(
+                            postalCode: _postalCode,
+                            id: 1,
+                            name: _name,
+                            url: _url,
+                            detail: _detail,
+                            been: false,
+                            creatorId: _uid,
+                            createdAt: DateTime.now(),
+                            updatedAt: DateTime.now(),
+                          ), 
+                          uid: _uid,
+                          images: state.images,
+                        ),
+                      );
+                      Navigator.pop(context);
+                    },
+                    color: Colors.lightGreen,
                   );
-                  Navigator.pop(context);
-                },
-                color: Colors.lightGreen,
+                  }
+                  return RaisedButton(
+                    child: Text("保存"),
+                    splashColor: Colors.yellow,
+                    onPressed: (){
+                      BlocProvider.of<PlaceBloc>(context).add(
+                        GetCreatePlace(
+                          place: Place(
+                            postalCode: _postalCode,
+                            id: 1,
+                            name: _name,
+                            url: _url,
+                            detail: _detail,
+                            been: false,
+                            creatorId: _uid,
+                            createdAt: DateTime.now(),
+                            updatedAt: DateTime.now(),
+                          ), 
+                          uid: _uid
+                        ),
+                      );
+                      Navigator.pop(context);
+                    },
+                    color: Colors.lightGreen,
+                  );
+                }
               ),
             ],
           )

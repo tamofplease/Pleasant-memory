@@ -20,3 +20,7 @@ class PickPlaceImages extends ImageEvent {
   String toString() => "PickPlaceImage";
 }
 
+class ImagesToFirebase extends ImageEvent {
+  @override
+  String toString() => "ImagesToFirebase";
+}

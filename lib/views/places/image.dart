@@ -29,16 +29,24 @@ class PlaceImagePick extends StatelessWidget {
   }
 
   Widget buildListView(List<Asset> images) {
-    return ListView.builder(
-      scrollDirection: Axis.horizontal,
-      itemCount: images.length,
-      itemBuilder: (context, index){
-        return AssetThumb(
-          asset: images[index],
-          width: 100,
-          height: 100,
-        );
-      }
+    return Center(
+      child: new ListView.builder(
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemCount: images.length,
+        itemBuilder: (context, index){
+          return Container(
+            decoration: BoxDecoration(
+              border: Border.all(),
+            ),
+            child: AssetThumb(
+              asset: images[index],
+              width: 150,
+              height: 150,
+            ),
+          );
+        }
+      ),
     );
   }
 
@@ -46,14 +54,14 @@ class PlaceImagePick extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ImageBloc, ImageState>(
       builder: (context, state) {
-        if(state is PickedPlaceImages && state.images != null){
+        if(state is PickedPlaceImages){
           return Container(
             child: Column(
               children: <Widget>[
                 SizedBox(height: 20),
                 Container(
                   child: buildListView(state.images),
-                  height: 100,
+                  height: 150,
                 ),
                 SizedBox(height: 20),
                 RaisedButton(
@@ -65,6 +73,7 @@ class PlaceImagePick extends StatelessWidget {
                   ),
                   onPressed: () => BlocProvider.of<ImageBloc>(context).add(PickPlaceImages()),
                 ),
+                SizedBox(height: 20),
               ],
             ),
           );

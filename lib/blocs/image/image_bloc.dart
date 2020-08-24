@@ -47,9 +47,7 @@ class ImageBloc extends Bloc<ImageEvent,ImageState> {
       error = e.toString();
       yield PickPlaceImagesFail(error);
     }
-
-    yield PickedPlaceImages(resultList);
-    
-
+    if(resultList != null)yield PickedPlaceImages(resultList);
+    else yield PickImageInitial();
   }
 }

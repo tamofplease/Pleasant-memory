@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:multi_image_picker/multi_image_picker.dart';
 
 class Place {
   final int id;
@@ -6,14 +7,14 @@ class Place {
   final String name,url;
   final String detail;
   bool been; //0がまだ、1が行った
-  List<String> images;
+  List<dynamic> images;
   final String creatorId;
   final DateTime createdAt;
   final DateTime updatedAt;
   
 
   Place({
-    @required this.id,
+    this.id,
     @required this.name,
     @required this.url,
     @required this.creatorId,

@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:meple/models/place.dart';
-// import 'package:meple/models/user.dart';
+import 'package:multi_image_picker/multi_image_picker.dart';
 
 
 abstract class PlaceEvent extends Equatable{
@@ -12,7 +12,8 @@ abstract class PlaceEvent extends Equatable{
 class GetCreatePlace extends PlaceEvent{ //createの通知。
   final Place place;
   final String uid;
-  GetCreatePlace({@required this.place, @required this.uid})
+  final List<Asset> images;
+  GetCreatePlace({@required this.place, @required this.uid, this.images})
   : assert(
     place != null,
     uid != null,

@@ -4,9 +4,9 @@ import 'package:meple/models/user.dart';
 
 abstract class PlaceDataRepository{
   Stream<List<Place> > getPlaceList(String uid);
-  Future<void> createPlace(Place place, String uid);
-  Future<void> createPlaceinPlace(Place place, String uid);
-  Future<void> createPlaceinUser(Place place, String uid);  
+  Future<void> createPlace(Place place, String uid, List<dynamic> urls);
+  Future<void> createPlaceinPlace(Place place, String uid, List<dynamic> urls);
+  Future<void> createPlaceinUser(Place place, String uid, List<dynamic> urls);  
 }
 
 class PlaceRepository extends PlaceDataRepository{
@@ -16,6 +16,12 @@ class PlaceRepository extends PlaceDataRepository{
   @override
   Stream<List<Place> > getPlaceList(String uid) {
     return usersCollection.document(uid).collection("places").snapshots().map(_placeListFromSnapshot);
+  }
+
+  List<Place> _placeListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc) {
+      return _placeDataFromSnapshot(doc);
+    }).toList();
   }
 
   Place _placeDataFromSnapshot(DocumentSnapshot doc) {
@@ -31,14 +37,8 @@ class PlaceRepository extends PlaceDataRepository{
     );
   }
 
-  List<Place> _placeListFromSnapshot(QuerySnapshot snapshot) {
-    return snapshot.documents.map((doc) {
-      return _placeDataFromSnapshot(doc);
-    }).toList();
-  }
-
   @override
-  Future<void> createPlaceinPlace(Place place, String uid) async {
+  Future<void> createPlaceinPlace(Place place, String uid, List<dynamic> urls) async {
     try{
       return await placesCollection.document(uid).setData({
         'name': place.name,
@@ -47,6 +47,7 @@ class PlaceRepository extends PlaceDataRepository{
         'url': place.url,
         'creatorId': uid,
         'been': false,
+        'images': urls,
       });
     }catch(e){
       print("\n error is occur in place_repo l:31");
@@ -54,7 +55,7 @@ class PlaceRepository extends PlaceDataRepository{
   }
 
   @override
-  Future<void> createPlaceinUser(Place place, String uid) async {
+  Future<void> createPlaceinUser(Place place, String uid, List<dynamic> urls) async {
     try {
       return await usersCollection.document(uid).collection("places").document(place.name).setData({
         'name': place.name,
@@ -63,6 +64,7 @@ class PlaceRepository extends PlaceDataRepository{
         'url': place.url,
         'creatorId': uid,
         'been': false,
+        'images': urls,
       });
     }catch(e){
       print("\n error is occur in place_repo l:31");
@@ -70,8 +72,8 @@ class PlaceRepository extends PlaceDataRepository{
   }
 
   @override
-  Future<void> createPlace(Place place, String uid) async {
-    await createPlaceinUser(place, uid);
-    await createPlaceinPlace(place, uid);
+  Future<void> createPlace(Place place, String uid, List<dynamic> urls) async {
+    await createPlaceinUser(place, uid, urls);
+    await createPlaceinPlace(place, uid, urls);
   }
 }
