@@ -6,7 +6,7 @@ import 'package:meple/extensions.dart';
 
 
 abstract class ImageDataReposiroy {
-  List<dynamic> saveImages(List<Asset> assets, Place place, String uid);
+  // List<dynamic> saveImages(List<Asset> assets, Place place, String uid);
 }
 
 class ImageRepository extends ImageDataReposiroy{
@@ -19,11 +19,10 @@ class ImageRepository extends ImageDataReposiroy{
     return await (await uploadTask.onComplete).ref.getDownloadURL();
   }
 
-  List<dynamic> saveImages(List<Asset> assets, Place place, String uid) {
-
-    return assets.indexedMap((index, asset) {
-      _saveImage(index, asset, place.name, uid);
-    }).toList();
+  Future<List<dynamic>> saveImages(List<Asset> assets, Place place, String uid) async {
+    return await Future.wait(assets.indexedMap((index, asset) async {
+      return await _saveImage(index, asset, place.name, uid);
+    }).toList());
   }
 }
 

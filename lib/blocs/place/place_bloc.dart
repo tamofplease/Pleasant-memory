@@ -32,20 +32,25 @@ class PlaceBloc extends Bloc<PlaceEvent, PlaceState> {
     }
   }
 
+  Future<void> _getImageUrls(Place place, String uid, List<Asset> images) async {
+    await _imageRepository.saveImages(images, place, uid).then((urls){
+      print(urls);
+      _placeRepository.createPlace(place, uid, urls);
+    });
+    
+  }
+
   Stream<PlaceState> _mapCraetePlaceToState(Place place, String uid, List<Asset> images)async* {
     try{
-      List<dynamic> urls =  _imageRepository.saveImages(images, place, uid);
-      print(urls);
-      await _placeRepository.createPlace(place, uid, urls);
+      await _getImageUrls(place,uid,images);
       yield PlaceCreated(place: new Place(
-
         name: place.name,
         detail: place.detail,
         postalCode: place.postalCode,
         url: place.url,
         creatorId: uid,
         been: false,
-        images: urls,
+        // images: urls,
         createdAt: place.createdAt,
         updatedAt: place.updatedAt,
       ));

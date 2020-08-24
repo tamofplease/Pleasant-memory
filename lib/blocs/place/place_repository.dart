@@ -50,7 +50,9 @@ class PlaceRepository extends PlaceDataRepository{
         'images': urls,
       });
     }catch(e){
-      print("\n error is occur in place_repo l:31");
+      print(e);
+      print(urls);
+      print("\n error is occur in place_repo l:53");
     }
   }
 
