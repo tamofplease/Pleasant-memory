@@ -24,7 +24,7 @@ class NewPlace extends StatelessWidget {
         child: BlocBuilder<PlaceBloc, PlaceState>(
           builder: (context, state) {
             if(state is PlaceNew) {
-              // BlocProvider.of<ImageBloc>(context).add(ImageInitial());
+              BlocProvider.of<ImageBloc>(context).add(ImageInitial());
               return Container(
                 decoration: BoxDecoration(
                   color: Colors.black54,

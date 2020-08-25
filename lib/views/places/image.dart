@@ -9,25 +9,6 @@ import 'package:meple/blocs/image/image.dart';
 
 class PlaceImagePick extends StatelessWidget {
 
-  Widget buildGridView(List<Asset> images) {
-    if (images != null){
-      return GridView.count(
-        crossAxisCount: 3,
-        children: List.generate(images.length, (index) {
-          Asset asset = images[index];
-          return AssetThumb(
-            asset: asset,
-            width: 100,
-            height: 100,
-          );
-        }),
-      );
-    }
-    else
-      return Container(
-      );
-  }
-
   Widget buildListView(List<Asset> images) {
     return Center(
       child: new ListView.builder(

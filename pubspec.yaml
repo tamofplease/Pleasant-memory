@@ -43,12 +43,13 @@ dependencies:
   firebase_auth: ^0.16.1
   firebase_storage: ^3.1.6
   cloud_firestore: ^0.13.7
+  multi_image_picker: ^4.7.12
   google_sign_in: ^4.5.1
   firebase_core: ^0.4.5
   
   #image
   image_picker: ^0.6.7+4
-  multi_image_picker: ^4.7.12
+  
 
   #other
   flutter_svg: ^0.18.0

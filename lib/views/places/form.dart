@@ -15,7 +15,6 @@ class _PlaceFromState extends State<PlaceFrom> {
   final _formKey = GlobalKey<FormState>();
   String _name,_postalCode,_url;
   String _detail;
-  String _images;
   @override
   Widget build(BuildContext context) {   
     String _uid = Provider.of<String>(context);
@@ -94,30 +93,30 @@ class _PlaceFromState extends State<PlaceFrom> {
                 builder: (context, state) {
                   if(state is PickedPlaceImages){
                     return RaisedButton(
-                    child: Text("保存 with 画像"),
-                    splashColor: Colors.yellow,
-                    onPressed: (){
-                      BlocProvider.of<PlaceBloc>(context).add(
-                        GetCreatePlace(
-                          place: Place(
-                            postalCode: _postalCode,
-                            id: 1,
-                            name: _name,
-                            url: _url,
-                            detail: _detail,
-                            been: false,
-                            creatorId: _uid,
-                            createdAt: DateTime.now(),
-                            updatedAt: DateTime.now(),
-                          ), 
-                          uid: _uid,
-                          images: state.images,
-                        ),
-                      );
-                      Navigator.pop(context);
-                    },
-                    color: Colors.lightGreen,
-                  );
+                      child: Text("保存"),
+                      splashColor: Colors.yellow,
+                      onPressed: (){
+                        BlocProvider.of<PlaceBloc>(context).add(
+                          GetCreatePlace(
+                            place: Place(
+                              postalCode: _postalCode,
+                              id: 1,
+                              name: _name,
+                              url: _url,
+                              detail: _detail,
+                              been: false,
+                              creatorId: _uid,
+                              createdAt: DateTime.now(),
+                              updatedAt: DateTime.now(),
+                            ), 
+                            uid: _uid,
+                            images: state.images,
+                          ),
+                        );
+                        Navigator.pop(context);
+                      },
+                      color: Colors.lightGreen,
+                    );
                   }
                   return RaisedButton(
                     child: Text("保存"),

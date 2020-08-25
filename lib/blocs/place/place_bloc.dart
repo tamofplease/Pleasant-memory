@@ -33,11 +33,9 @@ class PlaceBloc extends Bloc<PlaceEvent, PlaceState> {
   }
 
   Future<void> _getImageUrls(Place place, String uid, List<Asset> images) async {
-    await _imageRepository.saveImages(images, place, uid).then((urls){
-      print(urls);
+    await _imageRepository.saveImages(images, place, place.creatorId).then((urls){
       _placeRepository.createPlace(place, uid, urls);
     });
-    
   }
 
   Stream<PlaceState> _mapCraetePlaceToState(Place place, String uid, List<Asset> images)async* {
