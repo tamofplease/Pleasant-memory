@@ -22,7 +22,6 @@ class _PlaceFromState extends State<PlaceFrom> {
       child: Form(
         key: _formKey,
         child: Container(
-          // padding: EdgeInsets.all(15),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -31,8 +30,9 @@ class _PlaceFromState extends State<PlaceFrom> {
                 padding: EdgeInsets.symmetric(horizontal: 60),
                 child: Column(
                   children: [
-                    placeTitle("名前", Icons.account_box),
+                    placeTitle("名前", Icons.account_box, true),
                     TextFormField(
+                      validator: (val) => val.isEmpty ? "値を入力してください" : null,
                       style: TextStyle(
                         color: Colors.white,
                       ),
@@ -41,12 +41,11 @@ class _PlaceFromState extends State<PlaceFrom> {
                       onChanged: (val) => setState(() {
                         _name = val;
                       }),
-                      validator: (val) => val.isEmpty? "error" : null,
                       decoration: placeDeco,
                     ),
                     
                     SizedBox(height: 20),
-                    placeTitle("詳細", Icons.add_box),
+                    placeTitle("詳細", Icons.add_box, false),
                     TextFormField(
                       maxLines: null,
                       style: TextStyle(
@@ -60,7 +59,7 @@ class _PlaceFromState extends State<PlaceFrom> {
                       decoration: placeDeco,
                     ),
                     SizedBox(height: 20),
-                    placeTitle("住所", Icons.ac_unit),
+                    placeTitle("住所", Icons.ac_unit, false),
                     TextFormField(
                       style: TextStyle(
                         color: Colors.white,
@@ -73,7 +72,7 @@ class _PlaceFromState extends State<PlaceFrom> {
                       decoration: placeDeco,
                     ),
                     SizedBox(height: 20),
-                    placeTitle("URL", Icons.ac_unit),
+                    placeTitle("URL", Icons.ac_unit, false),
                     TextFormField(
                       style: TextStyle(
                         color: Colors.white,
@@ -123,23 +122,25 @@ class _PlaceFromState extends State<PlaceFrom> {
                     child: Text("保存"),
                     splashColor: Colors.yellow,
                     onPressed: (){
-                      BlocProvider.of<PlaceBloc>(context).add(
-                        GetCreatePlace(
-                          place: Place(
-                            postalCode: _postalCode,
-                            id: 1,
-                            name: _name,
-                            url: _url,
-                            detail: _detail,
-                            been: false,
-                            creatorId: _uid,
-                            createdAt: DateTime.now(),
-                            updatedAt: DateTime.now(),
-                          ), 
-                          uid: _uid
-                        ),
-                      );
-                      Navigator.pop(context);
+                      if(_formKey.currentState.validate()){
+                        BlocProvider.of<PlaceBloc>(context).add(
+                          GetCreatePlace(
+                            place: Place(
+                              postalCode: _postalCode,
+                              id: 1,
+                              name: _name,
+                              url: _url,
+                              detail: _detail,
+                              been: false,
+                              creatorId: _uid,
+                              createdAt: DateTime.now(),
+                              updatedAt: DateTime.now(),
+                            ), 
+                            uid: _uid
+                          ),
+                        );
+                        Navigator.pop(context);
+                      }
                     },
                     color: Colors.lightGreen,
                   );
@@ -151,30 +152,40 @@ class _PlaceFromState extends State<PlaceFrom> {
       ), 
     );
   }
-  Widget placeTitle(String name, IconData icon) {
+  Widget placeTitle(String name, IconData icon, bool req) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        req ? Text(
+          "必須",
+          style: TextStyle(
+            fontSize: 10,
+            color: Colors.redAccent,
+          ),
+        ) : Text(""),
+        SizedBox(width: 10),
         Text(
           name,
           style: TextStyle(
             fontSize: 17,
-            color: Colors.lightBlueAccent,
+            color: req ? Colors.amberAccent : Colors.lightBlueAccent,
           )
         ),
         SizedBox(width: 10),
         Icon(
           icon,
-          color: Colors.lightBlueAccent,
-          ),
+          color: req ? Colors.amberAccent : Colors.lightBlueAccent 
+        ),
+
       ],
+      
     );
   }
 }
 
 const InputDecoration placeDeco = InputDecoration(
-  fillColor: Colors.lightBlueAccent,
+  fillColor: Colors.yellowAccent,
   enabledBorder: UnderlineInputBorder(
-    borderSide: BorderSide(color: Colors.lightBlueAccent),
+    borderSide: BorderSide(color: Colors.yellowAccent),
   ),
 );
