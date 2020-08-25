@@ -48,6 +48,7 @@ class _PlaceFromState extends State<PlaceFrom> {
                     SizedBox(height: 20),
                     placeTitle("詳細", Icons.add_box),
                     TextFormField(
+                      maxLines: null,
                       style: TextStyle(
                         color: Colors.white,
                       ),
