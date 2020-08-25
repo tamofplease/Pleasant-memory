@@ -34,6 +34,7 @@ class PlaceRepository extends PlaceDataRepository{
       postalCode: doc["address"]?? "",
       url: doc["url"]?? "",
       been: doc["been"]?? false,
+      images: doc["images"],
     );
   }
 

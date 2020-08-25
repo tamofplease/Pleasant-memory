@@ -18,20 +18,21 @@ class PlaceListState extends State<PlaceList> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: ListWheelScrollView(
-        onSelectedItemChanged: (index) {
-          setState(() {
-            widget.selectedPlace = widget.places[index];
-          });
-        },
-        children: <Widget>[
-          ...widget.places.map((place) {
-            // return Text(place.name);
-            return widget.selectedPlace == place ? PlaceTile(place, true) : PlaceTile(place, false);
-          }),
-        ],
-        itemExtent: 300,
-        diameterRatio: 5.0,
+      child: Container(
+        child: ListWheelScrollView(
+          onSelectedItemChanged: (index) {
+            setState(() {
+              widget.selectedPlace = widget.places[index];
+            });
+          },
+          children: <Widget>[
+            ...widget.places.map((place) {
+              return widget.selectedPlace == place ? PlaceTile(place, true) : PlaceTile(place, false);
+            }),
+          ],
+          itemExtent: 350,
+          diameterRatio: 5.0,
+        ),
       ),
       onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context){
           return ShowPlace(widget.selectedPlace);
