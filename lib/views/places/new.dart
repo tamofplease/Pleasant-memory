@@ -8,9 +8,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NewPlace extends StatelessWidget {
   // const NewPlace({Key key}) : super(key: key);
+  void initState() {
+  }
 
   @override
   Widget build(BuildContext context) {
+
+
     BlocProvider.of<PlaceBloc>(context).add(GetNewPlace());
     return Scaffold(
       appBar: AppBar(

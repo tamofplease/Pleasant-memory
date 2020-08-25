@@ -40,12 +40,14 @@ class HomeScreen extends StatelessWidget {
                         SnackBar(content: Text(
                           "${state.place.name}を作成しました。"
                           ),
+                          duration: Duration(seconds: 1 ),
                         ),
                       );
                   });
-                  Provider.of<PlaceBloc>(context).add(GetInitialPlace());
+                    BlocProvider.of<PlaceBloc>(context).add(GetInitialPlace());
                   return Body();
-                }else return Body();
+                }
+                return Body();
               }
             ),
             drawer: BuildDrawer(_user),

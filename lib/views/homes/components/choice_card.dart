@@ -8,13 +8,37 @@ import 'package:meple/views/places/new.dart';
 import 'package:meple/views/places/places.dart';
 import 'package:provider/provider.dart';
 
-class ChoiceCard extends StatelessWidget {
-  final Choice choice;
 
-  const ChoiceCard({Key key, this.choice}) : super(key: key);
+class ChoiceCard extends StatefulWidget {
+
+  final Choice choice;
+  AnimationController _animationController;
+
+  ChoiceCard({Key key, this.choice}) : super(key: key);
+
   @override
-  Widget build(BuildContext context) {
-  
+  _ChoiceCardState createState() => _ChoiceCardState();
+}
+
+class _ChoiceCardState extends State<ChoiceCard> with SingleTickerProviderStateMixin {
+
+  AnimationController _animationController;
+
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 500),
+    );
+  }
+
+  void dispose(){
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {  
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: OpenContainer(
@@ -22,10 +46,10 @@ class ChoiceCard extends StatelessWidget {
         openElevation: 0,
         closedBuilder: (context, action) => buildChoiceCard(context),
         openBuilder: (context, action){
-          if(choice.id==1){
+          if(widget.choice.id==1){
             return NewPlace();
           }
-          else if(choice.id==6){
+          else if(widget.choice.id==6){
             return IndexPlace();
           }
           return ComingSoonWithBtn(1.0);
@@ -41,7 +65,7 @@ class ChoiceCard extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(vertical: 20.0 / 2),
           child: Text(
-            choice.title,
+            widget.choice.title,
             style: Theme.of(context)
                 .textTheme
                 .headline5
@@ -59,7 +83,7 @@ class ChoiceCard extends StatelessWidget {
               )],
               image: DecorationImage(
                 fit: BoxFit.fill,
-                image: AssetImage(choice.image),
+                image: AssetImage(widget.choice.image),
               ),
             ),
           ),

@@ -6,7 +6,7 @@ import 'package:meple/extensions.dart';
 
 
 abstract class ImageDataReposiroy {
-  // List<dynamic> saveImages(List<Asset> assets, Place place, String uid);
+  Future<List<dynamic>> saveImages(List<Asset> assets, Place place, String uid);
 }
 
 class ImageRepository extends ImageDataReposiroy{

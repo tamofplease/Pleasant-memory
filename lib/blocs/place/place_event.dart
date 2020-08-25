@@ -29,7 +29,7 @@ class GetNewPlace extends PlaceEvent { //Newpageの取得
   @override
   List<Object> get props => [];
   @override
-  String toString() => "ShowNewPlace";
+  String toString() => "GetNewPlace";
 }
 
 class GetIndexPlace extends PlaceEvent { //view側からindexのつうち

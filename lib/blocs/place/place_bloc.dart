@@ -38,9 +38,15 @@ class PlaceBloc extends Bloc<PlaceEvent, PlaceState> {
     });
   }
 
+  Future<void> _createPlaceWithoutImages(Place place, String uid) async {
+    await _placeRepository.createPlace(place,uid, null);
+  }
+
   Stream<PlaceState> _mapCraetePlaceToState(Place place, String uid, List<Asset> images)async* {
     try{
-      await _getImageUrls(place,uid,images);
+      if(images != null)await _getImageUrls(place,uid,images);
+      else _createPlaceWithoutImages(place,uid);
+
       yield PlaceCreated(place: new Place(
         name: place.name,
         detail: place.detail,
@@ -48,11 +54,11 @@ class PlaceBloc extends Bloc<PlaceEvent, PlaceState> {
         url: place.url,
         creatorId: uid,
         been: false,
-        // images: urls,
         createdAt: place.createdAt,
         updatedAt: place.updatedAt,
       ));
     } catch(e) {
+      print(e);
       print("\nerror is occur in place_dart_bloc l:24\n");
     }
   }
