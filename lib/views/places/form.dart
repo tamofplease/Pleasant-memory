@@ -32,6 +32,8 @@ class _PlaceFromState extends State<PlaceFrom> {
                   children: [
                     placeTitle("名前", Icons.account_box, true),
                     TextFormField(
+                      maxLength: 30,
+                      maxLengthEnforced: true,
                       validator: (val) => val.isEmpty ? "値を入力してください" : null,
                       style: TextStyle(
                         color: Colors.white,
@@ -41,7 +43,7 @@ class _PlaceFromState extends State<PlaceFrom> {
                       onChanged: (val) => setState(() {
                         _name = val;
                       }),
-                      decoration: placeDeco,
+                      decoration: placeDeco.copyWith(counterStyle: TextStyle(color: Colors.white)),
                     ),
                     
                     SizedBox(height: 20),
@@ -186,6 +188,9 @@ class _PlaceFromState extends State<PlaceFrom> {
 const InputDecoration placeDeco = InputDecoration(
   fillColor: Colors.yellowAccent,
   enabledBorder: UnderlineInputBorder(
-    borderSide: BorderSide(color: Colors.yellowAccent),
+    borderSide: BorderSide(
+      color: Colors.yellowAccent,
+      width: 2,
+    ),
   ),
 );
