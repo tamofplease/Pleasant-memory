@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
+class MultiImageView extends StatefulWidget {
+  final List<String> images;
+  MultiImageView({Key key, this.images}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MultiImageViewState createState() => _MultiImageViewState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin{
+class _MultiImageViewState extends State<MultiImageView> with SingleTickerProviderStateMixin{
   AnimationController controller;
   Animation<double> animation;
 
@@ -31,7 +31,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
     super.dispose();
   }
 
-  List<String> images = ['images/image0.jpg', 'images/image1.jpg', 'images/image2.jpg'];
+  // List<String> images = ['images/image0.jpg', 'images/image1.jpg', 'images/image2.jpg'];
   String _path = 'images/image0.jpg';
 
   void _changestate(String path){
@@ -39,48 +39,48 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
       _path = path;
     });
   }
+  List<Widget> list = new List<Widget>();
+  
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            AnimatedBuilder(
-              animation: animation,
-              child: Center(
-                child: Container(
-                  margin: EdgeInsets.symmetric(vertical: 10),
-                  height: 300,
-                  width: 300,
-                  child: Image.asset(
-                    _path,
-                    fit: BoxFit.cover,
-                  ),
+    for(var i=0;i<widget.images.length;i++){
+      if(widget.images[i]==null){
+        list.add(smallImage('assets/images/noimage.png'));
+      }else {
+        list.add(smallImage(widget.images[i]));
+      }
+    }
+    return  Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          AnimatedBuilder(
+            animation: animation,
+            child: Center(
+              child: Container(
+                margin: EdgeInsets.symmetric(vertical: 10),
+                height: 300,
+                width: 300,
+                child: Image.asset(
+                  _path,
+                  fit: BoxFit.cover,
                 ),
               ),
-              builder: (BuildContext context, Widget child) {
-                return Opacity(
-                  opacity: animation.value,
-                  child: child,
-                );
-              }
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                smallImage(images[0]),
-                smallImage(images[1]),
-                smallImage(images[2]),
-              ],
-            ),
-          ],
-        ),
-
+            builder: (BuildContext context, Widget child) {
+              return Opacity(
+                opacity: animation.value,
+                child: child,
+              );
+            }
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: list
+          ),
+        ],
       ),
+
     );
   }
   
@@ -92,7 +92,14 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
         )
       ),
       child: GestureDetector(
-        child: Image.asset(
+        child: path == 'assets/images/noimage.png'
+        ? Image.asset(
+          path,
+          width: 100,
+          height: 100,
+          fit: BoxFit.cover,
+        ) 
+         : Image.network(
           path,
           width: 100,
           height: 100,

@@ -16,6 +16,7 @@ class ShowPlace extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Row(
+              
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text("名前:"),
