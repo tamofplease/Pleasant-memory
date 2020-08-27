@@ -18,10 +18,7 @@ class PlaceTile extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               color: _selected ? Colors.white : Colors.white38,
-              border: Border.all(
-                color: _selected ? Colors.lightGreen : Colors.white10,
-                width: 4,
-              )
+              
             ),
             height: 50,
             child: Row(
@@ -75,10 +72,13 @@ class PlaceTile extends StatelessWidget {
           NetworkImage(
             _place.images[0],
           )
-        )
+        ),
+        border: Border.all(
+          color: _selected ? Colors.yellowAccent : Colors.white10,
+          width: 10,
+        ),
       ),
     );
   }
 }
 
-//　選択時に色とかフォントサイズとかを大きくする。背景に関してはあんまり変化させないのがいいかも...?
