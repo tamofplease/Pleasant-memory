@@ -49,6 +49,9 @@ dependencies:
   
   #image
   image_picker: ^0.6.7+4
+
+  #google_map_api
+  google_maps_flutter: ^0.5.30
   
 
   #other

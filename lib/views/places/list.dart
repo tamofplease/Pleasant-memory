@@ -14,7 +14,6 @@ class PlaceList extends StatefulWidget {
 }
 
 class PlaceListState extends State<PlaceList> {
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -27,7 +26,8 @@ class PlaceListState extends State<PlaceList> {
           },
           children: <Widget>[
             ...widget.places.map((place) {
-              return widget.selectedPlace == place ? PlaceTile(place, true) : PlaceTile(place, false);
+              return widget.selectedPlace == place ? 
+              PlaceTile(place, true) : PlaceTile(place, false);
             }),
           ],
           itemExtent: 350,

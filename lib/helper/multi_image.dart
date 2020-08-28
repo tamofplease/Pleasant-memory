@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class MultiImageView extends StatefulWidget {
-  final List<String> images;
+  final List<dynamic> images;
   MultiImageView({Key key, this.images}) : super(key: key);
 
   @override
@@ -11,9 +12,21 @@ class MultiImageView extends StatefulWidget {
 class _MultiImageViewState extends State<MultiImageView> with SingleTickerProviderStateMixin{
   AnimationController controller;
   Animation<double> animation;
-
+  List<Widget> list = new List<Widget>();
   @override
   void initState() {
+    if(widget.images[0]==null){
+        _changeState(defaultImg);
+        list.add(smallImage(defaultImg));
+    }else {
+      _changeState(widget.images[0]);
+      list.add(
+        smallImage(widget.images[0].toString()),
+      );
+      for(var i=1;i<widget.images.length;i++){        
+        list.add(smallImage(widget.images[i].toString()));
+      } 
+    } 
     super.initState();
     controller =
         AnimationController(duration: const Duration(milliseconds: 250), vsync: this);
@@ -30,30 +43,28 @@ class _MultiImageViewState extends State<MultiImageView> with SingleTickerProvid
     controller.dispose();
     super.dispose();
   }
+  final String defaultImg = 'assets/images/noimage.png';
+  String _path;
 
-  // List<String> images = ['images/image0.jpg', 'images/image1.jpg', 'images/image2.jpg'];
-  String _path = 'images/image0.jpg';
-
-  void _changestate(String path){
+  void _changeState(String path){
     setState(() {
       _path = path;
     });
   }
-  List<Widget> list = new List<Widget>();
+  
   
   @override
   Widget build(BuildContext context) {
-    for(var i=0;i<widget.images.length;i++){
-      if(widget.images[i]==null){
-        list.add(smallImage('assets/images/noimage.png'));
-      }else {
-        list.add(smallImage(widget.images[i]));
-      }
-    }
+    
     return  Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          // Image.network(
+          //   _path,
+          //   height: 300,
+          //   width: 300,
+          // ),
           AnimatedBuilder(
             animation: animation,
             child: Center(
@@ -61,9 +72,11 @@ class _MultiImageViewState extends State<MultiImageView> with SingleTickerProvid
                 margin: EdgeInsets.symmetric(vertical: 10),
                 height: 300,
                 width: 300,
-                child: Image.asset(
-                  _path,
-                  fit: BoxFit.cover,
+                child: (
+                  Image.network(
+                    _path,
+                    fit: BoxFit.cover,
+                  )
                 ),
               ),
             ),
@@ -74,9 +87,12 @@ class _MultiImageViewState extends State<MultiImageView> with SingleTickerProvid
               );
             }
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: list
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: list
+            ),
           ),
         ],
       ),
@@ -92,7 +108,7 @@ class _MultiImageViewState extends State<MultiImageView> with SingleTickerProvid
         )
       ),
       child: GestureDetector(
-        child: path == 'assets/images/noimage.png'
+        child: path == defaultImg
         ? Image.asset(
           path,
           width: 100,
@@ -108,7 +124,7 @@ class _MultiImageViewState extends State<MultiImageView> with SingleTickerProvid
         onTap: () {
           if(_path != path){
             Future.delayed(const Duration(milliseconds: 250), () {
-              _changestate(path);
+              _changeState(path);
             });
             controller.reverse();
           }

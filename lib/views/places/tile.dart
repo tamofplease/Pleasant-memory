@@ -18,7 +18,6 @@ class PlaceTile extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               color: _selected ? Colors.white : Colors.white38,
-              
             ),
             height: 50,
             child: Row(
@@ -45,33 +44,21 @@ class PlaceTile extends StatelessWidget {
               ],
             ),
           ),
-          // Container(
-          //   color: Colors.black54,
-          //   child: _place.images == null ? 
-          //   Image.asset(
-          //     'assets/images/noimage.png',
-          //     fit: BoxFit.scaleDown,
-          //     colorBlendMode: BlendMode.dst,
-          //   ) : 
-          //   Image.network(
-          //     _place.images[0],
-          //     fit: BoxFit.contain,
-          //     colorBlendMode: BlendMode.modulate,
-          //   ),
-          // ),
+          
         ],
       ),
-      decoration: BoxDecoration(  
+      decoration: BoxDecoration(
         color: _selected ? Colors.white12 : Colors.white12,
         image: DecorationImage(
           colorFilter: _selected ? ColorFilter.mode(Colors.white12, BlendMode.dst) : ColorFilter.mode(Colors.grey[600], BlendMode.modulate),
           fit: BoxFit.cover,
           image: _place.images == null ? AssetImage(
             'assets/images/noimage.png',
-          ) : 
+          ) :
           NetworkImage(
             _place.images[0],
-          )
+            //loadgin_builderを追加する。
+          ),
         ),
         border: Border.all(
           color: _selected ? Colors.yellowAccent : Colors.white10,

@@ -72,7 +72,7 @@ class BuildDrawer extends StatelessWidget {
                     onTap: () {
                       Navigator.push(context, MaterialPageRoute(builder: (context) {
                           return Profile(user);
-                        }));
+                      }));
                     },
                   ),
                   _buildDivider(),

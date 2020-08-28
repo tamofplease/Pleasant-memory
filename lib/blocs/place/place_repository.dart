@@ -52,7 +52,6 @@ class PlaceRepository extends PlaceDataRepository{
       });
     }catch(e){
       print(e);
-      print(urls);
       print("\n error is occur in place_repo l:53");
     }
   }
