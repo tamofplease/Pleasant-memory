@@ -22,9 +22,9 @@ class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     final authBloc = BlocProvider.of<AuthenticationBloc>(context);
-    final signInBloc = SignInBloc(signInRepository: FirebaseSignInRepository());
+    // final signInBloc = SignInBloc(signInRepository: FirebaseSignInRepository());
     return BlocBuilder<SignInBloc,SignInState>(
-      bloc: signInBloc,
+      bloc: SignInBloc(signInRepository: FirebaseSignInRepository()),
       builder: (context, state) {
         if(state is SignInLoading) {
           return SplashScreen();
@@ -97,7 +97,7 @@ class _LoginFormState extends State<LoginForm> {
                       child: Text("Login"),
                       onPressed: () {
                         if(_formKey.currentState.validate()) {
-                          signInBloc.add(SignInWithEmailAndPassword(
+                          SignInBloc(signInRepository: FirebaseSignInRepository()).add(SignInWithEmailAndPassword(
                               email: email, 
                               password: password
                           ));

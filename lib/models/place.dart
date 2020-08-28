@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:multi_image_picker/multi_image_picker.dart';
+// import 'package:multi_image_picker/multi_image_picker.dart';
 
 class Place {
   final int id;
   final String postalCode;
+  final String address;
   final String name,url;
   final String detail;
   bool been; //0がまだ、1が行った
@@ -17,6 +18,7 @@ class Place {
     this.id,
     @required this.name,
     @required this.url,
+    this.address,
     @required this.creatorId,
     @required this.createdAt,
     @required this.updatedAt,

@@ -32,10 +32,10 @@ class _AuthPageState extends State<AuthPage> {
   @override
   Widget build(BuildContext context) {
     final authBloc = BlocProvider.of<AuthenticationBloc>(context);
-    final signInBloc = SignInBloc(signInRepository: FirebaseSignInRepository());
+    // final signInBloc = SignInBloc(signInRepository: FirebaseSignInRepository());
     return Scaffold(
       body: BlocBuilder<SignInBloc, SignInState>(
-        bloc: signInBloc,
+        bloc: SignInBloc(signInRepository: FirebaseSignInRepository()),
         builder: (context, state){
           if(state is SignInLoading) {
             return SplashScreenWithBG();
@@ -138,7 +138,7 @@ class _AuthPageState extends State<AuthPage> {
                           ),
                           icon: Icon(Icons.account_circle),
                           label: Text("Continue with Annon"),
-                          onPressed: () => signInBloc.add(SignInAnonymouslyOnPressed()),
+                          onPressed: () => SignInBloc(signInRepository: FirebaseSignInRepository()).add(SignInAnonymouslyOnPressed()),
                         ),
                         const SizedBox(height: 30.0),
                         OutlineButton.icon(
@@ -150,7 +150,7 @@ class _AuthPageState extends State<AuthPage> {
                           ),
                           icon: Icon(FontAwesomeIcons.google),
                           label: Text("Continue with Google"),
-                          onPressed: () => signInBloc.add(SignInWithGoogleOnPressed()),
+                          onPressed: () => SignInBloc(signInRepository: FirebaseSignInRepository()).add(SignInWithGoogleOnPressed()),
                           
                         ),
                         const SizedBox(height: 20.0),

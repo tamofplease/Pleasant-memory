@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meple/blocs/place/place.dart';
 import 'package:meple/models/place.dart';
-import 'package:meple/models/user.dart';
 import 'package:meple/blocs/image/image_repo.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 

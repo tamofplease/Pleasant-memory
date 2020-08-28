@@ -8,7 +8,7 @@ import 'package:meple/blocs/image/image.dart';
 class SettingForm extends StatefulWidget {
 
   var count = 0;
-  User user;
+  final User user;
   SettingForm(this.user);
   @override
   _SettingFormState createState() => _SettingFormState();

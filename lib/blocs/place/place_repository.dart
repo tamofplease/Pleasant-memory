@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meple/models/place.dart';
-import 'package:meple/models/user.dart';
 
 abstract class PlaceDataRepository{
   Stream<List<Place> > getPlaceList(String uid);

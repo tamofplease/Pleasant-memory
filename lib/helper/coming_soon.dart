@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ComingSoon extends StatelessWidget {
   final double heightRate;
-  String backImg;
+  final String backImg; 
   ComingSoon(this.heightRate,[this.backImg]);
 
   

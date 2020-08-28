@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meple/blocs/place/place.dart';
 import 'package:meple/helper/coming_soon_with_btn.dart';
 import 'package:meple/models/choice.dart';
 import 'package:meple/views/places/new.dart';
 import 'package:meple/views/places/places.dart';
-import 'package:provider/provider.dart';
 
 
 class ChoiceCard extends StatefulWidget {
 
   final Choice choice;
-  AnimationController _animationController;
+  // AnimationController _animationController;
 
   ChoiceCard({Key key, this.choice}) : super(key: key);
 
