@@ -14,7 +14,7 @@ class ShowPlace extends StatelessWidget {
     void _showErrorSnackBar() {
       Scaffold.of(context).showSnackBar(
         SnackBar(
-          content: Text('URLが開ませんでした'),
+          content: Text('URLを開けませんでした'),
         ),
       );
     }
@@ -112,7 +112,7 @@ class ShowPlace extends StatelessWidget {
                             style: TextStyle(color: Colors.lightBlue),
                           ),
                           url: _place.url,
-                          // onError: _showErrorSnackBar,
+                          onError: _showErrorSnackBar,
                         ),
                       ) : Text("リンクが存在しません。")
                     ),
