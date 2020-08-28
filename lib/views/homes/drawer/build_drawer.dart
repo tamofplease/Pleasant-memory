@@ -20,7 +20,7 @@ class BuildDrawer extends StatelessWidget {
       clipper: DrawerClipper(),
       child: Drawer(
         child: Container(
-          padding: const EdgeInsets.only(left: 16.0, right: 40),
+          padding: const EdgeInsets.only(left: 5.0, right: 40),
           decoration: BoxDecoration(
             color: Colors.grey[300], boxShadow: [BoxShadow(color: Colors.black45)],
           ),
@@ -29,7 +29,18 @@ class BuildDrawer extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  SizedBox(height: 30),
+                  SizedBox(height: 5),
+                  Container(
+                    alignment: Alignment.topLeft,
+                    padding: EdgeInsets.all(0),
+                    child: IconButton(
+                      icon: Icon(Icons.dehaze),
+                      onPressed: () => {
+                        Navigator.pop(context),
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 15),
                   Container(
                     height: 90,
                     alignment: Alignment.center,

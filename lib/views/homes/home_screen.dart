@@ -17,7 +17,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     User _user;
-    final authBloc = BlocProvider.of<AuthenticationBloc>(context);
     final String uid = Provider.of<String>(context);
     return  BlocBuilder<UserBloc, UserState>(
       builder: (context, status){
@@ -30,7 +29,7 @@ class HomeScreen extends StatelessWidget {
           _user = status.user;
           return Scaffold(
             backgroundColor: Colors.white,
-            appBar: buildAppBar(authBloc),
+            appBar: buildAppBar(),
             body: BlocBuilder<PlaceBloc, PlaceState>(
               builder: (context, state) {
                 if(state is PlaceCreated){
@@ -59,7 +58,7 @@ class HomeScreen extends StatelessWidget {
   }
 
 
-  AppBar buildAppBar(AuthenticationBloc authBloc) {
+  AppBar buildAppBar() {
     return AppBar(
       backgroundColor: appBarColor,
       actions: <Widget>[
@@ -73,7 +72,5 @@ class HomeScreen extends StatelessWidget {
       ],
     );
   }
-
- 
 }
 
