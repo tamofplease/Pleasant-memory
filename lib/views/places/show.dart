@@ -25,9 +25,16 @@ class ShowPlace extends StatelessWidget {
         title: Text("詳細"),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          alignment: Alignment.center,
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            colorFilter: ColorFilter.mode(Colors.grey[600], BlendMode.modulate),
+            image: AssetImage("assets/home/choice/garary.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        alignment: Alignment.center,
+        child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -38,14 +45,15 @@ class ShowPlace extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(text: _place.name, style: TextStyle(fontSize: 20)),
-                        ],
-                        style: DefaultTextStyle.of(context).style,
+                    Text(
+                      _place.name,
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: _place.been ? Colors.yellow : Colors.black,
                       ),
                     ),
+                    
                   ],
                 ),
               ),
@@ -167,7 +175,7 @@ class ShowPlace extends StatelessWidget {
               ),
               SizedBox(height: 10),
             ],
-          )
+          ),
         ),
       ),
     );
@@ -177,6 +185,7 @@ class ShowPlace extends StatelessWidget {
       color: Colors.grey,
       width: 4, 
     ),
+    color: Colors.white70,
   );
 
   

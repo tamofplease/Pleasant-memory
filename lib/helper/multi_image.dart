@@ -60,11 +60,6 @@ class _MultiImageViewState extends State<MultiImageView> with SingleTickerProvid
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          // Image.network(
-          //   _path,
-          //   height: 300,
-          //   width: 300,
-          // ),
           AnimatedBuilder(
             animation: animation,
             child: Center(
@@ -75,7 +70,7 @@ class _MultiImageViewState extends State<MultiImageView> with SingleTickerProvid
                 child: (
                   Image.network(
                     _path,
-                    fit: BoxFit.cover,
+                    // fit: BoxFit.cover,
                   )
                 ),
               ),
