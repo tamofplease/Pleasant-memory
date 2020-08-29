@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:meple/blocs/auth/auth.dart';
-import 'package:meple/blocs/category/category_bloc.dart';
+// import 'package:meple/blocs/auth/auth.dart';
+// import 'package:meple/blocs/category/category_bloc.dart';
 import 'package:meple/blocs/user/user.dart';
 import 'package:meple/helper/helpers.dart';
 import 'package:meple/models/user.dart';

@@ -4,6 +4,7 @@ import 'package:meple/models/user.dart';
 abstract class UserDataRepository {
   Stream<User> getUserData(String uid);
   Future<void> updateUser(User user);
+  Future<void> updateUserProfileImage(String uid,String imageUrl);
 }
 
 class UserRepository extends UserDataRepository {
@@ -38,6 +39,15 @@ class UserRepository extends UserDataRepository {
         'createdAt': user.createdAt,
       });
     }catch(e) {
+      
+    }
+  }
+  Future<void> updateUserProfileImage(String uid, String imageUrl) async {
+    try {
+      await usersCollection.document(uid).updateData(
+        {'photoUrl': imageUrl}
+      );
+    }catch(e){
       
     }
   }

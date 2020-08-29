@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:image_picker/image_picker.dart';
 
 abstract class DrawerEvent extends Equatable  {
   DrawerEvent([List props = const[]]);
@@ -35,3 +36,28 @@ class NothingDrawerEvent extends DrawerEvent {
   String toString() => "NothingDrawerEvent";
 }
 
+class ChangeImageEvent extends DrawerEvent {
+  final String uid;
+  ChangeImageEvent(this.uid);
+
+  List<Object> get props => [uid];
+  @override
+  String toString() => "ChangeImageEvent";
+}
+
+class PushImageEvent extends DrawerEvent {
+  final PickedFile pickedFile;
+  final String uid;
+  PushImageEvent(this.pickedFile, this.uid);
+
+  @override
+  List<Object> get props => [pickedFile, uid];
+
+  @override
+  String toString() =>"PushImageEvent";
+}
+
+class ChangeDrawerImage extends DrawerEvent {
+  final dynamic imageUrl;
+  ChangeDrawerImage(this.imageUrl);
+}

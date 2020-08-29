@@ -8,10 +8,8 @@ import 'package:meple/views/sidebar/sidebar.dart';
 
 
 class BuildDrawer extends StatelessWidget {
-
   final User user;
   BuildDrawer(this.user);
-  
   @override
   Widget build(BuildContext context) {
     DrawerBloc drawerBloc = BlocProvider.of<DrawerBloc>(context);
@@ -50,12 +48,39 @@ class BuildDrawer extends StatelessWidget {
                         colors: [Colors.blue, Colors.red],
                       ),
                     ),
-                    child: Hero(
-                      tag: "${user.uid}__image",
-                      child: CircleAvatar(
-                        radius: 40,
-                        backgroundImage: AssetImage(user.photoUrl),
-                      ),
+                    child: BlocBuilder<DrawerBloc, DrawerState>(
+                      builder: (context, state) {
+                        if(state is UpdatedImageState){
+                          return GestureDetector(
+                            onTap: () {
+                              BlocProvider.of<DrawerBloc>(context).add(ChangeImageEvent(user.uid));
+                            }, 
+                            child: Hero(
+                              tag: "${user.uid}__image",
+                              child: CircleAvatar(
+                                radius: 40,
+                                backgroundImage: NetworkImage(state.imageUrl),
+                              ),
+                            ),
+                          );
+                          
+                        } 
+                        else if(state is UpdatedImageProgress){
+                          return CircularProgressIndicator();
+                        }
+                        return GestureDetector(
+                          onTap: () {
+                            BlocProvider.of<DrawerBloc>(context).add(ChangeImageEvent(user.uid));
+                          }, 
+                          child: Hero(
+                            tag: "${user.uid}__image",
+                            child: CircleAvatar(
+                              radius: 40,
+                              backgroundImage: user.photoUrl == "assets/images/default.png" ? AssetImage(user.photoUrl) : NetworkImage(user.photoUrl),
+                            ),
+                          ),
+                        );
+                      }
                     ),
                   ),
                   SizedBox(

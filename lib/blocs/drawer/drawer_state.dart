@@ -35,3 +35,22 @@ class NothingDrawerState extends DrawerState {
   @override
   String toString() => "Nothing";
 }
+
+class UpdatedImageState extends DrawerState{
+  final dynamic imageUrl;
+  UpdatedImageState(this.imageUrl);
+
+  List<Object> get props => [imageUrl];
+  @override
+  String toString() =>  "ChangeImage";
+}
+
+class ChangeDrawerImageStateFail extends DrawerState{
+  @override
+  String toString() =>  "ChangeImage";
+}
+
+class UpdatedImageProgress extends DrawerState {
+  @override
+  String toString() => "UpdatedImageProgress";
+}

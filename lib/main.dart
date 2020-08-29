@@ -21,7 +21,7 @@ void main() {
           create: (context) => AuthenticationBloc(authRepository: authenticationRepository)..add(AppStarted()),
         ),
         BlocProvider<DrawerBloc> (
-          create: (context) => DrawerBloc(),
+          create: (context) => DrawerBloc(imageRepo,userRepo),
         ),
         BlocProvider<UserBloc> (
           create: (context) => UserBloc(userRepo),
