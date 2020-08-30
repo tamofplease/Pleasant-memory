@@ -33,6 +33,18 @@ List<Choice> memoryChoices = [
     parents: Category.Memory.index,
   ),
   Choice(
+    id: 3,
+    title: "ユーザーを探す",
+    image: "assets/home/choice/find_user.jpg",
+    parents: Category.Find.index
+  ),
+  Choice(
+    id: 4,
+    title: "場所を探す",
+    image: "assets/home/choice/find_place.jpg",
+    parents: Category.Find.index,
+  ),
+  Choice(
     id: 6,
     title: "一覧",
     image: "assets/home/choice/garary.jpg",

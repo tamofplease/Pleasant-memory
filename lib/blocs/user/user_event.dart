@@ -45,7 +45,7 @@ class UpdateUser extends UserEvent{
 
 class UpdateUserOfSetting extends UserEvent {
   final User user;
-  final dynamic imageInfo;
+  final String imageInfo;
   UpdateUserOfSetting(this.user, this.imageInfo) : assert(user != null, imageInfo != null);
   @override
   List<Object> get props => [user];

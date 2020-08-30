@@ -3,9 +3,9 @@ import 'package:meple/blocs/index/index.dart';
 import 'package:meple/models/place.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class PlaceTile extends StatelessWidget {
-
   final Place _place;
   final bool _selected;
   
