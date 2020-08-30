@@ -59,7 +59,7 @@ class BuildDrawer extends StatelessWidget {
                               tag: "${user.uid}__image",
                               child: CircleAvatar(
                                 radius: 40,
-                                backgroundImage: user.profileImage(),
+                                backgroundImage: user.profileWithBackgroundImage(),
                               ),
                             ),
                           );
@@ -75,7 +75,7 @@ class BuildDrawer extends StatelessWidget {
                             tag: "${user.uid}__image",
                             child: CircleAvatar(
                               radius: 40,
-                              backgroundImage: user.profileImage(),
+                              backgroundImage: user.profileWithBackgroundImage(),
                             ),
                           ),
                         );

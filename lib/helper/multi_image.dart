@@ -17,14 +17,16 @@ class _MultiImageViewState extends State<MultiImageView> with SingleTickerProvid
   void initState() {
     if(widget.images[0]==null){
         _changeState(defaultImg);
-        list.add(smallImage(defaultImg));
+        _changeIndex(0);
+        list.add(smallImage(defaultImg,0));
     }else {
       _changeState(widget.images[0]);
+      _changeIndex(0);
       list.add(
-        smallImage(widget.images[0].toString()),
+        smallImage(widget.images[0].toString(),0),
       );
       for(var i=1;i<widget.images.length;i++){        
-        list.add(smallImage(widget.images[i].toString()));
+        list.add(smallImage(widget.images[i].toString(),i));
       } 
     } 
     super.initState();
@@ -45,13 +47,21 @@ class _MultiImageViewState extends State<MultiImageView> with SingleTickerProvid
   }
   final String defaultImg = 'assets/images/noimage.png';
   String _path;
+  int _selectedIndex;
 
   void _changeState(String path){
     setState(() {
       _path = path;
     });
+  }  
+
+  void _changeIndex(int index){
+    setState(() {
+      _selectedIndex = index;
+    });
   }
-  
+
+
   
   @override
   Widget build(BuildContext context) {
@@ -82,11 +92,22 @@ class _MultiImageViewState extends State<MultiImageView> with SingleTickerProvid
               );
             }
           ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: list
+          SizedBox(
+            height: 100,
+            width: 300,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: list.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: index == _selectedIndex ? Colors.redAccent : Colors.white,
+                    )
+                  ),
+                  child: list[index],
+                );
+              },
             ),
           ),
         ],
@@ -95,14 +116,9 @@ class _MultiImageViewState extends State<MultiImageView> with SingleTickerProvid
     );
   }
   
-  Widget smallImage(String path) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: _path == path ? Colors.redAccent : Colors.white,
-        )
-      ),
-      child: GestureDetector(
+  Widget smallImage(String path, int index) {
+    print(_path);
+    return GestureDetector(
         child: path == defaultImg
         ? Image.asset(
           path,
@@ -117,6 +133,7 @@ class _MultiImageViewState extends State<MultiImageView> with SingleTickerProvid
           fit: BoxFit.cover,
         ),
         onTap: () {
+          _changeIndex(index);
           if(_path != path){
             Future.delayed(const Duration(milliseconds: 250), () {
               _changeState(path);
@@ -124,7 +141,6 @@ class _MultiImageViewState extends State<MultiImageView> with SingleTickerProvid
             controller.reverse();
           }
         }
-      ),
     );
   }
 }

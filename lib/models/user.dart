@@ -21,11 +21,18 @@ class User {
       assert(createdAt != null),
       assert(updatedAt != null);
 
-  dynamic profileImage() {
+  dynamic profileWithBackgroundImage() {
     if(this.photoUrl=="assets/images/default.png"){
       return AssetImage(this.photoUrl);
     }else{
       return NetworkImage(this.photoUrl);
+    }
+  }
+  dynamic profileImage(){
+    if(this.photoUrl=="assets/images/default.png"){
+      return Image.asset(this.photoUrl);
+    }else{
+      return Image.network(this.photoUrl);
     }
   }
 }

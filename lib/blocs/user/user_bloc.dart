@@ -48,9 +48,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   } 
 
   Stream<UserState> _mapUpdateUser(User user) async* {
-    
     try {
-
       await _userRepository.updateUser(user);
       yield UserProgress();
     }catch(e) {
@@ -80,6 +78,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       yield UpdateFail();
     }
   }
+
+  
 
   void dispose() {
     _todosSubscription.cancel();

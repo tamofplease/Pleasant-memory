@@ -173,6 +173,31 @@ class ShowPlace extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 10),
+              Container(
+                width: contentWidth,
+                padding: EdgeInsets.fromLTRB(10,20,0,0),
+                decoration: containerDeco,
+                child: Column(
+                  children: [
+                    Row(children: [
+                      Icon(
+                        Icons.people,
+                      ),
+                      Container(
+                        child: Text("作成者"),
+                        alignment: Alignment.centerLeft,
+                      ),
+                    ],),
+                    Container(
+                      padding: EdgeInsets.only(bottom: 5),
+                      alignment: Alignment.center,
+                      child: Text(
+                        "〒",
+                      ),
+                    ),
+                  ],
+                )
+              )
             ],
           ),
         ),

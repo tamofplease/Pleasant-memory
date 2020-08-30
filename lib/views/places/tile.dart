@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:meple/blocs/index/index.dart';
 import 'package:meple/models/place.dart';
-import './places.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 class PlaceTile extends StatelessWidget {
 
   final Place _place;
   final bool _selected;
+  
   PlaceTile(this._place, this._selected);
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<IndexBloc>(context).add(GetUserImage(Provider.of<String>(context)));
     return Container(
       alignment: Alignment.topCenter,
       width: double.infinity,
@@ -37,9 +40,25 @@ class PlaceTile extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: _selected ? 17 : 10,
+                      fontWeight: _selected ? FontWeight.w900 : FontWeight.normal,
                       color: Colors.black,
                     ),
                   ),
+                ),
+                BlocBuilder<IndexBloc, IndexState>(
+                  builder: (context, state) {
+                    if(state is GottenUserImage) {
+                      return Padding(
+                        padding: EdgeInsets.only(right: 10),
+                        child: CircleAvatar(
+                          radius: 20,
+                          backgroundImage: state.imageInfo,
+                          backgroundColor: Colors.black26,
+                        )
+                      );
+                    }
+                    return CircularProgressIndicator();
+                  }
                 ),
               ],
             ),

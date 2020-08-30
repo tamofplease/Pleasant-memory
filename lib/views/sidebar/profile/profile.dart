@@ -26,7 +26,7 @@ class Profile extends StatelessWidget {
                   tag: "${_user.uid}__image",
                   child: CircleAvatar(
                     radius: 50,
-                    backgroundImage: _user.profileImage(),
+                    backgroundImage: _user.profileWithBackgroundImage(),
                   ),
                 ),
                 SizedBox(

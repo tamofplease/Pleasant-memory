@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:meple/blocs/index/index.dart';
 import 'package:meple/blocs/place/place.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meple/helper/helpers.dart';
@@ -19,25 +20,29 @@ class IndexPlace extends StatelessWidget {
         title: Text("一覧"),
         centerTitle: true,
       ),
-      body: SafeArea(
-        child: BlocBuilder<PlaceBloc, PlaceState>(
-          builder: (context,state) {
-            if(state is PlaceIndex) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: Colors.black54,
-                  image: DecorationImage(
-                    colorFilter: ColorFilter.mode(Colors.grey[600], BlendMode.modulate),
-                    image: AssetImage("assets/home/choice/garary.jpg"),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                child: PlaceList(state.places,state.places[0]),
-              );
-            }
-            return SplashScreen();
-          }
-        )
+      body: BlocBuilder<IndexBloc, IndexState>(
+        builder: (context, state) {
+          return SafeArea(
+            child: BlocBuilder<PlaceBloc, PlaceState>(
+              builder: (context,state) {
+                if(state is PlaceIndex) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: Colors.black54,
+                      image: DecorationImage(
+                        colorFilter: ColorFilter.mode(Colors.grey[600], BlendMode.modulate),
+                        image: AssetImage("assets/home/choice/garary.jpg"),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: PlaceList(state.places,state.places[0]),
+                  );
+                }
+                return SplashScreen();
+              }
+            )
+          );
+        }
       )
     );
   }

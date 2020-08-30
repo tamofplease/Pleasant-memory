@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meple/blocs/index/index_bloc.dart';
 import 'blocs/blocs.dart';
 import 'package:meple/helper/splash_screen.dart';
 import 'package:meple/views/homes/home_screen.dart';
@@ -34,6 +35,9 @@ void main() {
         ),
         BlocProvider<PlaceBloc> (
           create: (context) => PlaceBloc(placeRepo, imageRepo),
+        ), 
+        BlocProvider<IndexBloc> (
+          create: (context) => IndexBloc(userRepo),
         )
       ],
       child: MyApp(),
