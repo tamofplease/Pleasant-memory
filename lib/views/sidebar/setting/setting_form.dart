@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:meple/blocs/drawer/drawer_event.dart';
 import 'package:meple/blocs/user/user.dart';
 import 'package:meple/helper/form.dart';
 import 'package:meple/models/user.dart';
 import 'package:meple/blocs/image/image.dart';
+import 'dart:io';
+import 'package:meple/blocs/drawer/drawer.dart';
 
 class SettingForm extends StatefulWidget {
 
-  var count = 0;
   final User user;
   SettingForm(this.user);
   @override
@@ -19,12 +21,14 @@ class _SettingFormState extends State<SettingForm> {
   final _formKey = GlobalKey<FormState>();
   String _email;
   String _name;
+  
   @override
   Widget build(BuildContext context) {
     User _user = widget.user;
+    dynamic _profileImage;
+    _profileImage ??= _user.photoUrl;
     _email ??= _user.email;
-    _name ??= _user.name;
-    UserBloc userBloc = BlocProvider.of<UserBloc>(context);    
+    _name ??= _user.name; 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: appBarColor,
@@ -38,19 +42,28 @@ class _SettingFormState extends State<SettingForm> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                GestureDetector(
-                  onTap: (){
-                    BlocProvider.of<ImageBloc>(context).add(
-                      ImagePickEvent(),
+
+                BlocBuilder<ImageBloc, ImageState>(
+                  builder: (context, state) {
+                    if(state is PickImageSuccess){
+                      _profileImage = state.image;
+                      BlocProvider.of<ImageBloc>(context).add(ImageInitial());
+                    }
+                    return GestureDetector(
+                      onTap: (){
+                        BlocProvider.of<ImageBloc>(context).add(
+                          ImagePickEvent(),
+                        );
+                      },
+                      child: Hero(
+                        tag: "${_user.uid}__image",
+                        child: CircleAvatar(
+                          radius: 50,
+                          backgroundImage: _profileImage is File ? FileImage(_profileImage) : _profileImage=="assets/images/default.png" ? AssetImage(_profileImage) : NetworkImage(_profileImage),
+                        ),
+                      ),
                     );
-                  },
-                  child: Hero(
-                    tag: "${_user.uid}__image",
-                    child: CircleAvatar(
-                      radius: 50,
-                      backgroundImage: AssetImage(_user.photoUrl),
-                    ),
-                  ),
+                  }
                 ),
                 SizedBox(
                   height: 30,
@@ -88,8 +101,9 @@ class _SettingFormState extends State<SettingForm> {
                 SizedBox(height: 20),
                 RaisedButton(
                   onPressed: () {
-                    userBloc.add(UpdateUser(
-                      user: User(
+                    BlocProvider.of<DrawerBloc>(context).add(UpdatedImageProg());
+                    BlocProvider.of<UserBloc>(context).add(UpdateUserOfSetting(
+                      User(
                         email: _email,
                         uid: _user.uid,
                         name: _name,
@@ -97,6 +111,7 @@ class _SettingFormState extends State<SettingForm> {
                         createdAt: _user.createdAt,
                         updatedAt: DateTime.now(),
                       ),
+                      _profileImage,
                     ));
                     Navigator.pop(context);
                   },

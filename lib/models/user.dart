@@ -20,4 +20,12 @@ class User {
       assert(photoUrl != null),
       assert(createdAt != null),
       assert(updatedAt != null);
+
+  dynamic profileImage() {
+    if(this.photoUrl=="assets/images/default.png"){
+      return AssetImage(this.photoUrl);
+    }else{
+      return NetworkImage(this.photoUrl);
+    }
+  }
 }

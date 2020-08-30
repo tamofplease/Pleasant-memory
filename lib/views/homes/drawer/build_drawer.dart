@@ -59,11 +59,10 @@ class BuildDrawer extends StatelessWidget {
                               tag: "${user.uid}__image",
                               child: CircleAvatar(
                                 radius: 40,
-                                backgroundImage: NetworkImage(state.imageUrl),
+                                backgroundImage: user.profileImage(),
                               ),
                             ),
                           );
-                          
                         } 
                         else if(state is UpdatedImageProgress){
                           return CircularProgressIndicator();
@@ -76,7 +75,7 @@ class BuildDrawer extends StatelessWidget {
                             tag: "${user.uid}__image",
                             child: CircleAvatar(
                               radius: 40,
-                              backgroundImage: user.photoUrl == "assets/images/default.png" ? AssetImage(user.photoUrl) : NetworkImage(user.photoUrl),
+                              backgroundImage: user.profileImage(),
                             ),
                           ),
                         );

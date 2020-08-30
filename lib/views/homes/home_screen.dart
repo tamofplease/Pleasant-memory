@@ -10,6 +10,7 @@ import 'package:meple/views/homes/drawer/build_drawer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:meple/blocs/place/place.dart';
+import 'package:meple/blocs/drawer/drawer.dart';
 
 
 class HomeScreen extends StatelessWidget {
@@ -26,6 +27,7 @@ class HomeScreen extends StatelessWidget {
           BlocProvider.of<UserBloc>(context).add(GetUserData(uid));
         }
         if(status is UserLoaded ){ 
+          BlocProvider.of<DrawerBloc>(context).add(Initialize());
           _user = status.user;
           return Scaffold(
             backgroundColor: Colors.white,

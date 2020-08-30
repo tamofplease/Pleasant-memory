@@ -8,30 +8,42 @@ abstract class DrawerState extends Equatable {
 
 class HomeDrawerState extends DrawerState {
   @override
+  List<Object> get props => [];
+  @override
   String toString() => "HomeDrawerState";
 }
 
 class ProfileDrawerState extends DrawerState {
+  @override
+  List<Object> get props => [];
   @override
   String toString() => "ProfileState";
 }
 
 class SettingDrawerState extends DrawerState {
   @override
+  List<Object> get props => [];
+  @override
   String toString() => "SettingState";
 }
 
 class ContactDrawerState extends DrawerState {
+  @override
+  List<Object> get props => [];
   @override
   String toString() => "ContactDrawerState";
 }
 
 class HelpDrawerState extends DrawerState {
   @override
+  List<Object> get props => [];
+  @override
   String toString() => "HelpDrawerState";
 }
 
 class NothingDrawerState extends DrawerState {
+  @override
+  List<Object> get props => [];
   @override
   String toString() => "Nothing";
 }
@@ -40,6 +52,7 @@ class UpdatedImageState extends DrawerState{
   final dynamic imageUrl;
   UpdatedImageState(this.imageUrl);
 
+  @override
   List<Object> get props => [imageUrl];
   @override
   String toString() =>  "ChangeImage";
@@ -47,10 +60,16 @@ class UpdatedImageState extends DrawerState{
 
 class ChangeDrawerImageStateFail extends DrawerState{
   @override
+  List<Object> get props => [];
+
+  @override
   String toString() =>  "ChangeImage";
 }
 
 class UpdatedImageProgress extends DrawerState {
+  @override
+  List<Object> get props => [];
+
   @override
   String toString() => "UpdatedImageProgress";
 }

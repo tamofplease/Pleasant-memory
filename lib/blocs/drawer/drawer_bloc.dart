@@ -30,6 +30,10 @@ class DrawerBloc extends Bloc<DrawerEvent,DrawerState> {
       yield* _getImageFromGallery(event.uid);
     }else if(event is PushImageEvent) {
       yield* _pushImageToEvent(event.uid, event.pickedFile);
+    }else if(event is UpdatedImageProg) {
+      yield UpdatedImageProgress();
+    }else if(event is Initialize) {
+      yield NothingDrawerState();
     }
     // else if(event is UpdateUserImage) {
 
@@ -44,11 +48,9 @@ class DrawerBloc extends Bloc<DrawerEvent,DrawerState> {
     Stream<DrawerState> _pushImageToEvent(String uid, PickedFile pickedFile) async* {
       try{
         dynamic imageUrl = await imageRepo.uploadImage(pickedFile,uid);
-        print(imageUrl.toString);
         await userRepo.updateUserProfileImage(uid,imageUrl.toString());
         yield UpdatedImageState(imageUrl);
       }catch(e){
-        print(e);
         yield ChangeDrawerImageStateFail();
       }
     }

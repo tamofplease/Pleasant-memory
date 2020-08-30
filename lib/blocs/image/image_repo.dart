@@ -40,5 +40,11 @@ class ImageRepository extends ImageDataReposiroy{
     return await (await task.onComplete).ref.getDownloadURL();
   }
 
+  Future<dynamic> uploadImageFromFile(File pickedFile, String uid) async {
+    final StorageReference firebasestorageRef = FirebaseStorage.instance.ref().child("$uid/profile.jpg");
+    final StorageUploadTask task = firebasestorageRef.putFile(pickedFile);
+    return await (await task.onComplete).ref.getDownloadURL();
+  }
+
 }
 

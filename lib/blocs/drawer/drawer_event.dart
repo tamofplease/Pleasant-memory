@@ -61,3 +61,13 @@ class ChangeDrawerImage extends DrawerEvent {
   final dynamic imageUrl;
   ChangeDrawerImage(this.imageUrl);
 }
+
+class UpdatedImageProg extends DrawerEvent {
+  @override
+  String toString() =>"UpdatedImageProgressEvent";
+}
+
+class Initialize extends DrawerEvent {
+  @override
+  String toString() =>"InitializeEvent";
+}

@@ -24,7 +24,7 @@ void main() {
           create: (context) => DrawerBloc(imageRepo,userRepo),
         ),
         BlocProvider<UserBloc> (
-          create: (context) => UserBloc(userRepo),
+          create: (context) => UserBloc(userRepo, imageRepo),
         ),
         BlocProvider<CategoryBloc> (
           create: (context) => CategoryBloc(),

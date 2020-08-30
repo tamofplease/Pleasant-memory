@@ -18,7 +18,6 @@ class ShowPlace extends StatelessWidget {
         ),
       );
     }
-    print(_place.detail);
     double contentWidth = MediaQuery.of(context).size.width - 20;
     return Scaffold(
       appBar: AppBar(

@@ -33,9 +33,7 @@ class GetUser extends UserEvent {
 
 class UpdateUser extends UserEvent{
   final User user;
-  UpdateUser({
-    @required this.user,
-  })
+  UpdateUser({@required this.user})
   : assert(user != null);
 
   @override
@@ -43,6 +41,16 @@ class UpdateUser extends UserEvent{
 
   @override
   String toString() => "UpdateUser";
+}
+
+class UpdateUserOfSetting extends UserEvent {
+  final User user;
+  final dynamic imageInfo;
+  UpdateUserOfSetting(this.user, this.imageInfo) : assert(user != null, imageInfo != null);
+  @override
+  List<Object> get props => [user];
+  @override
+  String toString() => "UpdateUserOfSetting";
 }
 
 
