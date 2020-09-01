@@ -3,17 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FindBloc extends Bloc<FindEvent, FindState> {
   @override
-  FindState get initialState => FinderRoot();
+  FindState get initialState => FinderRootState();
 
   Stream<FindState> mapEventToState(
     FindEvent event,
   ) async* {
     if (event is FindRootEvent) {
-      yield FinderRoot();
+      yield FinderRootState();
     } else if (event is FindPlaceEvent) {
-      yield FinderPlace();
+      yield FinderPlaceState();
     } else if (event is FindUserEvent) {
-      yield FinderUser();
+      yield FinderUserState();
     }
   }
 }

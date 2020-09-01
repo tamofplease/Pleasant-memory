@@ -12,8 +12,8 @@ class FinderChoice extends StatefulWidget {
 }
 
 class _FinderChoiceState extends State<FinderChoice> {
-  bool _selectedPlace = false;
-  bool _selectedUser = false;
+  bool _selectedPlace = true;
+  bool _selectedUser = true;
 
   void togglePlace() {
     setState(() => _selectedPlace = !_selectedPlace);
@@ -49,18 +49,25 @@ class _FinderChoiceState extends State<FinderChoice> {
                               : EdgeInsets.only(top: 160),
                           child: ClipRRect(
                             borderRadius: BorderRadius.all(Radius.circular(20)),
-                            child: Container(
-                                padding: EdgeInsets.all(5),
-                                child: Text("ここでは他人がいきたいと思っている場所の検索ができます。"),
-                                decoration: BoxDecoration(
-                                  color: Colors.grey,
-                                )),
+                            child: GestureDetector(
+                              onTap: () => BlocProvider.of<FindBloc>(context)
+                                ..add(FindPlaceEvent()),
+                              child: Container(
+                                  padding: EdgeInsets.all(5),
+                                  child: Text("ここでは他人がいきたいと思っている場所の検索ができます。"),
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey,
+                                  )),
+                            ),
                           )),
                       Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(20)),
                           ),
                           child: GestureDetector(
+                              onLongPress: () =>
+                                  BlocProvider.of<FindBloc>(context)
+                                      .add(FindPlaceEvent()),
                               onTap: () => togglePlace(),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
@@ -96,12 +103,16 @@ class _FinderChoiceState extends State<FinderChoice> {
                               : EdgeInsets.only(top: 160),
                           child: ClipRRect(
                             borderRadius: BorderRadius.all(Radius.circular(20)),
-                            child: Container(
-                                padding: EdgeInsets.all(5),
-                                child: Text("ここでは他人のuser_idを用いて友達の検索ができます。"),
-                                decoration: BoxDecoration(
-                                  color: Colors.grey,
-                                )),
+                            child: GestureDetector(
+                              onTap: () => BlocProvider.of<FindBloc>(context)
+                                  .add(FindUserEvent()),
+                              child: Container(
+                                  padding: EdgeInsets.all(5),
+                                  child: Text("ここでは他人のuser_idを用いて友達の検索ができます。"),
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey,
+                                  )),
+                            ),
                           )),
                       Container(
                           decoration: BoxDecoration(
@@ -109,6 +120,9 @@ class _FinderChoiceState extends State<FinderChoice> {
                           ),
                           child: GestureDetector(
                               onTap: () => toggleUser(),
+                              onLongPress: () =>
+                                  BlocProvider.of<FindBloc>(context)
+                                      .add(FindUserEvent()),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
                                 child: Image(

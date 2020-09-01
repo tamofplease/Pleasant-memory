@@ -6,23 +6,23 @@ abstract class FindState extends Equatable {
   List<Object> get props => [props];
 }
 
-class FinderRoot extends FindState {
+class FinderRootState extends FindState {
   @override
   List<Object> get props => [];
   @override
-  String toString() => "FinderRoot";
+  String toString() => "FinderRootState";
 }
 
-class FinderPlace extends FindState {
+class FinderPlaceState extends FindState {
   @override
   List<Object> get props => [];
   @override
-  String toString() => "FinderPlace";
+  String toString() => "FinderPlaceState";
 }
 
-class FinderUser extends FindState {
+class FinderUserState extends FindState {
   @override
   List<Object> get props => [];
   @override
-  String toString() => "FinderUser";
+  String toString() => "FinderUserState";
 }

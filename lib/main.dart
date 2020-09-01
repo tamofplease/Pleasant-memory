@@ -43,7 +43,10 @@ void main() {
         ),
         BlocProvider<FindBloc>(
           create: (context) => FindBloc(),
-        )
+        ),
+        BlocProvider<FormBloc>(
+          create: (context) => FormBloc(),
+        ),
       ],
       child: MyApp(),
     ),
