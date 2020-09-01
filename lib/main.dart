@@ -10,7 +10,7 @@ import 'simple_bloc_delegate.dart';
 
 void main() {
   BlocSupervisor.delegate = SimpleBlocDelegate();
-  WidgetsFlutterBinding.ensureInitialized(); 
+  WidgetsFlutterBinding.ensureInitialized();
   final authenticationRepository = FireBaseAuthenticationRepository();
   final userRepo = UserRepository();
   final placeRepo = PlaceRepository();
@@ -19,25 +19,30 @@ void main() {
     MultiBlocProvider(
       providers: [
         BlocProvider<AuthenticationBloc>(
-          create: (context) => AuthenticationBloc(authRepository: authenticationRepository)..add(AppStarted()),
+          create: (context) =>
+              AuthenticationBloc(authRepository: authenticationRepository)
+                ..add(AppStarted()),
         ),
-        BlocProvider<DrawerBloc> (
-          create: (context) => DrawerBloc(imageRepo,userRepo),
+        BlocProvider<DrawerBloc>(
+          create: (context) => DrawerBloc(imageRepo, userRepo),
         ),
-        BlocProvider<UserBloc> (
+        BlocProvider<UserBloc>(
           create: (context) => UserBloc(userRepo, imageRepo),
         ),
-        BlocProvider<CategoryBloc> (
+        BlocProvider<CategoryBloc>(
           create: (context) => CategoryBloc(),
         ),
-        BlocProvider<ImageBloc> (
+        BlocProvider<ImageBloc>(
           create: (context) => ImageBloc(),
         ),
-        BlocProvider<PlaceBloc> (
+        BlocProvider<PlaceBloc>(
           create: (context) => PlaceBloc(placeRepo, imageRepo),
-        ), 
-        BlocProvider<IndexBloc> (
+        ),
+        BlocProvider<IndexBloc>(
           create: (context) => IndexBloc(userRepo),
+        ),
+        BlocProvider<FindBloc>(
+          create: (context) => FindBloc(),
         )
       ],
       child: MyApp(),
@@ -47,40 +52,36 @@ void main() {
 
 class MyApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) {
     return BlocBuilder<AuthenticationBloc, AuthenticationState>(
       bloc: BlocProvider.of<AuthenticationBloc>(context),
-      builder: (context, state) { 
-        if(state is AuthenticationInProgress) {
+      builder: (context, state) {
+        if (state is AuthenticationInProgress) {
           return SplashScreen();
         }
-        if(state is AuthenticationSuccess) {
+        if (state is AuthenticationSuccess) {
           String uid = state.currentUser.uid;
-          return Provider<String>.value (
+          return Provider<String>.value(
             value: uid,
             child: MaterialApp(
               title: "Meple",
               theme: ThemeData(
-                primaryColor: Colors.indigo[900],
-                accentColor: Colors.pink[800],
-                brightness: Brightness.light
-              ),
+                  primaryColor: Colors.indigo[900],
+                  accentColor: Colors.pink[800],
+                  brightness: Brightness.light),
               routes: {
                 '/': (context) {
-                  return new Builder(
-                    builder: (BuildContext context) {
-                      return HomeScreen();
-                    }
-                  );
+                  return new Builder(builder: (BuildContext context) {
+                    return HomeScreen();
+                  });
                 },
               },
             ),
           );
         }
-        if(state is AuthenticationFailure) {
+        if (state is AuthenticationFailure) {
           return AuthPage();
-        }
-        else {
+        } else {
           return Container();
         }
       },

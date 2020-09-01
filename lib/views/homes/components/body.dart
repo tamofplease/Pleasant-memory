@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meple/blocs/category/category.dart';
 import 'package:meple/helper/coming_soon.dart';
+import 'package:meple/views/homes/finder/finder_choice.dart';
 import 'categories.dart';
 import 'memory_choice.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,8 +44,9 @@ class Body extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Categorylist(),
-                SizedBox(height: 20.0),
-                ComingSoon(0.8),
+                FinderChoice(),
+                // SizedBox(height: 20.0),
+                // ComingSoon(0.8),
               ],
             ),
           );

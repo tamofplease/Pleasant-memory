@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -14,52 +13,51 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
   UserBloc(this._userRepository, this._imageRepo);
 
-  @override get initialState => UserProgress();
+  @override
+  get initialState => UserProgress();
 
   Stream<UserState> mapEventToState(
     UserEvent event,
   ) async* {
-    if(event is GetUserData) {
-      yield * _mapGetUserDataToState(event.uid);
-    }else if(event is GetUser) {
+    if (event is GetUserData) {
+      yield* _mapGetUserDataToState(event.uid);
+    } else if (event is GetUser) {
       yield* _mapGetUserToState(event.user);
-    }else if(event is UpdateUser) {
+    } else if (event is UpdateUser) {
       yield* _mapUpdateUser(event.user);
-    }else if(event is UpdateUserOfSetting){
+    } else if (event is UpdateUserOfSetting) {
       yield* _mapUpdateUserOfSetting(event.user, event.imageInfo);
     }
   }
 
   Stream<UserState> _mapGetUserDataToState(String uid) async* {
     try {
-      _todosSubscription = _userRepository.getUserData(uid).listen(
-        (user) {
-          add(
-            GetUser(user),
-          ); 
-        }
-      );
-    } catch(e) {
-    }
+      _todosSubscription = _userRepository.getUserData(uid).listen((user) {
+        add(
+          GetUser(user),
+        );
+      });
+    } catch (e) {}
   }
 
   Stream<UserState> _mapGetUserToState(User user) async* {
     yield UserLoaded(user: user);
-  } 
+  }
 
   Stream<UserState> _mapUpdateUser(User user) async* {
     try {
       await _userRepository.updateUser(user);
       yield UserProgress();
-    }catch(e) {
+    } catch (e) {
       yield UpdateFail();
     }
   }
 
-  Stream<UserState> _mapUpdateUserOfSetting(User user, dynamic imageInfo) async* {
-    try{
-      if(imageInfo is File){
-        _imageRepo.uploadImageFromFile(imageInfo, user.uid).then((image){
+  Stream<UserState> _mapUpdateUserOfSetting(
+      User user, dynamic imageInfo) async* {
+    try {
+      if (imageInfo is File) {
+        _imageRepo.uploadImageFromFile(imageInfo, user.uid).then((image) {
           add(UpdateUser(
             user: new User(
               email: user.email,
@@ -71,18 +69,15 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             ),
           ));
         });
-      }else{
+      } else {
         add(UpdateUser(user: user));
       }
-    }catch(e){
+    } catch (e) {
       yield UpdateFail();
     }
   }
-
-  
 
   void dispose() {
     _todosSubscription.cancel();
   }
 }
-

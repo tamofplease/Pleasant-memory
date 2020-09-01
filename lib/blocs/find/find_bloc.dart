@@ -1,12 +1,19 @@
+import 'find.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:meple/blocs/find/find_event.dart';
-// import 'package:meple/blocs/find/find_state.dart';
-// import 'package:meple/blocs/find/find_repository.dart';
-// import 'package:flutter/material.dart';
-// import 'find.dart';
+class FindBloc extends Bloc<FindEvent, FindState> {
+  @override
+  FindState get initialState => FinderRoot();
 
-// class FindBloc extends Bloc<FindEvent, FindState> {
-
-// }
-
+  Stream<FindState> mapEventToState(
+    FindEvent event,
+  ) async* {
+    if (event is FindRootEvent) {
+      yield FinderRoot();
+    } else if (event is FindPlaceEvent) {
+      yield FinderPlace();
+    } else if (event is FindUserEvent) {
+      yield FinderUser();
+    }
+  }
+}
