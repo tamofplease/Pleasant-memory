@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-
 class CustomGoogleMap extends StatefulWidget {
   @override
   _CustomGoogleMapState createState() => _CustomGoogleMapState();
@@ -9,15 +8,17 @@ class CustomGoogleMap extends StatefulWidget {
 
 class _CustomGoogleMapState extends State<CustomGoogleMap> {
   GoogleMapController mapController;
-  Map<MarkerId, Marker> markers = <MarkerId, Marker>{}; 
+  Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
+      // height: MediaQuery.of(context).size.height,
+      // width: MediaQuery.of(context).size.width,
+      width: 300,
+      height: 500,
       child: GoogleMap(
         initialCameraPosition: CameraPosition(
-          target: LatLng(35.6580339,139.7016358),
+          target: LatLng(35.6580339, 139.7016358),
           zoom: 17.0,
         ),
         onMapCreated: _onMapCreated,
@@ -25,12 +26,13 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
       ),
     );
   }
+
   void _onMapCreated(GoogleMapController controller) {
     setState(() {
       mapController = controller;
       Marker marker = Marker(
         markerId: MarkerId('a'),
-        position: LatLng(35.6580339,139.7016358),
+        position: LatLng(35.6580339, 139.7016358),
       );
       markers[MarkerId('a')] = marker;
     });

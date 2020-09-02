@@ -5,29 +5,28 @@ import 'package:bloc/bloc.dart';
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
   final SignInRepository _signInRepository;
 
-  SignInBloc({ @required SignInRepository signInRepository}) 
-    :assert( signInRepository != null),
-     _signInRepository = signInRepository;
-
+  SignInBloc({@required SignInRepository signInRepository})
+      : assert(signInRepository != null),
+        _signInRepository = signInRepository;
 
   @override
   SignInState get initialState => SignInEmpty();
 
   @override
   Stream<SignInState> mapEventToState(SignInEvent event) async* {
-    if(event is SignInWithGoogleOnPressed) {
+    if (event is SignInWithGoogleOnPressed) {
       yield* _mapSignInWithGoogleOnPressed();
     }
-    if(event is SignInAnonymouslyOnPressed) {
+    if (event is SignInAnonymouslyOnPressed) {
       yield* _mapSignInAnonymouslyOnPressed();
     }
-    if(event is SignInWithEmailAndPassword){
+    if (event is SignInWithEmailAndPassword) {
       yield* _mapSignInWithEmailAndPassword(
         event.email,
         event.password,
       );
     }
-    if(event is CreateUserWithEmailAndPassword) {
+    if (event is CreateUserWithEmailAndPassword) {
       yield* _mapCreateUserWithEmailAndPassword(
         event.email,
         event.password,
@@ -40,7 +39,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     try {
       await _signInRepository.signInWithGoogle();
       yield SignInSuccess();
-    } catch(_) {
+    } catch (_) {
       yield SignInFailure();
     }
   }
@@ -50,27 +49,29 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     try {
       await _signInRepository.signInAnonymously();
       yield SignInSuccess();
-    } catch(_) {
+    } catch (_) {
       yield SignInFailure();
     }
   }
 
-  Stream<SignInState> _mapSignInWithEmailAndPassword(String email, String password) async* {
+  Stream<SignInState> _mapSignInWithEmailAndPassword(
+      String email, String password) async* {
     yield SignInLoading();
     try {
       await _signInRepository.signInWithEmailAndPassword(email, password);
       yield SignInSuccess();
-    } catch(_) {
+    } catch (_) {
       yield SignInFailure();
     }
   }
 
-  Stream<SignInState> _mapCreateUserWithEmailAndPassword(String email, String password) async* {
+  Stream<SignInState> _mapCreateUserWithEmailAndPassword(
+      String email, String password) async* {
     yield SignInLoading();
     try {
       await _signInRepository.createUserWithEmailAndPassword(email, password);
       yield SignInSuccess();
-    } catch(_) {
+    } catch (_) {
       yield SignInFailure();
     }
   }

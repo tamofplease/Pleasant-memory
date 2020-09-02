@@ -4,13 +4,12 @@ import 'package:meple/models/user.dart';
 abstract class UserDataRepository {
   Stream<User> getUserData(String uid);
   Future<void> updateUser(User user);
-  Future<void> updateUserProfileImage(String uid,String imageUrl);
+  Future<void> updateUserProfileImage(String uid, String imageUrl);
 }
 
 class UserRepository extends UserDataRepository {
-
-  final CollectionReference usersCollection = Firestore.instance.collection("users");
-
+  final CollectionReference usersCollection =
+      Firestore.instance.collection("users");
 
   @override
   Stream<User> getUserData(String uid) {
@@ -23,8 +22,12 @@ class UserRepository extends UserDataRepository {
       name: snapshot["name"],
       email: snapshot["email"],
       photoUrl: snapshot["photoUrl"],
-      createdAt: snapshot["createdAt"] != null ? snapshot["createdAt"].toDate() : DateTime.now(),
-      updatedAt: snapshot["updatedAt"] != null ? snapshot["updatedAt"].toDate() : DateTime.now(),
+      createdAt: snapshot["createdAt"] != null
+          ? snapshot["createdAt"].toDate()
+          : DateTime.now(),
+      updatedAt: snapshot["updatedAt"] != null
+          ? snapshot["updatedAt"].toDate()
+          : DateTime.now(),
     );
   }
 
@@ -38,18 +41,12 @@ class UserRepository extends UserDataRepository {
         'updatedAt': DateTime.now(),
         'createdAt': user.createdAt,
       });
-    }catch(e) {
-      
-    }
+    } catch (e) {}
   }
+
   Future<void> updateUserProfileImage(String uid, String imageUrl) async {
     try {
-      await usersCollection.document(uid).updateData(
-        {'photoUrl': imageUrl}
-      );
-    }catch(e){
-      
-    }
+      await usersCollection.document(uid).updateData({'photoUrl': imageUrl});
+    } catch (e) {}
   }
 }
-

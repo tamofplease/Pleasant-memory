@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meple/blocs/find_user/find_user.dart';
 import 'package:meple/blocs/index/index_bloc.dart';
 import 'blocs/blocs.dart';
 import 'package:meple/helper/splash_screen.dart';
@@ -12,9 +13,11 @@ void main() {
   BlocSupervisor.delegate = SimpleBlocDelegate();
   WidgetsFlutterBinding.ensureInitialized();
   final authenticationRepository = FireBaseAuthenticationRepository();
+  final signinRepo = FirebaseSignInRepository();
   final userRepo = UserRepository();
   final placeRepo = PlaceRepository();
   final imageRepo = ImageRepository();
+  final findUserRepo = FindUserRepository();
   runApp(
     MultiBlocProvider(
       providers: [
@@ -23,6 +26,8 @@ void main() {
               AuthenticationBloc(authRepository: authenticationRepository)
                 ..add(AppStarted()),
         ),
+        BlocProvider<SignInBloc>(
+            create: (context) => SignInBloc(signInRepository: signinRepo)),
         BlocProvider<DrawerBloc>(
           create: (context) => DrawerBloc(imageRepo, userRepo),
         ),
@@ -47,6 +52,12 @@ void main() {
         BlocProvider<FormBloc>(
           create: (context) => FormBloc(),
         ),
+        BlocProvider<FindUserBloc>(
+          create: (context) => FindUserBloc(findUserRepo),
+        ),
+        BlocProvider<FindMethodBloc>(
+          create: (context) => FindMethodBloc(),
+        )
       ],
       child: MyApp(),
     ),
@@ -83,10 +94,9 @@ class MyApp extends StatelessWidget {
           );
         }
         if (state is AuthenticationFailure) {
-          return AuthPage();
-        } else {
-          return Container();
+          return MaterialApp(home: AuthPage());
         }
+        return Container();
       },
     );
   }

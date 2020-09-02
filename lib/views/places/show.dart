@@ -5,7 +5,6 @@ import 'package:meple/models/place.dart';
 import 'package:meple/views/places/googlemap.dart';
 import 'package:link/link.dart';
 
-
 class ShowPlace extends StatelessWidget {
   final Place _place;
   ShowPlace(this._place);
@@ -18,7 +17,9 @@ class ShowPlace extends StatelessWidget {
         ),
       );
     }
-    double contentWidth = MediaQuery.of(context).size.width - 20;
+
+    double contentWidth = 300;
+    // double contentWidth = MediaQuery.of(context).size.width - 20;
     return Scaffold(
       appBar: AppBar(
         title: Text("詳細"),
@@ -52,7 +53,6 @@ class ShowPlace extends StatelessWidget {
                         color: _place.been ? Colors.yellow : Colors.black,
                       ),
                     ),
-                    
                   ],
                 ),
               ),
@@ -61,17 +61,18 @@ class ShowPlace extends StatelessWidget {
                 width: contentWidth,
                 padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
                 decoration: containerDeco,
-                child: _place.images != null ? MultiImageView(images: _place.images)
-                : Image.asset(
-                  'assets/images/noimage.png',
-                  height: 300,
-                  width: 300,
-                ),
+                child: _place.images != null
+                    ? MultiImageView(images: _place.images)
+                    : Image.asset(
+                        'assets/images/noimage.png',
+                        height: 300,
+                        width: 300,
+                      ),
               ),
               SizedBox(height: 20),
               Container(
                 width: contentWidth,
-                padding: EdgeInsets.fromLTRB(10,20,0,0),
+                padding: EdgeInsets.fromLTRB(10, 20, 0, 0),
                 decoration: containerDeco,
                 child: Column(
                   children: [
@@ -82,21 +83,21 @@ class ShowPlace extends StatelessWidget {
                       ],
                     ),
                     Container(
-                      alignment: Alignment.center,
-                      width: contentWidth,
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child: _place.detail != null ? 
-                        Text(_place.detail) : Text(""),
-                      )
-                    ),
+                        alignment: Alignment.center,
+                        width: contentWidth,
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: _place.detail != null
+                              ? Text(_place.detail)
+                              : Text(""),
+                        )),
                   ],
                 ),
               ),
               SizedBox(height: 20),
               Container(
                 width: contentWidth,
-                padding: EdgeInsets.fromLTRB(10,20,0,0),
+                padding: EdgeInsets.fromLTRB(10, 20, 0, 0),
                 decoration: containerDeco,
                 child: Column(
                   children: [
@@ -107,30 +108,30 @@ class ShowPlace extends StatelessWidget {
                       ],
                     ),
                     Container(
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.only(bottom: 10),
-                      width: contentWidth,
-                      child: _place.url != null ? 
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 30),
-                        child: Link(
-                          child: Text(
-                            _place.url,
-                            style: TextStyle(color: Colors.lightBlue),
-                          ),
-                          url: _place.url,
-                          onError: _showErrorSnackBar,
-                        ),
-                      ) : Text("リンクが存在しません。")
-                    ),
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.only(bottom: 10),
+                        width: contentWidth,
+                        child: _place.url != null
+                            ? Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 30),
+                                child: Link(
+                                  child: Text(
+                                    _place.url,
+                                    style: TextStyle(color: Colors.lightBlue),
+                                  ),
+                                  url: _place.url,
+                                  onError: _showErrorSnackBar,
+                                ),
+                              )
+                            : Text("リンクが存在しません。")),
                   ],
                 ),
               ),
               SizedBox(height: 20),
-              
               Container(
                 width: contentWidth,
-                padding: EdgeInsets.fromLTRB(10,20,0,0),
+                padding: EdgeInsets.fromLTRB(10, 20, 0, 0),
                 decoration: containerDeco,
                 child: Column(
                   children: [
@@ -153,8 +154,9 @@ class ShowPlace extends StatelessWidget {
                       ),
                     ),
                     GestureDetector(
-                      onLongPress: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) {
+                      onLongPress: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
                           return OnlyGoogleMap();
                         }));
                       },
@@ -174,43 +176,43 @@ class ShowPlace extends StatelessWidget {
               ),
               SizedBox(height: 10),
               Container(
-                width: contentWidth,
-                padding: EdgeInsets.fromLTRB(10,20,0,0),
-                decoration: containerDeco,
-                child: Column(
-                  children: [
-                    Row(children: [
-                      Icon(
-                        Icons.people,
+                  width: contentWidth,
+                  padding: EdgeInsets.fromLTRB(10, 20, 0, 0),
+                  decoration: containerDeco,
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.people,
+                          ),
+                          Container(
+                            child: Text("作成者"),
+                            alignment: Alignment.centerLeft,
+                          ),
+                        ],
                       ),
                       Container(
-                        child: Text("作成者"),
-                        alignment: Alignment.centerLeft,
+                        padding: EdgeInsets.only(bottom: 5),
+                        alignment: Alignment.center,
+                        child: Text(
+                          "〒",
+                        ),
                       ),
-                    ],),
-                    Container(
-                      padding: EdgeInsets.only(bottom: 5),
-                      alignment: Alignment.center,
-                      child: Text(
-                        "〒",
-                      ),
-                    ),
-                  ],
-                )
-              )
+                    ],
+                  ))
             ],
           ),
         ),
       ),
     );
   }
+
   BoxDecoration containerDeco = BoxDecoration(
     border: Border.all(
       color: Colors.grey,
-      width: 4, 
+      width: 4,
     ),
     color: Colors.white70,
   );
-
-  
 }
