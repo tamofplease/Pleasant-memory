@@ -2,7 +2,6 @@ import 'package:flutter/material.dart' hide FormState;
 import 'package:meple/blocs/find_user/find_user.dart';
 import 'package:meple/blocs/form_bloc/form.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meple/blocs/find_method_bloc/find_method.dart';
 import 'package:meple/views/homes/finder/finder_error_alert_dialog.dart';
 
 class FindByUserIdForm extends StatelessWidget {

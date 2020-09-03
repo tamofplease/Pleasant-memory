@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:meple/blocs/find_user/find_user_event.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:meple/blocs/find_user/find_user.dart';
 
 class FinderErrorAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<FindUserBloc>(context).add(FindUserInitialize());
     Future.delayed(Duration.zero, () => showAlert(context));
     return Container();
   }

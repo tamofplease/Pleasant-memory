@@ -17,6 +17,8 @@ class FindUserBloc extends Bloc<FindUserEvent, FindUserState> {
       yield* _mapFindUserSearchEventToState(event.search);
     } else if (event is FindUserSuccessEvent) {
       yield FindUserSuccess(event.user);
+    } else if (event is FindUserInitialize) {
+      yield FindUserInitialState();
     }
   }
 

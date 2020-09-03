@@ -31,7 +31,8 @@ class Body extends StatelessWidget {
             children: <Widget>[
               Categorylist(),
               SizedBox(height: 20.0),
-              ComingSoon(0.8),
+              Text("Chat"),
+              // ComingSoon(0.8),
             ],
           ),
         );

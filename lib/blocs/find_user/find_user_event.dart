@@ -25,3 +25,11 @@ class FindUserSuccessEvent extends FindUserEvent {
   @override
   String toString() => "FindUserSuccessEvent";
 }
+
+class FindUserInitialize extends FindUserEvent {
+  @override
+  List<Object> get props => [];
+
+  @override
+  String toString() => "FindUserInitialize";
+}
