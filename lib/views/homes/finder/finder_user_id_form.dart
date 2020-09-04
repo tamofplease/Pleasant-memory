@@ -3,6 +3,7 @@ import 'package:meple/blocs/find_user/find_user.dart';
 import 'package:meple/blocs/form_bloc/form.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meple/views/homes/finder/finder_error_alert_dialog.dart';
+import 'package:meple/views/homes/finder/finder_user_id_success_form.dart';
 
 class FindByUserIdForm extends StatelessWidget {
   @override
@@ -34,8 +35,7 @@ class FindByUserIdForm extends StatelessWidget {
                 SizedBox(height: 20),
                 RaisedButton(
                   onPressed: () => BlocProvider.of<FindUserBloc>(context)
-                      .add(FindUserSearchEvent("3GRYAkHHPqWt0t7Iq4yq4VrLh3W2")),
-                  // .add(FindUserSearchEvent(state.inputString)),
+                      .add(FindUserByIdEvent(state.inputString)),
                   child: Text("検索"),
                 ),
                 BlocBuilder<FindUserBloc, FindUserState>(
@@ -45,7 +45,7 @@ class FindByUserIdForm extends StatelessWidget {
                   else if (state is FindUserSearchState) {
                     return Container(child: Text(state.searchString));
                   } else if (state is FindUserSuccess) {
-                    return Container(child: Text(state.user.name));
+                    return FinderUserSuccessFrom(state.user);
                   } else if (state is FindUserFailuer) {
                     return FinderErrorAlertDialog();
                   }

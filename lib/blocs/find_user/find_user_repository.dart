@@ -24,6 +24,18 @@ class FindUserRepository extends FindUserDataRepository {
     } catch (e) {}
   }
 
+  Stream<User> getUserDataFromName(String name) {
+    try {
+      return usersCollection
+          .where("name", isEqualTo: name)
+          .snapshots()
+          .map((data) => _userDataFromSnapshot(data))
+          .handleError((error) {
+        throw ("error from getUser");
+      });
+    } catch (e) {}
+  }
+
   User _userDataFromSnapshot(QuerySnapshot snapshot) {
     if (snapshot.documents.isNotEmpty) {
       return User(

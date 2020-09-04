@@ -6,13 +6,22 @@ abstract class FindUserEvent extends Equatable {
   List<Object> get props => [props];
 }
 
-class FindUserSearchEvent extends FindUserEvent {
+class FindUserByIdEvent extends FindUserEvent {
   final String search;
-  FindUserSearchEvent(this.search);
+  FindUserByIdEvent(this.search);
   @override
   List<Object> get props => [search];
   @override
   String toString() => "FindUserSearchEvent";
+}
+
+class FindUserByNameEvent extends FindUserEvent {
+  final String search;
+  FindUserByNameEvent(this.search);
+  @override
+  List<Object> get props => [search];
+  @override
+  String toString() => "FindUserByNameEvent";
 }
 
 class FindUserSuccessEvent extends FindUserEvent {
