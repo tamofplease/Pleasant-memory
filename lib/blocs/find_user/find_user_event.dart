@@ -33,3 +33,10 @@ class FindUserInitialize extends FindUserEvent {
   @override
   String toString() => "FindUserInitialize";
 }
+
+class FindUserFailuerEvent extends FindUserEvent {
+  @override
+  List<Object> get props => [];
+  @override
+  String toString() => "FindUserFailuerEvent";
+}

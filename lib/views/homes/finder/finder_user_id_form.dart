@@ -34,7 +34,8 @@ class FindByUserIdForm extends StatelessWidget {
                 SizedBox(height: 20),
                 RaisedButton(
                   onPressed: () => BlocProvider.of<FindUserBloc>(context)
-                      .add(FindUserSearchEvent(state.inputString)),
+                      .add(FindUserSearchEvent("3GRYAkHHPqWt0t7Iq4yq4VrLh3W2")),
+                  // .add(FindUserSearchEvent(state.inputString)),
                   child: Text("検索"),
                 ),
                 BlocBuilder<FindUserBloc, FindUserState>(

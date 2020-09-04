@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+
 class User {
   final String uid;
   final String name;
@@ -14,26 +15,35 @@ class User {
     @required this.photoUrl,
     @required this.createdAt,
     @required this.updatedAt,
-  }) :assert(uid != null),
-      assert(name != null),
-      assert(email != null),
-      assert(photoUrl != null),
-      assert(createdAt != null),
-      assert(updatedAt != null);
+  })  : assert(uid != null),
+        assert(name != null),
+        assert(email != null),
+        assert(photoUrl != null),
+        assert(createdAt != null),
+        assert(updatedAt != null);
 
   dynamic profileWithBackgroundImage() {
-    if(this.photoUrl=="assets/images/default.png"){
+    if (this.photoUrl == "assets/images/default.png") {
       return AssetImage(this.photoUrl);
-    }else{
+    } else {
       return NetworkImage(this.photoUrl);
     }
   }
-  dynamic profileImage(){
-    if(this.photoUrl=="assets/images/default.png"){
+
+  dynamic profileImage() {
+    if (this.photoUrl == "assets/images/default.png") {
       return Image.asset(this.photoUrl);
-    }else{
+    } else {
       return Image.network(this.photoUrl);
     }
   }
-  
 }
+
+User noUser = new User(
+  uid: "",
+  name: "",
+  email: "",
+  photoUrl: "",
+  createdAt: DateTime.now(),
+  updatedAt: DateTime.now(),
+);
