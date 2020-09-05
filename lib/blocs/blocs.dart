@@ -9,3 +9,4 @@ export 'package:meple/blocs/find/find.dart';
 export 'package:meple/blocs/form_bloc/form.dart';
 export 'package:meple/blocs/find_method_bloc/find_method.dart';
 export 'package:meple/blocs/follow/follow.dart';
+export 'package:meple/blocs/chat_over/chat_over.dart';

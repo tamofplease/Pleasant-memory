@@ -32,7 +32,6 @@ class Body extends StatelessWidget {
               Categorylist(),
               SizedBox(height: 20.0),
               Text("Chat"),
-              // ComingSoon(0.8),
             ],
           ),
         );
@@ -43,8 +42,6 @@ class Body extends StatelessWidget {
             children: <Widget>[
               Categorylist(),
               FinderRoute(),
-              // SizedBox(height: 20.0),
-              // ComingSoon(0.8),
             ],
           ),
         );
