@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meple/blocs/find_user/find_user_repository.dart';
 import './find_user.dart';
-import 'package:meple/models/user.dart';
 
 class FindUserBloc extends Bloc<FindUserEvent, FindUserState> {
   FindUserState get initialState => FindUserInitialState();

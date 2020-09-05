@@ -1,20 +1,26 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meple/models/place.dart';
 
-abstract class PlaceDataRepository{
-  Stream<List<Place> > getPlaceList(String uid);
+abstract class PlaceDataRepository {
+  Stream<List<Place>> getPlaceList(String uid);
   Future<void> createPlace(Place place, String uid, List<dynamic> urls);
   Future<void> createPlaceinPlace(Place place, String uid, List<dynamic> urls);
-  Future<void> createPlaceinUser(Place place, String uid, List<dynamic> urls);  
+  Future<void> createPlaceinUser(Place place, String uid, List<dynamic> urls);
 }
 
-class PlaceRepository extends PlaceDataRepository{
-  final CollectionReference placesCollection = Firestore.instance.collection("places");
-  final CollectionReference usersCollection = Firestore.instance.collection("users");
-  
+class PlaceRepository extends PlaceDataRepository {
+  final CollectionReference placesCollection =
+      Firestore.instance.collection("places");
+  final CollectionReference usersCollection =
+      Firestore.instance.collection("users");
+
   @override
-  Stream<List<Place> > getPlaceList(String uid) {
-    return usersCollection.document(uid).collection("places").snapshots().map(_placeListFromSnapshot);
+  Stream<List<Place>> getPlaceList(String uid) {
+    return usersCollection
+        .document(uid)
+        .collection("places")
+        .snapshots()
+        .map(_placeListFromSnapshot);
   }
 
   List<Place> _placeListFromSnapshot(QuerySnapshot snapshot) {
@@ -24,22 +30,23 @@ class PlaceRepository extends PlaceDataRepository{
   }
 
   Place _placeDataFromSnapshot(DocumentSnapshot doc) {
-    return  Place(
+    return Place(
       id: 1,
       name: doc["name"],
       creatorId: doc["creatorId"],
       createdAt: doc["createdAt"],
       updatedAt: doc["updatedAt"],
-      postalCode: doc["address"]?? "",
-      url: doc["url"]?? "",
-      been: doc["been"]?? false,
+      postalCode: doc["address"] ?? "",
+      url: doc["url"] ?? "",
+      been: doc["been"] ?? false,
       images: doc["images"],
     );
   }
 
   @override
-  Future<void> createPlaceinPlace(Place place, String uid, List<dynamic> urls) async {
-    try{
+  Future<void> createPlaceinPlace(
+      Place place, String uid, List<dynamic> urls) async {
+    try {
       return await placesCollection.document(uid).setData({
         'name': place.name,
         'detail': place.detail,
@@ -49,16 +56,20 @@ class PlaceRepository extends PlaceDataRepository{
         'been': false,
         'images': urls,
       });
-    }catch(e){
+    } catch (e) {
       print(e);
-      print("\n error is occur in place_repo l:53");
     }
   }
 
   @override
-  Future<void> createPlaceinUser(Place place, String uid, List<dynamic> urls) async {
+  Future<void> createPlaceinUser(
+      Place place, String uid, List<dynamic> urls) async {
     try {
-      return await usersCollection.document(uid).collection("places").document(place.name).setData({
+      return await usersCollection
+          .document(uid)
+          .collection("places")
+          .document(place.name)
+          .setData({
         'name': place.name,
         'detail': place.detail,
         'address': place.postalCode,
@@ -67,9 +78,7 @@ class PlaceRepository extends PlaceDataRepository{
         'been': false,
         'images': urls,
       });
-    }catch(e){
-      print("\n error is occur in place_repo l:31");
-    }
+    } catch (e) {}
   }
 
   @override

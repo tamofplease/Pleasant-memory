@@ -4,10 +4,12 @@ import 'package:meple/blocs/form_bloc/form.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meple/views/homes/finder/finder_error_alert_dialog.dart';
 import 'package:meple/views/homes/finder/finder_user_success_form.dart';
+import 'package:provider/provider.dart';
 
 class FindByUserIdForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final String uid = Provider.of<String>(context);
     return Column(children: [
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -45,7 +47,7 @@ class FindByUserIdForm extends StatelessWidget {
                   else if (state is FindUserSearchState) {
                     return Container(child: Text(state.searchString));
                   } else if (state is FindUserSuccess) {
-                    return FinderUserSuccessFrom(state.user);
+                    return FinderUserSuccessFrom(state.user, uid);
                   } else if (state is FindUserFailuer) {
                     return FinderErrorAlertDialog();
                   }

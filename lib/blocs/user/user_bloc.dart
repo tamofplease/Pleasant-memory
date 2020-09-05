@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:meple/blocs/image/image.dart';
 import 'package:meple/blocs/user/user.dart';
 import 'package:meple/models/user.dart';

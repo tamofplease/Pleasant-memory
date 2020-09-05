@@ -9,44 +9,51 @@ class PlaceBloc extends Bloc<PlaceEvent, PlaceState> {
   final PlaceRepository _placeRepository;
   final ImageRepository _imageRepository;
   StreamSubscription _placesSubscription;
-  
 
   PlaceBloc(this._placeRepository, this._imageRepository);
 
-  @override get initialState => PlaceInitial();
+  @override
+  get initialState => PlaceInitial();
 
   Stream<PlaceState> mapEventToState(
     PlaceEvent event,
   ) async* {
-    if(event is GetCreatePlace){
+    if (event is GetCreatePlace) {
       yield* _mapCraetePlaceToState(event.place, event.uid, event.images);
-    }else if(event is GetNewPlace) {
+    } else if (event is GetNewPlace) {
       yield PlaceNew();
-    }else if(event is GetIndexPlace){
+    } else if (event is GetIndexPlace) {
       yield* _mapIndexPlaceToState(event.uid);
-    }else if(event is GetInitialPlace) {
+    } else if (event is GetInitialPlace) {
       yield PlaceInitial();
-    }else if(event is GetIndexPlaces) {
+    } else if (event is GetIndexPlaces) {
       yield PlaceIndex(places: event.places);
     }
   }
 
-  Future<void> _getImageUrls(Place place, String uid, List<Asset> images) async {
-    await _imageRepository.saveImages(images, place, place.creatorId).then((urls){
+  Future<void> _getImageUrls(
+      Place place, String uid, List<Asset> images) async {
+    await _imageRepository
+        .saveImages(images, place, place.creatorId)
+        .then((urls) {
       _placeRepository.createPlace(place, uid, urls);
     });
   }
 
   Future<void> _createPlaceWithoutImages(Place place, String uid) async {
-    await _placeRepository.createPlace(place,uid, null);
+    await _placeRepository.createPlace(place, uid, null);
   }
 
-  Stream<PlaceState> _mapCraetePlaceToState(Place place, String uid, List<Asset> images)async* {
-    try{
-      if(images != null)await _getImageUrls(place,uid,images);
-      else _createPlaceWithoutImages(place,uid);
+  Stream<PlaceState> _mapCraetePlaceToState(
+      Place place, String uid, List<Asset> images) async* {
+    try {
+      if (images != null)
+        await _getImageUrls(place, uid, images);
+      else
+        _createPlaceWithoutImages(place, uid);
 
-      yield PlaceCreated(place: new Place(
+      yield PlaceCreated(
+          place: new Place(
         name: place.name,
         detail: place.detail,
         postalCode: place.postalCode,
@@ -56,27 +63,20 @@ class PlaceBloc extends Bloc<PlaceEvent, PlaceState> {
         createdAt: place.createdAt,
         updatedAt: place.updatedAt,
       ));
-    } catch(e) {
-      print(e);
-      print("\nerror is occur in place_dart_bloc l:24\n");
-    }
-  }
-
-  Stream<PlaceState> _mapIndexPlaceToState(String uid)async* {
-    try{
-      _placesSubscription = _placeRepository.getPlaceList(uid).listen(
-        (places) {
-          add(
-            GetIndexPlaces(places),
-          );
-        }
-      );
-    } catch(e) {
+    } catch (e) {
       print(e);
     }
   }
 
-
-
-
+  Stream<PlaceState> _mapIndexPlaceToState(String uid) async* {
+    try {
+      _placesSubscription = _placeRepository.getPlaceList(uid).listen((places) {
+        add(
+          GetIndexPlaces(places),
+        );
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
 }

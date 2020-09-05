@@ -18,6 +18,7 @@ void main() {
   final placeRepo = PlaceRepository();
   final imageRepo = ImageRepository();
   final findUserRepo = FindUserRepository();
+  final followRepo = FollowUserRepository();
   runApp(
     MultiBlocProvider(
       providers: [
@@ -57,6 +58,9 @@ void main() {
         ),
         BlocProvider<FindMethodBloc>(
           create: (context) => FindMethodBloc(),
+        ),
+        BlocProvider<FollowBloc>(
+          create: (context) => FollowBloc(followRepo),
         )
       ],
       child: MyApp(),

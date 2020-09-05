@@ -4,10 +4,13 @@ import 'package:meple/blocs/form_bloc/form.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meple/views/homes/finder/finder_error_alert_dialog.dart';
 import 'package:meple/views/homes/finder/finder_user_success_form.dart';
+import 'package:provider/provider.dart';
+import 'package:meple/blocs/follow/follow.dart';
 
 class FindByUserNameForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    String uid = Provider.of<String>(context);
     return Column(children: [
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -34,7 +37,8 @@ class FindByUserNameForm extends StatelessWidget {
                 SizedBox(height: 20),
                 RaisedButton(
                   onPressed: () => BlocProvider.of<FindUserBloc>(context)
-                      .add(FindUserByNameEvent(state.inputString)),
+                      // .add(FindUserByNameEvent(state.inputString)),
+                      .add(FindUserByNameEvent("まいねーむ")),
                   child: Text("検索"),
                 ),
                 SizedBox(height: 20),
@@ -45,12 +49,12 @@ class FindByUserNameForm extends StatelessWidget {
                   else if (state is FindUserSearchState) {
                     return Container(child: Text(state.searchString));
                   } else if (state is FindUserSuccess) {
-                    return FinderUserSuccessFrom(state.user);
+                    return FinderUserSuccessFrom(state.user, uid);
                   } else if (state is FindUserFailuer) {
                     return FinderErrorAlertDialog();
                   }
                   return Container(child: Text("nothing"));
-                })
+                }),
               ],
             ),
           );

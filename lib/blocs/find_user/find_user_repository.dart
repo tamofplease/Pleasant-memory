@@ -1,6 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meple/blocs/find_user/find_user.dart';
 import 'package:meple/models/user.dart';
 
 abstract class FindUserDataRepository {
@@ -21,7 +19,9 @@ class FindUserRepository extends FindUserDataRepository {
           .handleError((error) {
         throw ("erorr from getUser");
       });
-    } catch (e) {}
+    } catch (e) {
+      throw ("error from getUser");
+    }
   }
 
   Stream<User> getUserDataFromName(String name) {
@@ -33,7 +33,9 @@ class FindUserRepository extends FindUserDataRepository {
           .handleError((error) {
         throw ("error from getUser");
       });
-    } catch (e) {}
+    } catch (e) {
+      throw ("error from getUser");
+    }
   }
 
   User _userDataFromSnapshot(QuerySnapshot snapshot) {
