@@ -3,7 +3,7 @@ import 'package:meple/blocs/find_user/find_user.dart';
 import 'package:meple/blocs/form_bloc/form.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meple/views/homes/finder/finder_error_alert_dialog.dart';
-import 'package:meple/views/homes/finder/finder_user_id_success_form.dart';
+import 'package:meple/views/homes/finder/finder_user_success_form.dart';
 
 class FindByUserIdForm extends StatelessWidget {
   @override

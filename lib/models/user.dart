@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 class User {
   final String uid;
   final String name;
+  String introduction;
   final String email;
   final String photoUrl;
   final DateTime createdAt;

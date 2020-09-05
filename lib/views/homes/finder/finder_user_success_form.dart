@@ -3,6 +3,7 @@ import 'package:meple/blocs/find_user/find_user_event.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meple/blocs/find_user/find_user.dart';
 import 'package:meple/models/user.dart';
+import 'package:provider/provider.dart';
 
 class FinderUserSuccessFrom extends StatelessWidget {
   final User user;
@@ -38,17 +39,19 @@ class FinderUserSuccessFrom extends StatelessWidget {
                             ],
                           ),
                           SizedBox(height: 10),
-                          Container(
-                            height: 30,
-                            child: RaisedButton(
-                              color: Colors.white,
-                              shape: StadiumBorder(
-                                side: BorderSide(color: Colors.blue),
-                              ),
-                              onPressed: () => print("follow"),
-                              child: Text("フォローする"),
-                            ),
-                          )
+                          user.uid == Provider.of<String>(context)
+                              ? Container(
+                                  height: 30,
+                                  child: RaisedButton(
+                                    color: Colors.white,
+                                    shape: StadiumBorder(
+                                      side: BorderSide(color: Colors.blue),
+                                    ),
+                                    onPressed: () => print("follow"),
+                                    child: Text("フォローする"),
+                                  ),
+                                )
+                              : Container(),
                         ],
                       ),
                     )),
