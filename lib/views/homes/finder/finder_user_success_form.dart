@@ -43,7 +43,7 @@ class FinderUserSuccessFrom extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 10),
-                user.uid == Provider.of<String>(context)
+                user.uid != Provider.of<String>(context)
                     ? BlocBuilder<FollowBloc, FollowState>(
                         builder: (context, state) {
                           if (state is InitialFollowState) {
@@ -57,12 +57,14 @@ class FinderUserSuccessFrom extends StatelessWidget {
                                   side: BorderSide(color: Colors.white),
                                 ),
                                 onPressed: () =>
-                                    BlocProvider.of<FollowBloc>(context)
-                                        .add(UnFollowUserEvent(uid, uidTo)),
+                                    BlocProvider.of<FollowBloc>(context).add(
+                                        UnFollowUserEvent(
+                                            state.uid, state.uidTo)),
                                 child: Text("フォロー済み"),
                               ),
                             );
                           } else if (state is UserUnFindState) {
+                            print("error");
                             return Container(
                               height: 30,
                               child: RaisedButton(
@@ -71,8 +73,9 @@ class FinderUserSuccessFrom extends StatelessWidget {
                                   side: BorderSide(color: Colors.blue),
                                 ),
                                 onPressed: () =>
-                                    BlocProvider.of<FollowBloc>(context)
-                                        .add(FollowUserEvent(uid, uidTo)),
+                                    BlocProvider.of<FollowBloc>(context).add(
+                                        FollowUserEvent(
+                                            state.uid, state.uidTo)),
                                 child: Text("フォローする"),
                               ),
                             );

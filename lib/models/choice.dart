@@ -27,7 +27,7 @@ List<Choice> memoryChoices = [
   ),
   Choice(
     id: 2,
-    title: "場所",
+    title: "行った場所",
     image: "assets/home/choice/reg_mem.jpg",
     parents: Category.Memory.index,
   ),

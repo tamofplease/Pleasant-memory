@@ -7,6 +7,8 @@ abstract class FollowState extends Equatable {
 
 class InitialFollowState extends FollowState {
   @override
+  List<Object> get props => [];
+  @override
   String toString() => "InitialFollowState";
 }
 
@@ -20,6 +22,10 @@ class UserFindState extends FollowState {
 }
 
 class UserUnFindState extends FollowState {
+  final String uid, uidTo;
+  UserUnFindState(this.uid, this.uidTo);
+  @override
+  List<Object> get props => [uid, uidTo];
   @override
   String toString() => "UserUnFindState";
 }

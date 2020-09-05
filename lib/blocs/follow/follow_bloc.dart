@@ -19,7 +19,7 @@ class FollowBloc extends Bloc<FollowEvent, FollowState> {
     } else if (event is FindFollowUserEvent) {
       yield UserFindState(event.uid, event.uidTo);
     } else if (event is UnFindFollowUserEvent) {
-      yield UserUnFindState();
+      yield UserUnFindState(event.uid, event.uidTo);
     }
   }
 
@@ -35,7 +35,7 @@ class FollowBloc extends Bloc<FollowEvent, FollowState> {
         }
       }).onError((e) => add(UnFindFollowUserEvent(uid, uidTo)));
     } catch (e) {
-      yield UserUnFindState();
+      yield UserUnFindState(uid, uidTo);
     }
   }
 
@@ -49,7 +49,7 @@ class FollowBloc extends Bloc<FollowEvent, FollowState> {
   Stream<FollowState> _mapUnFollowUserEvent(String uid, String uidTo) async* {
     try {
       await _followRepo.deleteUserFollowing(uid, uidTo);
-      yield UserUnFindState();
+      yield UserUnFindState(uid, uidTo);
     } catch (e) {}
   }
 }

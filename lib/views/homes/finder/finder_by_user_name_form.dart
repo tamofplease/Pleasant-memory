@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meple/views/homes/finder/finder_error_alert_dialog.dart';
 import 'package:meple/views/homes/finder/finder_user_success_form.dart';
 import 'package:provider/provider.dart';
-import 'package:meple/blocs/follow/follow.dart';
 
 class FindByUserNameForm extends StatelessWidget {
   @override
@@ -37,8 +36,7 @@ class FindByUserNameForm extends StatelessWidget {
                 SizedBox(height: 20),
                 RaisedButton(
                   onPressed: () => BlocProvider.of<FindUserBloc>(context)
-                      // .add(FindUserByNameEvent(state.inputString)),
-                      .add(FindUserByNameEvent("まいねーむ")),
+                      .add(FindUserByNameEvent(state.inputString)),
                   child: Text("検索"),
                 ),
                 SizedBox(height: 20),

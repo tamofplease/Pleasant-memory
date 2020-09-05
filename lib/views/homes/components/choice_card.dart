@@ -6,9 +6,7 @@ import 'package:meple/models/choice.dart';
 import 'package:meple/views/places/new.dart';
 import 'package:meple/views/places/places.dart';
 
-
 class ChoiceCard extends StatefulWidget {
-
   final Choice choice;
   // AnimationController _animationController;
 
@@ -18,8 +16,8 @@ class ChoiceCard extends StatefulWidget {
   _ChoiceCardState createState() => _ChoiceCardState();
 }
 
-class _ChoiceCardState extends State<ChoiceCard> with SingleTickerProviderStateMixin {
-
+class _ChoiceCardState extends State<ChoiceCard>
+    with SingleTickerProviderStateMixin {
   AnimationController _animationController;
 
   void initState() {
@@ -30,30 +28,27 @@ class _ChoiceCardState extends State<ChoiceCard> with SingleTickerProviderStateM
     );
   }
 
-  void dispose(){
+  void dispose() {
     _animationController.dispose();
     super.dispose();
   }
 
   @override
-  Widget build(BuildContext context) {  
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: OpenContainer(
-        closedElevation: 0,
-        openElevation: 0,
-        closedBuilder: (context, action) => buildChoiceCard(context),
-        openBuilder: (context, action){
-          if(widget.choice.id==1){
-            return NewPlace();
-          }
-          else if(widget.choice.id==6){
-            return IndexPlace();
-          }
-          return ComingSoonWithBtn(1.0);
-
-        }
-      ),
+          closedElevation: 0,
+          openElevation: 0,
+          closedBuilder: (context, action) => buildChoiceCard(context),
+          openBuilder: (context, action) {
+            if (widget.choice.id == 1) {
+              return NewPlace();
+            } else if (widget.choice.id == 6) {
+              return IndexPlace();
+            }
+            return Container();
+          }),
     );
   }
 
@@ -74,11 +69,13 @@ class _ChoiceCardState extends State<ChoiceCard> with SingleTickerProviderStateM
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(50),
-              boxShadow: [BoxShadow(
-                offset: Offset(0, 4),
-                blurRadius: 4,
-                color: Colors.black26,
-              )],
+              boxShadow: [
+                BoxShadow(
+                  offset: Offset(0, 4),
+                  blurRadius: 4,
+                  color: Colors.black26,
+                )
+              ],
               image: DecorationImage(
                 fit: BoxFit.fill,
                 image: AssetImage(widget.choice.image),
