@@ -65,6 +65,7 @@ class PlaceBloc extends Bloc<PlaceEvent, PlaceState> {
       ));
     } catch (e) {
       print(e);
+      print("\nerror is occur in place_dart_bloc l:24\n");
     }
   }
 

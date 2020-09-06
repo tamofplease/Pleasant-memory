@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:meple/models/room.dart';
 
 abstract class ChatOverEvent extends Equatable {
   @override
@@ -23,4 +24,15 @@ class ChatOverLoading extends ChatOverEvent {
 
   @override
   String toString() => "ChatOverLoading";
+}
+
+class MakeChatOverStateLoaded extends ChatOverEvent {
+  final List<Room> rooms;
+  MakeChatOverStateLoaded(this.rooms);
+
+  @override
+  List<Object> get props => [rooms];
+
+  @override
+  String toString() => "MakeChatOverStateLoaded";
 }

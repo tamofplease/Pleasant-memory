@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:meple/models/user.dart';
+import 'package:meple/models/room.dart';
 
 abstract class ChatOverState extends Equatable {
   @override
@@ -13,8 +13,8 @@ class ChatOverInitial extends ChatOverState {
 }
 
 class ChatOverLoaded extends ChatOverState {
-  final List<User> users;
-  ChatOverLoaded(this.users);
+  final List<Room> rooms;
+  ChatOverLoaded(this.rooms);
   @override
-  List<Object> get props => [users];
+  List<Object> get props => [rooms];
 }

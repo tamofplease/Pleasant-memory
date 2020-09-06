@@ -64,7 +64,6 @@ class FinderUserSuccessFrom extends StatelessWidget {
                               ),
                             );
                           } else if (state is UserUnFindState) {
-                            print("error");
                             return Container(
                               height: 30,
                               child: RaisedButton(
@@ -74,8 +73,8 @@ class FinderUserSuccessFrom extends StatelessWidget {
                                 ),
                                 onPressed: () =>
                                     BlocProvider.of<FollowBloc>(context).add(
-                                        FollowUserEvent(
-                                            state.uid, state.uidTo)),
+                                        FollowUserEvent(state.uid, state.uidTo,
+                                            user.name, user.photoUrl)),
                                 child: Text("フォローする"),
                               ),
                             );

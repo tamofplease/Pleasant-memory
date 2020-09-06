@@ -19,6 +19,7 @@ void main() {
   final imageRepo = ImageRepository();
   final findUserRepo = FindUserRepository();
   final followRepo = FollowUserRepository();
+  final roomRepo = ChatOverRepository();
   runApp(
     MultiBlocProvider(
       providers: [
@@ -61,6 +62,9 @@ void main() {
         ),
         BlocProvider<FollowBloc>(
           create: (context) => FollowBloc(followRepo),
+        ),
+        BlocProvider<ChatOverBloc>(
+          create: (context) => ChatOverBloc(roomRepo),
         )
       ],
       child: MyApp(),

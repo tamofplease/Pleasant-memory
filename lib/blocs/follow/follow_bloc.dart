@@ -13,7 +13,8 @@ class FollowBloc extends Bloc<FollowEvent, FollowState> {
     if (event is CheckUserFollowd) {
       yield* _mapCheckUserFollowdToState(event.uid, event.uidTo);
     } else if (event is FollowUserEvent) {
-      yield* _mapFollowUserEvent(event.uid, event.uidTo);
+      yield* _mapFollowUserEvent(
+          event.uid, event.uidTo, event.name, event.photoUrl);
     } else if (event is UnFollowUserEvent) {
       yield* _mapUnFollowUserEvent(event.uid, event.uidTo);
     } else if (event is FindFollowUserEvent) {
@@ -39,9 +40,10 @@ class FollowBloc extends Bloc<FollowEvent, FollowState> {
     }
   }
 
-  Stream<FollowState> _mapFollowUserEvent(String uid, String uidTo) async* {
+  Stream<FollowState> _mapFollowUserEvent(
+      String uid, String uidTo, String name, String photoUrl) async* {
     try {
-      await _followRepo.createUserFollowing(uid, uidTo);
+      await _followRepo.createNeedData(uid, uidTo, name, photoUrl);
       yield UserFindState(uid, uidTo);
     } catch (e) {}
   }

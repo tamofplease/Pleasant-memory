@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meple/blocs/category/category.dart';
 import 'package:meple/helper/coming_soon.dart';
+import 'package:meple/views/chat/over/chat_over.dart';
 import 'package:meple/views/homes/finder/finder_route.dart';
 import 'categories.dart';
 import 'memory_choice.dart';
@@ -31,7 +32,7 @@ class Body extends StatelessWidget {
             children: <Widget>[
               Categorylist(),
               SizedBox(height: 20.0),
-              Text("Chat"),
+              ChatOver(),
             ],
           ),
         );

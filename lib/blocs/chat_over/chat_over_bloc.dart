@@ -16,8 +16,16 @@ class ChatOverBloc extends Bloc<ChatOverEvent, ChatOverState> {
       _mapChatOverLoadingToState(event.uid);
     } else if (event is ChatOverInitialize) {
       yield ChatOverInitial();
+    } else if (event is MakeChatOverStateLoaded) {
+      yield ChatOverLoaded(event.rooms);
     }
   }
 
-  Stream<ChatOverState> _mapChatOverLoadingToState(String uid) {}
+  Stream<ChatOverState> _mapChatOverLoadingToState(String uid) {
+    _chatOverRepo.getChatRoomList(uid).listen((rooms) {
+      add(
+        MakeChatOverStateLoaded(rooms),
+      );
+    });
+  }
 }

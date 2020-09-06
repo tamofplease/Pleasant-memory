@@ -40,8 +40,8 @@ class UnFindFollowUserEvent extends FollowEvent {
 }
 
 class FollowUserEvent extends FollowEvent {
-  final String uid, uidTo;
-  FollowUserEvent(this.uid, this.uidTo);
+  final String uid, uidTo, photoUrl, name;
+  FollowUserEvent(this.uid, this.uidTo, this.name, this.photoUrl);
 
   @override
   List<Object> get props => [uid, uidTo];
