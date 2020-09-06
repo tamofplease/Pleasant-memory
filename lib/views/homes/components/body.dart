@@ -31,7 +31,6 @@ class Body extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Categorylist(),
-              SizedBox(height: 20.0),
               ChatOver(),
             ],
           ),
